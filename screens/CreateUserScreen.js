@@ -20,8 +20,11 @@ const CreateUserScreen = (props) => {
             alert('provea un nombre')
         }else{
             try {
-                console.log(state)
-                props.navigation.navigate('UserList')
+                // console.log(state)
+                props.navigation.navigate('UserDetailScreen',{
+                    user:'1'
+                })
+
                 
             } catch (error) {
                 console.log('error')
@@ -30,7 +33,7 @@ const CreateUserScreen = (props) => {
     }
 
     return (
-        <ScrollView>
+        <ScrollView style={styles.container}>
             <View style={styles.inputGroup}>
                 <TextInput 
                 placeholder="Name user"
@@ -61,6 +64,10 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         borderBottomWidth: 1,
         bordeBottomColor: '#cccccc'
+    },
+    container: {
+        flex: 1,
+        padding: 35
     }
 })
 
