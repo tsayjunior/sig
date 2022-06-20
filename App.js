@@ -4,16 +4,16 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator ();
 
-import userList from './screens/userList'
+import UserList from './screens/UserList'
 import CreateUserScreen from './screens/CreateUserScreen'
-import userDetailScreen from './screens/userDetailScreen'
+import UserDetailScreen from './screens/UserDetailScreen'
 
 function MyStack(){
   return(
     <Stack.Navigator>
     <Stack.Screen name="CreateUserScreen" component={CreateUserScreen} />
-      <Stack.Screen name="userList" component={userList} />
-      <Stack.Screen name="userDetailScreen" component={userDetailScreen} />
+      <Stack.Screen name="UserList" component={UserList} />
+      <Stack.Screen name="UserDetailScreen" component={UserDetailScreen} />
     </Stack.Navigator>
   );
 }

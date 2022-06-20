@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, Text } from 'react-native'
 
-const userList = () => {
+const UserList = () => {
   return (
         <View>
             <Text>User list</Text>
@@ -9,4 +9,4 @@ const userList = () => {
     )
 }
 
-export default userList
+export default UserList

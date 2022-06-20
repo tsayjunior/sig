@@ -3,7 +3,7 @@ import { Button, TextInput, ScrollView, StyleSheet, Text, View } from 'react-nat
 
 
 
-const CreateUserScreen = () => {
+const CreateUserScreen = (props) => {
 
     const [state, setState] =useState({
         name: '',
@@ -14,6 +14,20 @@ const CreateUserScreen = () => {
     const handleChangeText = (name, value) => {
         setState({...state, [name]: value});
     };
+
+    const saveNewUSer=()=>{
+        if(state.name===''){
+            alert('provea un nombre')
+        }else{
+            try {
+                console.log(state)
+                props.navigation.navigate('UserList')
+                
+            } catch (error) {
+                console.log('error')
+            }
+        }
+    }
 
     return (
         <ScrollView>
@@ -34,7 +48,7 @@ const CreateUserScreen = () => {
                 />
             </View>
             <View>
-                <Button title="Guardar usuario" onPress={()=> console.log(state)}/>
+                <Button title="Guardar usuario" onPress={()=>saveNewUSer()}/>
             </View>
         </ScrollView>
     )
