@@ -1,21 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-const Stack = createNativeStackNavigator ();
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+const Stack = createNativeStackNavigator();
 
-import UserList from './screens/UserList'
-import CreateUserScreen from './screens/CreateUserScreen'
-import UserDetailScreen from './screens/UserDetailScreen'
-import Login from './screens/Login';
- 
-function MyStack(){
-  return(
+import UserList from "./screens/UserList";
+import CreateUserScreen from "./screens/CreateUserScreen";
+import UserDetailScreen from "./screens/UserDetailScreen";
+import Login from "./screens/Login";
+
+function MyStack() {
+  return (
     <Stack.Navigator>
-    <Stack.Screen name="Login" component={Login} options={{title: 'Inicio de sesion'}}/>
-    <Stack.Screen name="CreateUserScreen" component={CreateUserScreen} options={{title: 'Registro chofer'}}/>
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ title: "Inicio de sesion" }}
+      />
+      <Stack.Screen
+        name="CreateUserScreen"
+        component={CreateUserScreen}
+        options={{ title: "Registro chofer" }}
+      />
       <Stack.Screen name="UserList" component={UserList} />
-      <Stack.Screen name="UserDetailScreen" component={UserDetailScreen} options={{title: 'Editar chofer'}}/>
+      <Stack.Screen
+        name="UserDetailScreen"
+        component={UserDetailScreen}
+        options={{ title: "Editar chofer" }}
+      />
     </Stack.Navigator>
   );
 }
@@ -23,7 +35,7 @@ function MyStack(){
 export default function App() {
   return (
     <NavigationContainer>
-      <MyStack/>
+      <MyStack />
     </NavigationContainer>
   );
 }
@@ -31,8 +43,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
