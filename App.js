@@ -8,6 +8,8 @@ import UserList from "./screens/UserList";
 import CreateUserScreen from "./screens/CreateUserScreen";
 import UserDetailScreen from "./screens/UserDetailScreen";
 import Login from "./screens/Login";
+import RegistroMicro from './screens/RegistroMicro';
+import Mapa from './screens/Mapa'
 
 function MyStack() {
   return (
@@ -27,6 +29,18 @@ function MyStack() {
         name="UserDetailScreen"
         component={UserDetailScreen}
         options={{ title: "Editar chofer" }}
+      />
+      <Stack.Screen
+        name="RegistroMicro"
+        component={RegistroMicro}
+        options={{ title: "Registro de micro" }}
+      />
+      
+      <Stack.Screen
+        // screenOptions={{headerShow:false}}
+        name="Mapa"
+        component={Mapa}
+        options={{ title: "Mapa" }}
       />
     </Stack.Navigator>
   );

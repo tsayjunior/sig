@@ -4,19 +4,19 @@ import {
   TextInput,
   ScrollView,
   StyleSheet,
-  Text,
   View,
 } from "react-native";
 
-const CreateUserScreen = (props) => {
+const RegistroMicro = (props) => {
   const [state, setState] = useState({
-    docId: "",
-    name: "",
-    fechaNac: "",
-    sexo: "",
-    phone: "",
-    email: "",
-    catLic: "",
+    placa: "",
+    modelo: "",
+    cantAsien: "",
+    linea: "",
+    numInter: "",
+    foto: "",
+    fechAsign: "",
+    fechBaja: "",
   });
 
   const handleChangeText = (name, value) => {
@@ -29,7 +29,7 @@ const CreateUserScreen = (props) => {
     } else {
       try {
         // console.log(state)
-        props.navigation.navigate("RegistroMicro", {
+        props.navigation.navigate("Mapa", {
           user: "1",
         });
       } catch (error) {
@@ -42,48 +42,54 @@ const CreateUserScreen = (props) => {
     <ScrollView style={styles.container}>
       <View style={styles.inputGroup}>
         <TextInput
-          placeholder="Documento de identidad"
-          onChangeText={(value) => handleChangeText("docId", value)}
+          placeholder="placa"
+          onChangeText={(value) => handleChangeText("placa", value)}
         />
       </View>
       <View style={styles.inputGroup}>
         <TextInput
-          placeholder="Nombre"
-          onChangeText={(value) => handleChangeText("name", value)}
+          placeholder="modelo"
+          onChangeText={(value) => handleChangeText("modelo", value)}
         />
       </View>
       <View style={styles.inputGroup}>
         <TextInput
-          placeholder="Fecha de nacimiento"
-          onChangeText={(value) => handleChangeText("fechaNac", value)}
+          placeholder="Cantidad de asientos"
+          onChangeText={(value) => handleChangeText("cantAsien", value)}
         />
       </View>
       <View style={styles.inputGroup}>
         <TextInput
-          placeholder="Sexo"
-          onChangeText={(value) => handleChangeText("sexo", value)}
+          placeholder="linea"
+          onChangeText={(value) => handleChangeText("linea", value)}
         />
       </View>
       <View style={styles.inputGroup}>
         <TextInput
-          placeholder="Telefono"
-          onChangeText={(value) => handleChangeText("phone", value)}
+          placeholder="Numero interno"
+          onChangeText={(value) => handleChangeText("numInter", value)}
         />
       </View>
       <View style={styles.inputGroup}>
         <TextInput
-          placeholder="Email"
-          onChangeText={(value) => handleChangeText("email", value)}
+          placeholder="foto"
+          onChangeText={(value) => handleChangeText("foto", value)}
         />
       </View>
       <View style={styles.inputGroup}>
         <TextInput
-          placeholder="Categoria licencia"
-          onChangeText={(value) => handleChangeText("catLic", value)}
+          placeholder="Fecha de asignacion"
+          onChangeText={(value) => handleChangeText("fechAsign", value)}
+        />
+      </View>
+      <View style={styles.inputGroup}>
+        <TextInput
+          placeholder="fecha de baja"
+          onChangeText={(value) => handleChangeText("fechBaja", value)}
         />
       </View>
       <View>
-        <Button title="Registar chofer" onPress={() => saveNewUSer()} />
+        <Button title="Registar Micro" onPress={() => saveNewUSer()} />
       </View>
       {/* <View>
                 <Button title="lista de usuario" onPress={props.navigation.navigate('userList')}/>
@@ -106,4 +112,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateUserScreen;
+export default RegistroMicro;

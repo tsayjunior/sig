@@ -29,7 +29,7 @@ const UserDetailScreen = (props) => {
           placeholder="Name user"
         //   value='aux'
           onChangeText={(value) => handleChangeText("name", value)}
-        />
+        /> 
       </View>
       <View style={styles.inputGroup}>
         <TextInput
