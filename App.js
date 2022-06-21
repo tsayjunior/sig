@@ -37,10 +37,13 @@ function MyStack() {
       />
       
       <Stack.Screen
-        // screenOptions={{headerShow:false}}
+        screenOptions={{headerShow:false}}
+        // headerLeft={false}
         name="Mapa"
         component={Mapa}
-        options={{ title: "Mapa" }}
+        options={{ title: "Mapa",
+        // headerLeft:"false"
+      }}
       />
     </Stack.Navigator>
   );
