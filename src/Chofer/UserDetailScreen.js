@@ -15,8 +15,8 @@ const UserDetailScreen = (props) => {
         phone: ''
     });
 
-  console.log(props.route.params.user);
-    const aux=props.route.params.user
+  // console.log(props.route.params.user);
+  //   const aux=props.route.params.user
 
   const handleChangeText = (name, value) => {
     setState({ ...state, [name]: value });

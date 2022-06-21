@@ -2,14 +2,15 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 const Stack = createNativeStackNavigator();
 
 import UserList from "./screens/UserList";
-import CreateUserScreen from "./screens/CreateUserScreen";
-import UserDetailScreen from "./screens/UserDetailScreen";
-import Login from "./screens/Login";
-import RegistroMicro from './screens/RegistroMicro';
-import Mapa from './screens/Mapa'
+import CreateUserScreen from "./src/Chofer/CreateUserScreen";
+import UserDetailScreen from "./src/Chofer/UserDetailScreen";
+import Login from "./src/Login/Login";
+import DrawerNavigation from "./src/Navigation/DrawerNavigation";
+import RegistroMicro from "./src/Micro/RegistroMicro";
 
 function MyStack() {
   return (
@@ -35,15 +36,10 @@ function MyStack() {
         component={RegistroMicro}
         options={{ title: "Registro de micro" }}
       />
-      
       <Stack.Screen
-        screenOptions={{headerShow:false}}
-        // headerLeft={false}
-        name="Mapa"
-        component={Mapa}
-        options={{ title: "Mapa",
-        // headerLeft:"false"
-      }}
+        name="DrawerNavigation"
+        component={DrawerNavigation}
+        options={{ title: "Información" }}
       />
     </Stack.Navigator>
   );

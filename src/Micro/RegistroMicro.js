@@ -29,7 +29,7 @@ const RegistroMicro = (props) => {
     } else {
       try {
         // console.log(state)
-        props.navigation.navigate("Mapa", {
+        props.navigation.navigate("DrawerNavigation", {
           user: "1",
         });
       } catch (error) {
