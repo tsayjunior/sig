@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import React, { useEffect, useState } from "react";
 import { getUsers } from "../Api/ConsultasApi";
 import TaskUser from '../components/UserList'
+import Layout from '../components/Layout'
 
 const UserLista = () => {
   const [users, setUsers] = useState([]); //defino un estado llamado users, y una funcion usersState que lo actualiza, y un arreglo en blanco que nos permitira empezar siempre con el arreglo en blanco
@@ -12,14 +13,14 @@ const UserLista = () => {
   };
 
   useEffect(() => {
-    console.log("usuarios");
+    // console.log("usuarios");
     loadTasks();
   }, []);
 
   return (
-    <View>
+    <Layout>
         <TaskUser users={users} />
-    </View>
+    </Layout>
   );
 };
 

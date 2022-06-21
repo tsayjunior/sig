@@ -12,7 +12,6 @@ import RegistroMicro from "./src/Micro/RegistroMicro";
 import RegistroChofer from "./src/Chofer/RegistroChofer";
 import EditarChofer from "./src/Chofer/EditarChofer";
 
-
 function MyStack() {
   return (
     <Stack.Navigator>
@@ -22,7 +21,7 @@ function MyStack() {
         options={{ title: "Inicio de sesion" }}
       />
       <Stack.Screen
-        name="CreateUserScreen"
+        name="RegistroChofer"
         component={RegistroChofer}
         options={{ title: "Registro chofer" }}
       />
@@ -35,12 +34,20 @@ function MyStack() {
       <Stack.Screen
         name="RegistroMicro"
         component={RegistroMicro}
-        options={{ title: "Registro de micro" }}
+        options={{ title: "Registro de micro",
+        headerStyle: {backgroundColor: "#222f3e"},//color de la barra superior
+        headerTitleStyle: {color: '#fff'} //color de la letra
+      }}
       />
       <Stack.Screen
         name="DrawerNavigation"
         component={DrawerNavigation}
-        options={{ title: "Información" }}
+        options={{ title: "Información",
+        headerStyle: {backgroundColor: "#222f3e"},
+        headerTitleStyle: {color: '#fff'},
+        // headerBackVisible: {headerLeft: 'false'} 
+        headerMode: 'screen'
+      }}
       />
     </Stack.Navigator>
   );
