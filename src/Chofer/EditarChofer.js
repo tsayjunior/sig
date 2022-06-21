@@ -7,7 +7,7 @@ import {
   Button,
 } from "react-native";
 
-const UserDetailScreen = (props) => {
+const EditarChofer = (props) => {
 
     const [state, setState] =useState({
       docId: "",
@@ -93,4 +93,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UserDetailScreen;
+export default EditarChofer;

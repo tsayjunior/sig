@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 
-const CreateUserScreen = (props) => {
+const RegistroChofer = (props) => {
   const [state, setState] = useState({
     docId: "",
     name: "",
@@ -106,4 +106,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateUserScreen;
+export default RegistroChofer;

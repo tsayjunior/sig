@@ -6,11 +6,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
 
 import UserList from "./screens/UserList";
-import CreateUserScreen from "./src/Chofer/CreateUserScreen";
-import UserDetailScreen from "./src/Chofer/UserDetailScreen";
 import Login from "./src/Login/Login";
 import DrawerNavigation from "./src/Navigation/DrawerNavigation";
 import RegistroMicro from "./src/Micro/RegistroMicro";
+import RegistroChofer from "./src/Chofer/RegistroChofer";
+import EditarChofer from "./src/Chofer/EditarChofer";
+
 
 function MyStack() {
   return (
@@ -22,13 +23,13 @@ function MyStack() {
       />
       <Stack.Screen
         name="CreateUserScreen"
-        component={CreateUserScreen}
+        component={RegistroChofer}
         options={{ title: "Registro chofer" }}
       />
       <Stack.Screen name="UserList" component={UserList} />
       <Stack.Screen
         name="UserDetailScreen"
-        component={UserDetailScreen}
+        component={EditarChofer}
         options={{ title: "Editar chofer" }}
       />
       <Stack.Screen
