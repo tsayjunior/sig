@@ -16,10 +16,10 @@ const Login = (props) => {
 
   const iniciarSes = () => {
     // props.navigation.navigate("CreateUserScreen");
-    props.navigation.navigate("CreateUserScreen");
+    props.navigation.navigate("RegistroChofer");
   };
   const onPress = () => {
-    props.navigation.navigate("CreateUserScreen");
+    props.navigation.navigate("CrearUsuario");
   };
   return (
     <View style={styles.container}>
@@ -40,10 +40,10 @@ const Login = (props) => {
       </View>
       <View style={styles.container}>
         <TouchableNativeFeedback onPress={onPress}>
-          <View >
+          <View>
             <Text style={styles.letra}>Aun no tiene una cuenta,registrese</Text>
           </View>
-        </TouchableNativeFeedback >
+        </TouchableNativeFeedback>
       </View>
     </View>
   );
@@ -61,8 +61,8 @@ const styles = StyleSheet.create({
     padding: 35,
   },
   letra: {
-    color: 'red',
-    fontWeight: "bold"
+    color: "red",
+    fontWeight: "bold",
   },
 });
 export default Login;

@@ -15,7 +15,7 @@ const DrawerNavigation = () => {
       <Drawer.Screen name="Editar chofer" component={EditarChofer} />
       <Drawer.Screen name="Editar Micro" component={EditarMicro} />
       <Drawer.Screen
-        name="Lista de Usuarios"
+        name="Usuarios"
         component={UserLista}
         options={({navigation})=>({
           // title: "Información",
@@ -23,8 +23,8 @@ const DrawerNavigation = () => {
           headerTitleStyle: { color: "#fff" },
           // headerBackVisible: {headerLeft: 'false'}
           headerRight: () => (
-            <TouchableOpacity onPress={()=>navigation.navigate('RegistroChofer')}>
-              <Text>New</Text>
+            <TouchableOpacity onPress={()=>navigation.navigate('CrearUsuario')}>
+              <Text style={{color: '#fff', marginRight: 20, fontSize: 15}}>Nuevo</Text>
             </TouchableOpacity>
           ),
         })}

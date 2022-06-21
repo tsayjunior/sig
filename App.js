@@ -11,6 +11,7 @@ import DrawerNavigation from "./src/Navigation/DrawerNavigation";
 import RegistroMicro from "./src/Micro/RegistroMicro";
 import RegistroChofer from "./src/Chofer/RegistroChofer";
 import EditarChofer from "./src/Chofer/EditarChofer";
+import CrearUsuario from "./src/User/CrearUsuario";
 
 function MyStack() {
   return (
@@ -47,6 +48,15 @@ function MyStack() {
         headerTitleStyle: {color: '#fff'},
         // headerBackVisible: {headerLeft: 'false'} 
         headerMode: 'screen'
+      }}
+      />
+      <Stack.Screen
+        name="CrearUsuario"
+        component={CrearUsuario}
+        options={{ title: "Crear usuario",
+        headerStyle: {backgroundColor: "#222f3e"},
+        headerTitleStyle: {color: '#fff'},
+        headerTintColor: '#fff'
       }}
       />
     </Stack.Navigator>
