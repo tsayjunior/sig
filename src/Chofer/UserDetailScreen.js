@@ -10,9 +10,13 @@ import {
 const UserDetailScreen = (props) => {
 
     const [state, setState] =useState({
-        name: '',
-        email: '',
-        phone: ''
+      docId: "",
+      name: "",
+      fechaNac: "",
+      sexo: "",
+      phone: "",
+      email: "",
+      catLic: "",
     });
 
   // console.log(props.route.params.user);
@@ -26,28 +30,51 @@ const UserDetailScreen = (props) => {
     <ScrollView style={styles.container}>
       <View style={styles.inputGroup}>
         <TextInput
-          placeholder="Name user"
-        //   value='aux'
-          onChangeText={(value) => handleChangeText("name", value)}
-        /> 
+          placeholder="Documento de identidad"
+          onChangeText={(value) => handleChangeText("docId", value)}
+        />
       </View>
       <View style={styles.inputGroup}>
         <TextInput
-          placeholder="Email user"
+          placeholder="Nombre"
+          onChangeText={(value) => handleChangeText("name", value)}
+        />
+      </View>
+      <View style={styles.inputGroup}>
+        <TextInput
+          placeholder="Fecha de nacimiento"
+          onChangeText={(value) => handleChangeText("fechaNac", value)}
+        />
+      </View>
+      <View style={styles.inputGroup}>
+        <TextInput
+          placeholder="Sexo"
+          onChangeText={(value) => handleChangeText("sexo", value)}
+        />
+      </View>
+      <View style={styles.inputGroup}>
+        <TextInput
+          placeholder="Telefono"
+          onChangeText={(value) => handleChangeText("phone", value)}
+        />
+      </View>
+      <View style={styles.inputGroup}>
+        <TextInput
+          placeholder="Email"
           onChangeText={(value) => handleChangeText("email", value)}
         />
       </View>
       <View style={styles.inputGroup}>
         <TextInput
-          placeholder="Phone user"
-          onChangeText={(value) => handleChangeText("phone", value)}
+          placeholder="Categoria licencia"
+          onChangeText={(value) => handleChangeText("catLic", value)}
         />
       </View>
       <View>
-        <Button color="#19ac52" title="Actualizar usuario" onPress={() => alert("works")} />
+        <Button color="#19ac52" title="Actualizar chofer" onPress={() => alert("works")} />
       </View>
       <View>
-        <Button color="red" title="Eliminar usuario" onPress={() => alert("works")} />
+        <Button color="red" title="Eliminar chofer" onPress={() => alert("works")} />
       </View>
     </ScrollView>
   );
