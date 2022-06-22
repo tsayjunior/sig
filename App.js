@@ -18,7 +18,13 @@ function MyStack() {
       <Stack.Screen
         name="Login"
         component={Login}
-        options={{ title: "Inicio de sesion" }}
+        options={{
+          title: "Inicio de sesion",
+          headerStyle: { backgroundColor: "#222f3e" },
+          headerTitleStyle: { color: "#fff" },
+          // headerBackVisible: {headerLeft: 'false'}
+          headerMode: "screen",
+        }}
       />
       <Stack.Screen
         name="RegistroChofer"
@@ -33,29 +39,32 @@ function MyStack() {
       <Stack.Screen
         name="RegistroMicro"
         component={RegistroMicro}
-        options={{ title: "Registro de micro",
-        headerStyle: {backgroundColor: "#222f3e"},//color de la barra superior
-        headerTitleStyle: {color: '#fff'} //color de la letra
-      }}
+        options={{
+          title: "Registro de micro",
+          headerStyle: { backgroundColor: "#222f3e" }, //color de la barra superior
+          headerTitleStyle: { color: "#fff" }, //color de la letra
+        }}
       />
       <Stack.Screen
         name="DrawerNavigation"
         component={DrawerNavigation}
-        options={{ title: "Información",
-        headerStyle: {backgroundColor: "#222f3e"},
-        headerTitleStyle: {color: '#fff'},
-        // headerBackVisible: {headerLeft: 'false'} 
-        headerMode: 'screen'
-      }}
+        options={{
+          title: "Información",
+          headerStyle: { backgroundColor: "#222f3e" },
+          headerTitleStyle: { color: "#fff" },
+          // headerBackVisible: {headerLeft: 'false'}
+          headerMode: "screen",
+        }}
       />
       <Stack.Screen
         name="CrearUsuario"
         component={CrearUsuario}
-        options={{ title: "Crear usuario",
-        headerStyle: {backgroundColor: "#222f3e"},
-        headerTitleStyle: {color: '#fff'},
-        headerTintColor: '#fff'
-      }}
+        options={{
+          title: "Crear usuario",
+          headerStyle: { backgroundColor: "#222f3e" },
+          headerTitleStyle: { color: "#fff" },
+          headerTintColor: "#fff",
+        }}
       />
     </Stack.Navigator>
   );

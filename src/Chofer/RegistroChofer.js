@@ -7,6 +7,7 @@ import {
   Text,
   View,
 } from "react-native";
+import Layout from "../components/Layout";
 
 const RegistroChofer = (props) => {
   const [state, setState] = useState({
@@ -24,22 +25,25 @@ const RegistroChofer = (props) => {
   };
 
   const saveNewUSer = () => {
-    if (state.name === "") {
-      alert("provea un nombre");
-    } else {
-      try {
-        // console.log(state)
-        props.navigation.navigate("RegistroMicro", {
-          user: "1",
-        });
-      } catch (error) {
-        console.log("error");
-      }
-    }
+    // if (state.name === "") {
+    //   alert("provea un nombre");
+    // } else {
+    //   try {
+    //     // console.log(state)
+    //     props.navigation.navigate("RegistroMicro", {
+    //       user: "1",
+    //     });
+    //   } catch (error) {
+    //     console.log("error");
+    //   }
+    // }
+    props.navigation.navigate("RegistroMicro", {
+      user: "1",
+    })
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <Layout >
       <View style={styles.inputGroup}>
         <TextInput
           placeholder="Documento de identidad"
@@ -88,7 +92,7 @@ const RegistroChofer = (props) => {
       {/* <View>
                 <Button title="lista de usuario" onPress={props.navigation.navigate('userList')}/>
             </View> */}
-    </ScrollView>
+    </Layout>
   );
 };
 

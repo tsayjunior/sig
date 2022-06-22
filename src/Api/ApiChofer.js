@@ -1,4 +1,4 @@
-const API = "http://ec2-15-228-12-142.sa-east-1.compute.amazonaws.com/api/user";
+const API = "http://ec2-15-228-12-142.sa-east-1.compute.amazonaws.com/api/register";
 
 export const getUsers = async () => { //trae todos los usuarios registrados
   const res = await fetch(API);
@@ -35,4 +35,3 @@ export const updateUser = async (id, newUser) => { //actualiza un usuario dado s
   })
   return res;
 }
-

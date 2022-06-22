@@ -5,11 +5,14 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
-import {saveUsers} from '../Api/ConsultasApi'
+import { saveUsers, getUser, updateUser } from "../Api/ConsultasApi";
 
-const CrearUsuario = ({navigation}) => {
+const CrearUsuario = ({ navigation, route }) => {
+  //con route, recibo el parametro que me mandan, y lo mu
+
+  // console.log(route.params)//aca muestro el parametro que me manadn, el cual es un objeto con un id
 
   const [users, setUsers] = useState({
     email: "",
@@ -17,13 +20,47 @@ const CrearUsuario = ({navigation}) => {
     password: "",
     password_confirmation: "",
   });
+
+  const [editing, setEditing] = useState(false); //creo este estado, para que en caso tenga que editar, se cambie a true, editing
+
   const handleChangeUser = (name, value) => {
     setUsers({ ...users, [name]: value });
   };
-  const handleSubmit =()=>{
-    saveUsers(users)
-    navigation.navigate('RegistroChofer')
-  }
+
+  const handleSubmit = async () => {
+    //segun se actualize o se cree, realiza una funcion
+    try {
+      if (!editing) {
+        await saveUsers(users);
+        navigation.navigate("RegistroChofer");
+      } else {
+        await updateUser(route.params.id, users);
+        navigation.navigate("Usuarios");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (route.params && route.params.id) {
+      //si le mando un id, es por que quiero editar, y no crear
+      navigation.setOptions({ headerTitle: "Actualizar Usuario" }); //le cambia el nombre a la barra de arriba de navegacion
+      setEditing(true);
+      (async () => {
+        //recibe el objeto del usuario, sacandolo de la api
+        const users = await getUser(route.params.id);
+        // console.log(user);
+        setUsers({
+          email: users.email,
+          name: users.name,
+          password: "********",
+          password_confirmation: "********",
+        });
+      })();
+    }
+  }, []);
+
   return (
     <Layout>
       <TextInput
@@ -31,32 +68,48 @@ const CrearUsuario = ({navigation}) => {
         placeholder="Correo electrónico"
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
-        onChangeText={(text)=> handleChangeUser('email', text)}
+        onChangeText={(text) => handleChangeUser("email", text)}
+        value={users.email} //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
         placeholder="Nombre de usuario"
         placeholderTextColor="#546474"
-        onChangeText={(text)=> handleChangeUser('name', text)}
+        onChangeText={(text) => handleChangeUser("name", text)}
+        value={users.name}
       />
       <TextInput
         style={styles.input}
         placeholder="Contraseña"
         placeholderTextColor="#546474"
-        onChangeText={(text)=> handleChangeUser('password', text)}
+        onChangeText={(text) => handleChangeUser("password", text)}
+        value={users.password}
       />
       <TextInput
         style={styles.input}
         placeholder="Repetir contraseña"
         placeholderTextColor="#546474"
-        onChangeText={(text)=> handleChangeUser('password_confirmation', text)}
+        onChangeText={(text) => handleChangeUser("password_confirmation", text)}
+        value={users.password_confirmation}
       />
-      <TouchableOpacity style={styles.buttonSave}
-      onPress={handleSubmit}
-        // disabled
+
+      {!editing ? (
+        <TouchableOpacity
+          style={styles.buttonSave}
+          onPress={handleSubmit}
+          // disabled
         >
-        <Text style={styles.buttonText}>Registrar</Text>
-      </TouchableOpacity>
+          <Text style={styles.buttonText}>Registrar</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={styles.buttonUpdate}
+          onPress={handleSubmit}
+          // disabled
+        >
+          <Text style={styles.buttonText}>Actualizar</Text>
+        </TouchableOpacity>
+      )}
     </Layout>
   );
 };
@@ -87,5 +140,13 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
   },
+  buttonUpdate:{
+    padding:10,
+    paddingBottom: 5,
+    borderRadius: 5,
+    marginBottom:3,
+    backgroundColor: "#e58e26",
+    width: "90%"
+  }
 });
 export default CrearUsuario;
