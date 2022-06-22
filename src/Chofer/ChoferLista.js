@@ -1,11 +1,11 @@
 
 import React from "react";
-import UserList from '../components/UserList'
+import ChoferList from '../components/ChoferList'
 import Layout from '../components/Layout'
 
 const ChoferLista = () =>(
     <Layout>
-        <UserList />
+        <ChoferList />
     </Layout>
   );
 

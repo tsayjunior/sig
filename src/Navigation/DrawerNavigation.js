@@ -6,6 +6,7 @@ import EditarMicro from "../Micro/EditarMicro";
 import UserLista from "../User/UserLista";
 import EditarChofer from "../Chofer/EditarChofer";
 import ChoferLista from "../Chofer/ChoferLista";
+import MicroLista from "../Micro/MicroLista";
 
 const Drawer = createDrawerNavigator();
 
@@ -40,6 +41,21 @@ const DrawerNavigation = () => {
           // headerBackVisible: {headerLeft: 'false'}
           headerRight: () => (
             <TouchableOpacity onPress={()=>navigation.navigate('RegistroChofer')}>
+              <Text style={{color: '#fff', marginRight: 20, fontSize: 15}}>Nuevo</Text>
+            </TouchableOpacity>
+          ),
+        })}
+      />
+      <Drawer.Screen
+        name="Micros"
+        component={MicroLista}
+        options={({navigation})=>({
+          // title: "Información",
+          headerStyle: { backgroundColor: "#222f3e" },
+          headerTitleStyle: { color: "#fff" },
+          // headerBackVisible: {headerLeft: 'false'}
+          headerRight: () => (
+            <TouchableOpacity onPress={()=>navigation.navigate('RegistroMicro')}>
               <Text style={{color: '#fff', marginRight: 20, fontSize: 15}}>Nuevo</Text>
             </TouchableOpacity>
           ),

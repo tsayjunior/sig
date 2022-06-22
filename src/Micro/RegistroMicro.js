@@ -1,27 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  Button,
-  TextInput,
-  ScrollView,
-  StyleSheet,
   View,
+  StyleSheet,
+  TextInput,
   TouchableOpacity,
-Text
+  Text,
 } from "react-native";
 import Layout from "../components/Layout";
 import { saveUsers, getUser, updateUser } from "../Api/ApiMicro";
 
-
-const RegistroMicro = (props) => {
+const RegistroMicro = ({ navigation, route }) => {
   const [state, setState] = useState({
     placa: "",
     modelo: "",
-    cantAsien: "",
     linea: "",
-    numInter: "",
-    foto: "",
-    fechAsign: "",
-    fechBaja: "",
+    cantidad_asiento: "",
+    numero_interno: "",
+    fecha_asignacion: "",
+    fecha_baja: "",
+    conductor_id: "",
   });
   const [editing, setEditing] = useState(false); //creo este estado, para que en caso tenga que editar, se cambie a true, editing
 
@@ -29,21 +26,63 @@ const RegistroMicro = (props) => {
     setState({ ...state, [name]: value });
   };
 
-  const saveNewUSer = () => {
-    if (state.name === "") {
-      alert("provea un nombre");
-    } else {
-      try {
-        // console.log(state)
-        props.navigation.navigate("DrawerNavigation", {
-          user: "1",
-        });
-      } catch (error) {
-        console.log("error");
+  // const saveNewUSer = () => {
+  //   if (state.name === "") {
+  //     alert("provea un nombre");
+  //   } else {
+  //     try {
+  //       // console.log(state)
+  //       props.navigation.navigate("DrawerNavigation", {
+  //         user: "1",
+  //       });
+  //     } catch (error) {
+  //       console.log("error");
+  //     }
+  //   }
+  // };
+  const handleSubmit = async () => {
+    //segun se actualize o se cree, realiza una funcion
+    try {
+      if (!editing) {
+        await saveUsers(state);
+        console.log(state)
+        navigation.navigate("DrawerNavigation");
+        // props.navigation.navigate("DrawerNavigation", {
+        //   user: "1",
+        // });
+      } else {
+        await updateUser(route.params.id, state);
+        navigation.navigate("Usuarios");
       }
+    } catch (error) {
+      console.log(error);
     }
+    // navigation.navigate("Usuarios");
+
   };
 
+  useEffect(() => {
+    if (route.params && route.params.id) {
+      //si le mando un id, es por que quiero editar, y no crear
+      navigation.setOptions({ headerTitle: "Actualizar Chofer" }); //le cambia el nombre a la barra de arriba de navegacion
+      setEditing(true);
+      (async () => {
+        //recibe el objeto del usuario, sacandolo de la api
+        const state = await getUser(route.params.id);
+        // console.log(state);
+        setState({
+          placa: state.data.placa,
+          modelo: state.modelo,
+          linea: state.linea,
+          cantidad_asiento: state.cantidad_asiento,
+          numero_interno: state.numero_interno,
+          fecha_asignacion: state.fecha_asignacion,
+          fecha_baja: state.fecha_baja,
+          conductor_id: state.conductor_id
+        });
+      })();
+    }
+  }, []);
   return (
     <Layout>
       <TextInput
@@ -64,34 +103,27 @@ const RegistroMicro = (props) => {
       />
       <TextInput
         style={styles.input}
-        placeholder="Cantidad de asientos"
+        placeholder="Linea"
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
-        onChangeText={(text) => handleChangeText("lastname", text)}
+        onChangeText={(text) => handleChangeText("linea", text)}
         // value={users.email} //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
-        placeholder="Linea"
+        placeholder="Cantidad de asientos"
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
-        onChangeText={(text) => handleChangeText("date", text)}
+        onChangeText={(text) => handleChangeText("cantidad_asiento", text)}
         // value={users.email} //pone en el input, lo que tenga el estado users
       />
+      
       <TextInput
         style={styles.input}
         placeholder="Numero Interno"
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
-        onChangeText={(text) => handleChangeText("sex", text)}
-        // value={users.email} //pone en el input, lo que tenga el estado users
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="foto"
-        placeholderTextColor="#546474"
-        // onChangeText={text=>console.log(text)}
-        onChangeText={(text) => handleChangeText("phone", text)}
+        onChangeText={(text) => handleChangeText("numero_interno", text)}
         // value={users.email} //pone en el input, lo que tenga el estado users
       />
       <TextInput
@@ -99,7 +131,7 @@ const RegistroMicro = (props) => {
         placeholder="Fecha de asignacion"
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
-        onChangeText={(text) => handleChangeText("mail", text)}
+        onChangeText={(text) => handleChangeText("fecha_asignacion", text)}
         // value={users.email} //pone en el input, lo que tenga el estado users
       />
       <TextInput
@@ -107,14 +139,22 @@ const RegistroMicro = (props) => {
         placeholder="Fecha de baja"
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
-        onChangeText={(text) => handleChangeText("category_licencia_id", text)}
+        onChangeText={(text) => handleChangeText("fecha_baja", text)}
+        // value={users.email} //pone en el input, lo que tenga el estado users
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Conductor id"
+        placeholderTextColor="#546474"
+        // onChangeText={text=>console.log(text)}
+        onChangeText={(text) => handleChangeText("conductor_id", text)}
         // value={users.email} //pone en el input, lo que tenga el estado users
       />
       
       {!editing ? (
         <TouchableOpacity
           style={styles.buttonSave}
-          onPress={saveNewUSer}
+          onPress={handleSubmit}
           // disabled
         >
           <Text style={styles.buttonText}>Registrar</Text>
@@ -122,7 +162,7 @@ const RegistroMicro = (props) => {
       ) : (
         <TouchableOpacity
           style={styles.buttonUpdate}
-          onPress={saveNewUSer}
+          onPress={handleSubmit}
           // disabled
         >
           <Text style={styles.buttonText}>Actualizar</Text>

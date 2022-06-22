@@ -46,17 +46,22 @@ const RegistroChofer = ({ navigation, route }) => {
   useEffect(() => {
     if (route.params && route.params.id) {
       //si le mando un id, es por que quiero editar, y no crear
-      navigation.setOptions({ headerTitle: "Actualizar Usuario" }); //le cambia el nombre a la barra de arriba de navegacion
+      navigation.setOptions({ headerTitle: "Actualizar Chofer" }); //le cambia el nombre a la barra de arriba de navegacion
       setEditing(true);
       (async () => {
         //recibe el objeto del usuario, sacandolo de la api
         const state = await getUser(route.params.id);
-        // console.log(user);
+        // console.log(state);
         setState({
-          email: state.email,
-          name: state.name,
-          password: "********",
-          password_confirmation: "********",
+          ci: state.data.email,
+          names: state.names,
+          lastname: state.lastname,
+          date: state.date,
+          sex: state.sex,
+          phone: state.phone,
+          mail: state.mail,
+          category_id: state.category_id,
+          user_id: state.user_id,
         });
       })();
     }
