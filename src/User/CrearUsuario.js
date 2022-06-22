@@ -32,6 +32,7 @@ const CrearUsuario = ({ navigation, route }) => {
     try {
       if (!editing) {
         await saveUsers(users);
+        // console.log(users.email)
         navigation.navigate("RegistroChofer");
       } else {
         await updateUser(route.params.id, users);

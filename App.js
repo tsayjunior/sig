@@ -29,7 +29,13 @@ function MyStack() {
       <Stack.Screen
         name="RegistroChofer"
         component={RegistroChofer}
-        options={{ title: "Registro chofer" }}
+        options={{
+          title: "Registro chofer",
+          headerStyle: { backgroundColor: "#222f3e" },
+          headerTitleStyle: { color: "#fff" },
+          // headerBackVisible: {headerLeft: 'false'}
+          headerMode: "screen",
+        }}
       />
       <Stack.Screen
         name="UserDetailScreen"
