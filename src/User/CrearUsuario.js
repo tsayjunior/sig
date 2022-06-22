@@ -53,8 +53,8 @@ const CrearUsuario = ({ navigation, route }) => {
         const users = await getUser(route.params.id);
         // console.log(user);
         setUsers({
-          email: users.email,
-          name: users.name,
+          email: users.data.email,
+          name: users.data.name,
           password: "********",
           password_confirmation: "********",
         });

@@ -15,8 +15,8 @@ import UserItem from './UserItem'
 
   const loadTasks = async () => {
     const data = await getUsers();
-    // console.log(data)
-    setUsers(data);
+    console.log(data.data)
+    setUsers(data.data);
   };
 
   useEffect(() => {

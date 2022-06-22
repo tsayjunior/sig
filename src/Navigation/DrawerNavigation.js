@@ -5,6 +5,7 @@ import Mapa from "../Mapa/Mapa";
 import EditarMicro from "../Micro/EditarMicro";
 import UserLista from "../User/UserLista";
 import EditarChofer from "../Chofer/EditarChofer";
+import ChoferLista from "../Chofer/ChoferLista";
 
 const Drawer = createDrawerNavigator();
 
@@ -24,6 +25,21 @@ const DrawerNavigation = () => {
           // headerBackVisible: {headerLeft: 'false'}
           headerRight: () => (
             <TouchableOpacity onPress={()=>navigation.navigate('CrearUsuario')}>
+              <Text style={{color: '#fff', marginRight: 20, fontSize: 15}}>Nuevo</Text>
+            </TouchableOpacity>
+          ),
+        })}
+      />
+      <Drawer.Screen
+        name="Choferes"
+        component={ChoferLista}
+        options={({navigation})=>({
+          // title: "Información",
+          headerStyle: { backgroundColor: "#222f3e" },
+          headerTitleStyle: { color: "#fff" },
+          // headerBackVisible: {headerLeft: 'false'}
+          headerRight: () => (
+            <TouchableOpacity onPress={()=>navigation.navigate('RegistroChofer')}>
               <Text style={{color: '#fff', marginRight: 20, fontSize: 15}}>Nuevo</Text>
             </TouchableOpacity>
           ),
