@@ -18,7 +18,7 @@ const RegistroChofer = ({ navigation, route }) => {
     sex: "",
     phone: "",
     mail: "",
-    category_licencia_id: "",
+    category_id: "",
     user_id: "",
   });
 
@@ -33,7 +33,7 @@ const RegistroChofer = ({ navigation, route }) => {
     try {
       if (!editing) {
         await saveUsers(state);
-        console.log(state)
+        // console.log(state)
         navigation.navigate("RegistroMicro");
       } else {
         await updateUser(route.params.id, state);
@@ -51,20 +51,23 @@ const RegistroChofer = ({ navigation, route }) => {
       (async () => {
         //recibe el objeto del usuario, sacandolo de la api
         const state = await getUser(route.params.id);
-        // console.log(state);
+        console.log(state);
         setState({
-          ci: state.data.email,
-          names: state.names,
-          lastname: state.lastname,
-          date: state.date,
-          sex: state.sex,
-          phone: state.phone,
-          mail: state.mail,
-          category_id: state.category_id,
-          user_id: state.user_id,
+          ci: state.data.ci,
+          names: state.data.names,
+          lastname: state.data.lastname,
+          date: state.data.date,
+          sex: state.data.sex,
+          phone: state.data.phone,
+          mail: state.data.mail,
+          category_id: state.data.category_id + "",
+          user_id: state.data.user_id+"", 
         });
       })();
     }
+    
+    console.log("----*-*-*-**-*-*---*-");
+    // console.log(route.params.id);
   }, []);
 
   const saveNewUSer = () => {
@@ -93,7 +96,7 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("ci", text)}
-        // value={users.email} //pone en el input, lo que tenga el estado users
+        value={state.ci} //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
@@ -101,7 +104,7 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("names", text)}
-        // value={users.email} //pone en el input, lo que tenga el estado users
+        value={state.names} //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
@@ -109,7 +112,7 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("lastname", text)}
-        // value={users.email} //pone en el input, lo que tenga el estado users
+        value={state.lastname} //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
@@ -117,7 +120,7 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("date", text)}
-        // value={users.email} //pone en el input, lo que tenga el estado users
+        value={state.date} //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
@@ -125,7 +128,7 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("sex", text)}
-        // value={users.email} //pone en el input, lo que tenga el estado users
+        value={state.sex} //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
@@ -133,7 +136,7 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("phone", text)}
-        // value={users.email} //pone en el input, lo que tenga el estado users
+        value={state.phone} //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
@@ -141,15 +144,15 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("mail", text)}
-        // value={users.email} //pone en el input, lo que tenga el estado users
+        value={state.mail} //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
         placeholder="Categoria licencia"
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
-        onChangeText={(text) => handleChangeText("category_licencia_id", text)}
-        // value={users.email} //pone en el input, lo que tenga el estado users
+        onChangeText={(text) => handleChangeText("category_id", text)}
+       value={state.category_id} //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
@@ -157,7 +160,7 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("user_id", text)}
-        // value={users.email} //pone en el input, lo que tenga el estado users
+        value={state.user_id} //pone en el input, lo que tenga el estado users
       />
 
       

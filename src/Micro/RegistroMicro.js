@@ -45,7 +45,7 @@ const RegistroMicro = ({ navigation, route }) => {
     try {
       if (!editing) {
         await saveUsers(state);
-        console.log(state)
+        // console.log(state)
         navigation.navigate("DrawerNavigation");
         // props.navigation.navigate("DrawerNavigation", {
         //   user: "1",

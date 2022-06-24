@@ -15,7 +15,7 @@ import ChoferItem from './ChoferItem';
 
   const loadTasks = async () => {
     const data = await getUsers();
-    console.log(data.data)
+    // console.log(data.data)
     setUsers(data.data);
   };
 
@@ -35,6 +35,7 @@ import ChoferItem from './ChoferItem';
   const renderItem = ({item}) =>{//que sera la funcion que se ejecutara por cada usuario, y por cada item que recorra, devolverá el texto que se le indica
       //  console.log(item);
       //  return <Text>{item.name}</Text>//indica que se le devuelva el texto name del item 
+      // console.log({item})
         return <ChoferItem user={item} handleDelete={handleDelete}/>
   }
 

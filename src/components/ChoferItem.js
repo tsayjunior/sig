@@ -5,7 +5,9 @@ import {useNavigation} from '@react-navigation/native'
 const ChoferItem = ({ user, handleDelete }) => {
 
   const navigation = useNavigation();
+  // const prue()={
 
+  // }
   return (
     <View style={styles.itemContainer}>
       <TouchableOpacity
