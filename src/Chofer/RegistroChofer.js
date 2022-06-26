@@ -27,7 +27,7 @@ const RegistroChofer = ({ navigation, route }) => {
 
   const handleChangeText = (name, value) => {
     setState({ ...state, [name]: value });
-    // console.log(state)
+    console.log(state)
   };
 
   const handleSubmit = async () => {
@@ -146,8 +146,14 @@ const RegistroChofer = ({ navigation, route }) => {
         // placeholder="Fecha de nacimiento"
         onPress={insertarFecha}
       >
-        {}
-        <Text style={{color: "#fff", textAlign: "center"}}>{ text }</Text>
+        { text==="Fecha de nacimiento"? 
+        (
+          <Text style={{color: "#546474", textAlign: "center"}}>{ text }</Text>
+        ):
+        (
+          <Text style={{color: "#fff", textAlign: "center"}}>{ text }</Text>
+        )}
+        
       </TouchableOpacity>
       {show && (
             <DateTimePicker 
