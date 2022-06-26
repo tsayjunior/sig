@@ -11,10 +11,23 @@ import RegistroMicro from "./src/Micro/RegistroMicro";
 import RegistroChofer from "./src/Chofer/RegistroChofer";
 import EditarChofer from "./src/Chofer/EditarChofer";
 import CrearUsuario from "./src/User/CrearUsuario";
+import FechaPrueba from "./src/pruebas/FechaPrueba"; //prueba
 
 function MyStack() {
   return (
     <Stack.Navigator>
+      {/* <Stack.Screen
+        name="fecha"
+        component={FechaPrueba}
+        options={{
+          title: "fecha",
+          headerStyle: { backgroundColor: "#222f3e" },
+          headerTitleStyle: { color: "#fff" },
+          // headerBackVisible: {headerLeft: 'false'}
+          headerMode: "screen",
+        }}
+      /> */}
+
       <Stack.Screen
         name="Login"
         component={Login}

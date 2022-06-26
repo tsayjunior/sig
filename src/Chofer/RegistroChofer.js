@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import Layout from "../components/Layout";
 import { saveUsers, getUser, updateUser } from "../Api/ApiChofer";
+import DateTimePicker from "@react-native-community/datetimepicker"; //fecha
 
 const RegistroChofer = ({ navigation, route }) => {
   const [state, setState] = useState({
@@ -26,6 +27,7 @@ const RegistroChofer = ({ navigation, route }) => {
 
   const handleChangeText = (name, value) => {
     setState({ ...state, [name]: value });
+    // console.log(state)
   };
 
   const handleSubmit = async () => {
@@ -43,6 +45,30 @@ const RegistroChofer = ({ navigation, route }) => {
       console.log(error);
     }
   };
+  // --**------------*-**para poner Fecha *-*-*-*-*-*-*-*-*-----------------------------
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+  const [text, setText] = useState("Fecha de nacimiento");
+  const insertarFecha = (currentMode) => {
+    setShow(true);
+    // setMode(currentMode);
+  };
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === "ios");
+    setDate(currentDate);
+    let tempDate = new Date(currentDate);
+    let fDate =
+      tempDate.getFullYear() +
+      "-" +
+      (tempDate.getMonth() + 1) +
+      "-" +
+      tempDate.getDate();
+    setState({ ...state, ["date"]: fDate });
+    setText(fDate);
+    console.log(state)
+  };
+
   useEffect(() => {
     if (route.params && route.params.id) {
       //si le mando un id, es por que quiero editar, y no crear
@@ -61,12 +87,12 @@ const RegistroChofer = ({ navigation, route }) => {
           phone: state.data.phone,
           mail: state.data.mail,
           category_id: state.data.category_id + "",
-          user_id: state.data.user_id+"", 
+          user_id: state.data.user_id + "",
         });
       })();
     }
-    
-    console.log("----*-*-*-**-*-*---*-");
+
+    // console.log("----*-*-*-**-*-*---*-");
     // console.log(route.params.id);
   }, []);
 
@@ -114,14 +140,26 @@ const RegistroChofer = ({ navigation, route }) => {
         onChangeText={(text) => handleChangeText("lastname", text)}
         value={state.lastname} //pone en el input, lo que tenga el estado users
       />
-      <TextInput
+
+      <TouchableOpacity
         style={styles.input}
-        placeholder="Fecha de nacimiento"
-        placeholderTextColor="#546474"
-        // onChangeText={text=>console.log(text)}
-        onChangeText={(text) => handleChangeText("date", text)}
-        value={state.date} //pone en el input, lo que tenga el estado users
-      />
+        // placeholder="Fecha de nacimiento"
+        onPress={insertarFecha}
+      >
+        {}
+        <Text style={{color: "#fff", textAlign: "center"}}>{ text }</Text>
+      </TouchableOpacity>
+      {show && (
+            <DateTimePicker 
+            testID="dateTimePicker"
+            value={date}
+            mode="date"
+            is24Hour={true}
+            display='default'
+            onChange={onChange}
+            />
+        )}
+
       <TextInput
         style={styles.input}
         placeholder="Sexo"
@@ -152,7 +190,7 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("category_id", text)}
-       value={state.category_id} //pone en el input, lo que tenga el estado users
+        value={state.category_id} //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
@@ -163,7 +201,6 @@ const RegistroChofer = ({ navigation, route }) => {
         value={state.user_id} //pone en el input, lo que tenga el estado users
       />
 
-      
       {!editing ? (
         <TouchableOpacity
           style={styles.buttonSave}
@@ -218,14 +255,14 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
   },
-  buttonUpdate:{
-    padding:10,
+  buttonUpdate: {
+    padding: 10,
     paddingBottom: 5,
     borderRadius: 5,
-    marginBottom:3,
+    marginBottom: 3,
     backgroundColor: "#e58e26",
-    width: "90%"
-  }
+    width: "90%",
+  },
 });
 
 export default RegistroChofer;
