@@ -14,14 +14,15 @@ import { FontAwesome } from "@expo/vector-icons";
 const RegistroChofer = ({ navigation, route }) => {
   const [state, setState] = useState({
     ci: "",
-    names: "",
+    name: "",
     lastname: "",
-    date: "",
+    fecha_nac: "",
     sex: "",
     phone: "",
-    mail: "",
-    category_id: "",
-    user_id: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+    category_licencia_id: "",
   });
 
   const [editing, setEditing] = useState(false); //creo este estado, para que en caso tenga que editar, se cambie a true, editing
@@ -38,9 +39,12 @@ const RegistroChofer = ({ navigation, route }) => {
         await saveUsers(state);
         // console.log(state)
         navigation.navigate("RegistroMicro");
+        alert(resData.msg);
       } else {
         await updateUser(route.params.id, state);
         navigation.navigate("Usuarios");
+        
+        // alert(resData.msg);
       }
     } catch (error) {
       console.log(error);
@@ -65,7 +69,7 @@ const RegistroChofer = ({ navigation, route }) => {
       (tempDate.getMonth() + 1) +
       "-" +
       tempDate.getDate();
-    setState({ ...state, ["date"]: fDate });
+    setState({ ...state, ["fecha_nac"]: fDate });
     setText(fDate);
     console.log(state);
   };
@@ -81,14 +85,15 @@ const RegistroChofer = ({ navigation, route }) => {
         console.log(state);
         setState({
           ci: state.data.ci,
-          names: state.data.names,
+          name: state.data.name,
           lastname: state.data.lastname,
-          date: state.data.date,
+          fecha_nac: state.data.fecha_nac,
           sex: state.data.sex,
           phone: state.data.phone,
-          mail: state.data.mail,
-          category_id: state.data.category_id + "",
-          user_id: state.data.user_id + "",
+          email: state.data.email,
+          password: state.data.password,
+          password_confirmation: state.data.password_confirmation,
+          category_licencia_id: state.data.category_licencia_id + "",
         });
       })();
     }
@@ -130,7 +135,7 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholder="Nombre"
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
-        onChangeText={(text) => handleChangeText("names", text)}
+        onChangeText={(text) => handleChangeText("name", text)}
         value={state.names} //pone en el input, lo que tenga el estado users
       />
       <TextInput
@@ -191,7 +196,23 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholder="Email"
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
-        onChangeText={(text) => handleChangeText("mail", text)}
+        onChangeText={(text) => handleChangeText("email", text)}
+        value={state.mail} //pone en el input, lo que tenga el estado users
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Contraseña"
+        placeholderTextColor="#546474"
+        // onChangeText={text=>console.log(text)}
+        onChangeText={(text) => handleChangeText("password", text)}
+        value={state.mail} //pone en el input, lo que tenga el estado users
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Confirmar contraseña"
+        placeholderTextColor="#546474"
+        // onChangeText={text=>console.log(text)}
+        onChangeText={(text) => handleChangeText("password_confirmation", text)}
         value={state.mail} //pone en el input, lo que tenga el estado users
       />
       <TextInput
@@ -199,18 +220,9 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholder="Categoria licencia"
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
-        onChangeText={(text) => handleChangeText("category_id", text)}
+        onChangeText={(text) => handleChangeText("category_licencia_id", text)}
         value={state.category_id} //pone en el input, lo que tenga el estado users
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Usuario id"
-        placeholderTextColor="#546474"
-        // onChangeText={text=>console.log(text)}
-        onChangeText={(text) => handleChangeText("user_id", text)}
-        value={state.user_id} //pone en el input, lo que tenga el estado users
-      />
-
       {!editing ? (
         <TouchableOpacity
           style={styles.buttonSave}

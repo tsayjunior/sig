@@ -1,12 +1,13 @@
 import React from "react";
 import { Text, View } from "react-native";
+import Layout from "../components/Layout";
 
 
 const Mapa = () => {
   return (
-    <View>
+    <Layout>
       <Text>Mapa</Text>
-    </View>
+    </Layout>
   );
 };
 

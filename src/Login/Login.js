@@ -15,25 +15,49 @@ const Login = (props) => {
   // const handleChangeText = (name, value) => {
   //     setState({...state, [name]: value});
   // };
+// console.log(props)
+  const [ci, setCi] = useState();
+  const [contraseña, setContraseña] = useState();
 
-  const iniciarSes = () => {
+  const iniciarSes = async() => {
     // props.navigation.navigate("CreateUserScreen");
-    props.navigation.navigate("DrawerNavigation");
+    // alert('email')
+    // props.navigation.navigate("DrawerNavigation");
+    await fetch('http://ec2-15-228-12-142.sa-east-1.compute.amazonaws.com/api/login',{
+      method:'POST',
+      headers:{
+        'Accept':'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"ci": ci, "password": contraseña})
+    }).then(res=>res.json())
+    .then(resData=>{
+      alert(resData.msg);
+      // alert(resData.access_token);
+      if (resData.msg==="¡Usuario logueado exitosamente!") {
+        props.navigation.navigate("DrawerNavigation");
+      }
+      console.log(resData);
+    })
+    // console.log('acabo')
   };
   const onPress = () => {
-    props.navigation.navigate("CrearUsuario");
+    props.navigation.navigate("RegistroChofer");
   };
   return (
     <Layout>
       <TextInput
         style={styles.input}
-        placeholder="Nombre de usuario"
+        placeholder="Documento de identidad"
         placeholderTextColor="#546474"
+        // value={{password}}
+        onChangeText={(value)=>setCi(value)}
       />
       <TextInput
         style={styles.input}
         placeholder="Contraseña"
         placeholderTextColor="#546474"
+        onChangeText={(value)=>setContraseña(value)}
       />
       <TouchableOpacity
         style={styles.buttonSave}

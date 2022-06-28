@@ -7,16 +7,24 @@ import UserLista from "../User/UserLista";
 import EditarChofer from "../Chofer/EditarChofer";
 import ChoferLista from "../Chofer/ChoferLista";
 import MicroLista from "../Micro/MicroLista";
+import RegistroChofer from "../Chofer/RegistroChofer";
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="Mapa" component={Mapa} />
-      <Drawer.Screen name="Editar chofer" component={EditarChofer} />
-      <Drawer.Screen name="Editar Micro" component={EditarMicro} />
-      <Drawer.Screen
+      <Drawer.Screen name="Mapa" component={Mapa} 
+      options={({navigation})=>({
+        // title: "Información",
+        headerStyle: { backgroundColor: "#222f3e" },
+        headerTitleStyle: { color: "#fff" },
+        // headerBackVisible: {headerLeft: 'false'}
+      })}
+      />
+      {/* <Drawer.Screen name="Editar chofer" component={EditarChofer} />
+      <Drawer.Screen name="Editar Micro" component={EditarMicro} /> */}
+      {/* <Drawer.Screen
         name="Usuarios"
         component={UserLista}
         options={({navigation})=>({
@@ -30,7 +38,7 @@ const DrawerNavigation = () => {
             </TouchableOpacity>
           ),
         })}
-      />
+      /> */}
       <Drawer.Screen
         name="Choferes"
         component={ChoferLista}
@@ -44,6 +52,21 @@ const DrawerNavigation = () => {
               <Text style={{color: '#fff', marginRight: 20, fontSize: 15}}>Nuevo</Text>
             </TouchableOpacity>
           ),
+        })}
+      />
+      <Drawer.Screen
+        name="Editar Chofer"
+        component={RegistroChofer}
+        options={({navigation})=>({
+          // title: "Información",
+          headerStyle: { backgroundColor: "#222f3e" },
+          headerTitleStyle: { color: "#fff" },
+          // headerBackVisible: {headerLeft: 'false'}
+          // headerRight: () => (
+          //   <TouchableOpacity onPress={()=>navigation.navigate('RegistroChofer')}>
+          //     <Text style={{color: '#fff', marginRight: 20, fontSize: 15}}>Nuevo</Text>
+          //   </TouchableOpacity>
+          // ),
         })}
       />
       <Drawer.Screen

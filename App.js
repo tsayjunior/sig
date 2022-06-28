@@ -43,7 +43,7 @@ function MyStack() {
         name="RegistroChofer"
         component={RegistroChofer}
         options={{
-          title: "Registro chofer",
+          title: "Registros personales",
           headerStyle: { backgroundColor: "#222f3e" },
           headerTitleStyle: { color: "#fff" },
           // headerBackVisible: {headerLeft: 'false'}
@@ -68,6 +68,7 @@ function MyStack() {
         name="DrawerNavigation"
         component={DrawerNavigation}
         options={{
+          headerShown: false,//oculta la barra de arriba
           title: "Información",
           headerStyle: { backgroundColor: "#222f3e" },
           headerTitleStyle: { color: "#fff" },
