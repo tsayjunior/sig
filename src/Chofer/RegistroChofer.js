@@ -9,6 +9,7 @@ import {
 import Layout from "../components/Layout";
 import { saveUsers, getUser, updateUser } from "../Api/ApiChofer";
 import DateTimePicker from "@react-native-community/datetimepicker"; //fecha
+import { FontAwesome } from "@expo/vector-icons";
 
 const RegistroChofer = ({ navigation, route }) => {
   const [state, setState] = useState({
@@ -27,7 +28,7 @@ const RegistroChofer = ({ navigation, route }) => {
 
   const handleChangeText = (name, value) => {
     setState({ ...state, [name]: value });
-    console.log(state)
+    console.log(state);
   };
 
   const handleSubmit = async () => {
@@ -66,7 +67,7 @@ const RegistroChofer = ({ navigation, route }) => {
       tempDate.getDate();
     setState({ ...state, ["date"]: fDate });
     setText(fDate);
-    console.log(state)
+    console.log(state);
   };
 
   useEffect(() => {
@@ -146,25 +147,28 @@ const RegistroChofer = ({ navigation, route }) => {
         // placeholder="Fecha de nacimiento"
         onPress={insertarFecha}
       >
-        { text==="Fecha de nacimiento"? 
-        (
-          <Text style={{color: "#546474", textAlign: "center"}}>{ text }</Text>
-        ):
-        (
-          <Text style={{color: "#fff", textAlign: "center"}}>{ text }</Text>
+        {text === "Fecha de nacimiento" ? (
+          <Text style={{ color: "#546474", textAlign: "center" }}>
+            {text}     <FontAwesome name="calendar" size={24} color="#fff" marginBottom="auto" />
+          </Text>
+        ) : (
+          <Text style={{ color: "#fff", textAlign: "center" }}>
+            {text}     <FontAwesome name="calendar" size={24} color="#fff"
+            // style={{margin:0, padding:0}} 
+            />
+          </Text>
         )}
-        
       </TouchableOpacity>
       {show && (
-            <DateTimePicker 
-            testID="dateTimePicker"
-            value={date}
-            mode="date"
-            is24Hour={true}
-            display='default'
-            onChange={onChange}
-            />
-        )}
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode="date"
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+      )}
 
       <TextInput
         style={styles.input}
