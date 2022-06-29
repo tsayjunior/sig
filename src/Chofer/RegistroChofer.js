@@ -120,7 +120,7 @@ const RegistroChofer = ({ navigation, route }) => {
       user: "1",
     });
   };
-  const val = useContext(AuthContext);
+  // const val = useContext(AuthContext);
   return (
     <Layout>
  <Text>{val}</Text>
