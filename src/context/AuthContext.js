@@ -9,6 +9,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [Micros, setMicross] = useState({});
 
   const register = (
     ci,
@@ -65,6 +66,7 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((e) => {
         console.log(`login error ${e}`);
+        alert('datos invalidos')
         setIsLoading(false);
       });
   };
@@ -96,14 +98,40 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const setMicros = () => {
+    setIsLoading(true);
+
+    axios
+      .get(
+        `${BASE_URL}/transporte`,
+        // {},
+        {
+          headers: {Authorization: `Bearer ${userInfo.access_token}`},
+        },
+      )
+      .then(res => {
+        // console.log("-*-*-*-**-*-*");
+        setIsLoading(false);
+        setMicross(res.data);
+      })
+      .catch(e => {
+        
+        // console.log("-*-*-*-**-*-*");
+        // console.log(`logout error ${e}`);
+        setIsLoading(false);
+      });
+  };
+
   return (
     <AuthContext.Provider
       value={{
         isLoading,
         userInfo,
+        Micros,
         register,
         login,
-        logout
+        logout,
+        setMicros
       }}
     >
       {children}

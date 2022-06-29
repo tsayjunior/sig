@@ -40,8 +40,10 @@ const RegistroChofer = ({ navigation, route }) => {
     //segun se actualize o se cree, realiza una funcion
     try {
       if (!editing) {
-        await saveUsers(state);
+        // await saveUsers(state);
         // console.log(state)
+        register(state.ci, state.name, state.lastname, state.sex, state.fecha_nac, state.email, state.category_licencia_id, state.password, state.password_confirmation, state.phone)
+        
         navigation.navigate("RegistroMicro");
         alert(resData.msg);
       } else {
@@ -232,8 +234,8 @@ const RegistroChofer = ({ navigation, route }) => {
       {!editing ? (
         <TouchableOpacity
           style={styles.buttonSave}
-          // onPress={handleSubmit}
-          onPress={()=>{register(state.ci, state.name, state.lastname, state.sex, state.fecha_nac, state.email, state.category_licencia_id, state.password, state.password_confirmation, state.phone)}}
+          onPress={handleSubmit}
+          // onPress={()=>{register(state.ci, state.name, state.lastname, state.sex, state.fecha_nac, state.email, state.category_licencia_id, state.password, state.password_confirmation, state.phone)}}
           // disabled
         >
           <Text style={styles.buttonText}>Registrar</Text>

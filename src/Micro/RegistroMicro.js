@@ -18,7 +18,7 @@ const RegistroMicro = ({ navigation, route }) => {
     numero_interno: "",
     fecha_asignacion: "",
     fecha_baja: "",
-    conductor_id: "",
+    // conductor_id: "",
   });
   const [editing, setEditing] = useState(false); //creo este estado, para que en caso tenga que editar, se cambie a true, editing
 
@@ -78,7 +78,7 @@ const RegistroMicro = ({ navigation, route }) => {
           numero_interno: state.numero_interno,
           fecha_asignacion: state.fecha_asignacion,
           fecha_baja: state.fecha_baja,
-          conductor_id: state.conductor_id
+          // conductor_id: state.conductor_id
         });
       })();
     }
@@ -142,14 +142,14 @@ const RegistroMicro = ({ navigation, route }) => {
         onChangeText={(text) => handleChangeText("fecha_baja", text)}
         // value={users.email} //pone en el input, lo que tenga el estado users
       />
-      <TextInput
+      {/* <TextInput
         style={styles.input}
         placeholder="Conductor id"
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("conductor_id", text)}
         // value={users.email} //pone en el input, lo que tenga el estado users
-      />
+      /> */}
       
       {!editing ? (
         <TouchableOpacity

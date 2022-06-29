@@ -42,7 +42,7 @@ const DrawerNavigation = () => {
         })}
       /> */}
       <Drawer.Screen
-        name="Choferes"
+        name="chofer"
         component={ChoferLista}
         options={({navigation})=>({
           // title: "Información",
@@ -57,7 +57,7 @@ const DrawerNavigation = () => {
         })}
       />
       <Drawer.Screen
-        name="Editar Chofer"
+        name="Editar perfil"
         component={RegistroChofer}
         options={({navigation})=>({
           // title: "Información",

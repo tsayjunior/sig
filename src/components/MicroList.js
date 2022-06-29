@@ -1,9 +1,10 @@
  import { View, Text, FlatList, RefreshControl } from 'react-native'
- import React, {useState, useEffect} from 'react'
+ import React, {useState, useEffect, useContext} from 'react'
  import { getUsers, deleteUser } from "../Api/ApiMicro";
  import {useIsFocused} from '@react-navigation/native' //
 
 import MicroItem from './MicroItem';
+import { AuthContext } from '../context/AuthContext';
 
  const MicroList = () => {
 
@@ -13,10 +14,13 @@ import MicroItem from './MicroItem';
 
   const isFocused = useIsFocused() //useIsFocused es una funcion, que devuelve true si vuelvo a la pantalla anterior, y false si no
 
+  const {userInfo, isLoading, setMicros, Micros} = useContext(AuthContext)
   const loadTasks = async () => {
-    const data = await getUsers();
-    console.log(data.data)
-    setUsers(data.data);
+    const data = setMicros();
+    console.log("*-*-*-*-**-*--*-*-")
+    console.log(Micros.data)
+    setUsers(Micros.data);
+
   };
 
   useEffect(() => {

@@ -7,13 +7,13 @@ import Spinner from 'react-native-loading-spinner-overlay/lib'
 const Logout = () => {
 
     const {userInfo, isLoading, logout} = useContext(AuthContext)
-    console.log(userInfo)
+    // console.log(userInfo)
   return (
     <Layout>
         <Spinner visible={isLoading} />
         <View style={styles.container}>
-      <Text style={styles.welcome}>Bienvenido {userInfo.data.name}</Text>
-      <Button title="Logout" color="red" onPress={logout}/>
+      <Text style={styles.welcome}>desea cerrar sesion {userInfo.data.name}</Text>
+      <Button title="cerrar sesion" color="red" onPress={logout}/>
       </View>
     </Layout>
   )

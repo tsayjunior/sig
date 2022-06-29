@@ -20,7 +20,7 @@ function MyStack() {
   return (
     <Stack.Navigator>
       {userInfo.access_token? (
-
+        <>
       <Stack.Screen
         name="DrawerNavigation"
         component={DrawerNavigation}
@@ -33,6 +33,27 @@ function MyStack() {
           headerMode: "screen",
         }}
       />
+       <Stack.Screen
+          name="RegistroChofer"
+          component={RegistroChofer}
+          options={{
+            title: "Registros personales",
+            headerStyle: { backgroundColor: "#222f3e" },
+            headerTitleStyle: { color: "#fff" },
+            // headerBackVisible: {headerLeft: 'false'}
+            headerMode: "screen",
+          }}
+        />
+        <Stack.Screen
+          name="RegistroMicro"
+          component={RegistroMicro}
+          options={{
+            title: "Registro de micro",
+            headerStyle: { backgroundColor: "#222f3e" }, //color de la barra superior
+            headerTitleStyle: { color: "#fff" }, //color de la letra
+          }}
+        />
+      </>
        ):( 
 
       <>
