@@ -1,5 +1,5 @@
 // import React from 'react'
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Button,
   TextInput,
@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Layout from "../components/Layout";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = (props) => {
   // const handleChangeText = (name, value) => {
@@ -18,6 +19,7 @@ const Login = (props) => {
 // console.log(props)
   const [ci, setCi] = useState();
   const [contraseña, setContraseña] = useState();
+  const val = useContext(AuthContext);
 
   const iniciarSes = async() => {
     // props.navigation.navigate("CreateUserScreen");
@@ -46,6 +48,7 @@ const Login = (props) => {
   };
   return (
     <Layout>
+      <Text>{val}</Text>
       <TextInput
         style={styles.input}
         placeholder="Documento de identidad"

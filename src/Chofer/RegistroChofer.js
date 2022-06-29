@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   StyleSheet,
@@ -10,6 +10,7 @@ import Layout from "../components/Layout";
 import { saveUsers, getUser, updateUser } from "../Api/ApiChofer";
 import DateTimePicker from "@react-native-community/datetimepicker"; //fecha
 import { FontAwesome } from "@expo/vector-icons";
+import { AuthContext } from "../context/AuthContext";
 
 const RegistroChofer = ({ navigation, route }) => {
   const [state, setState] = useState({
@@ -119,9 +120,10 @@ const RegistroChofer = ({ navigation, route }) => {
       user: "1",
     });
   };
-
+  const val = useContext(AuthContext);
   return (
     <Layout>
+ <Text>{val}</Text>
       <TextInput
         style={styles.input}
         placeholder="Documento de identidad"

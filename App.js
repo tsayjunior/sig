@@ -11,12 +11,14 @@ import RegistroMicro from "./src/Micro/RegistroMicro";
 import RegistroChofer from "./src/Chofer/RegistroChofer";
 import EditarChofer from "./src/Chofer/EditarChofer";
 import CrearUsuario from "./src/User/CrearUsuario";
-import FechaPrueba from "./src/pruebas/FechaPrueba"; //prueba
+import { AuthProvider } from "./src/context/AuthContext";
+// import FechaPrueba from "./src/pruebas/FechaPrueba"; //prueba
 
 function MyStack() {
   return (
-    <Stack.Navigator>
-      {/* <Stack.Screen
+    <AuthProvider>
+      <Stack.Navigator>
+        {/* <Stack.Screen
         name="fecha"
         component={FechaPrueba}
         options={{
@@ -28,65 +30,66 @@ function MyStack() {
         }}
       /> */}
 
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{
-          title: "Inicio de sesion",
-          headerStyle: { backgroundColor: "#222f3e" },
-          headerTitleStyle: { color: "#fff" },
-          // headerBackVisible: {headerLeft: 'false'}
-          headerMode: "screen",
-        }}
-      />
-      <Stack.Screen
-        name="RegistroChofer"
-        component={RegistroChofer}
-        options={{
-          title: "Registros personales",
-          headerStyle: { backgroundColor: "#222f3e" },
-          headerTitleStyle: { color: "#fff" },
-          // headerBackVisible: {headerLeft: 'false'}
-          headerMode: "screen",
-        }}
-      />
-      <Stack.Screen
-        name="UserDetailScreen"
-        component={EditarChofer}
-        options={{ title: "Editar chofer" }}
-      />
-      <Stack.Screen
-        name="RegistroMicro"
-        component={RegistroMicro}
-        options={{
-          title: "Registro de micro",
-          headerStyle: { backgroundColor: "#222f3e" }, //color de la barra superior
-          headerTitleStyle: { color: "#fff" }, //color de la letra
-        }}
-      />
-      <Stack.Screen
-        name="DrawerNavigation"
-        component={DrawerNavigation}
-        options={{
-          headerShown: false,//oculta la barra de arriba
-          title: "Información",
-          headerStyle: { backgroundColor: "#222f3e" },
-          headerTitleStyle: { color: "#fff" },
-          // headerBackVisible: {headerLeft: 'false'}
-          headerMode: "screen",
-        }}
-      />
-      <Stack.Screen
-        name="CrearUsuario"
-        component={CrearUsuario}
-        options={{
-          title: "Crear usuario",
-          headerStyle: { backgroundColor: "#222f3e" },
-          headerTitleStyle: { color: "#fff" },
-          headerTintColor: "#fff",
-        }}
-      />
-    </Stack.Navigator>
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{
+            title: "Inicio de sesion",
+            headerStyle: { backgroundColor: "#222f3e" },
+            headerTitleStyle: { color: "#fff" },
+            // headerBackVisible: {headerLeft: 'false'}
+            headerMode: "screen",
+          }}
+        />
+        <Stack.Screen
+          name="RegistroChofer"
+          component={RegistroChofer}
+          options={{
+            title: "Registros personales",
+            headerStyle: { backgroundColor: "#222f3e" },
+            headerTitleStyle: { color: "#fff" },
+            // headerBackVisible: {headerLeft: 'false'}
+            headerMode: "screen",
+          }}
+        />
+        <Stack.Screen
+          name="UserDetailScreen"
+          component={EditarChofer}
+          options={{ title: "Editar chofer" }}
+        />
+        <Stack.Screen
+          name="RegistroMicro"
+          component={RegistroMicro}
+          options={{
+            title: "Registro de micro",
+            headerStyle: { backgroundColor: "#222f3e" }, //color de la barra superior
+            headerTitleStyle: { color: "#fff" }, //color de la letra
+          }}
+        />
+        <Stack.Screen
+          name="DrawerNavigation"
+          component={DrawerNavigation}
+          options={{
+            headerShown: false, //oculta la barra de arriba
+            title: "Información",
+            headerStyle: { backgroundColor: "#222f3e" },
+            headerTitleStyle: { color: "#fff" },
+            // headerBackVisible: {headerLeft: 'false'}
+            headerMode: "screen",
+          }}
+        />
+        <Stack.Screen
+          name="CrearUsuario"
+          component={CrearUsuario}
+          options={{
+            title: "Crear usuario",
+            headerStyle: { backgroundColor: "#222f3e" },
+            headerTitleStyle: { color: "#fff" },
+            headerTintColor: "#fff",
+          }}
+        />
+      </Stack.Navigator>
+    </AuthProvider>
   );
 }
 
