@@ -11,6 +11,7 @@ import { saveUsers, getUser, updateUser } from "../Api/ApiChofer";
 import DateTimePicker from "@react-native-community/datetimepicker"; //fecha
 import { FontAwesome } from "@expo/vector-icons";
 import { AuthContext } from "../context/AuthContext";
+import Spinner from "react-native-loading-spinner-overlay/lib";
 
 const RegistroChofer = ({ navigation, route }) => {
   const [state, setState] = useState({
@@ -28,9 +29,11 @@ const RegistroChofer = ({ navigation, route }) => {
 
   const [editing, setEditing] = useState(false); //creo este estado, para que en caso tenga que editar, se cambie a true, editing
 
+  const {isLoading, register} = useContext(AuthContext);
+
   const handleChangeText = (name, value) => {
     setState({ ...state, [name]: value });
-    console.log(state);
+    // console.log(state);
   };
 
   const handleSubmit = async () => {
@@ -123,7 +126,8 @@ const RegistroChofer = ({ navigation, route }) => {
   // const val = useContext(AuthContext);
   return (
     <Layout>
- <Text>{val}</Text>
+ {/* <Text>{val}</Text> */}
+    <Spinner visible={isLoading} />
       <TextInput
         style={styles.input}
         placeholder="Documento de identidad"
@@ -228,7 +232,8 @@ const RegistroChofer = ({ navigation, route }) => {
       {!editing ? (
         <TouchableOpacity
           style={styles.buttonSave}
-          onPress={handleSubmit}
+          // onPress={handleSubmit}
+          onPress={()=>{register(state.ci, state.name, state.lastname, state.sex, state.fecha_nac, state.email, state.category_licencia_id, state.password, state.password_confirmation, state.phone)}}
           // disabled
         >
           <Text style={styles.buttonText}>Registrar</Text>

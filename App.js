@@ -11,13 +11,31 @@ import RegistroMicro from "./src/Micro/RegistroMicro";
 import RegistroChofer from "./src/Chofer/RegistroChofer";
 import EditarChofer from "./src/Chofer/EditarChofer";
 import CrearUsuario from "./src/User/CrearUsuario";
-import { AuthProvider } from "./src/context/AuthContext";
+import { AuthContext, AuthProvider } from "./src/context/AuthContext";
+import { useContext } from "react";
 // import FechaPrueba from "./src/pruebas/FechaPrueba"; //prueba
 
 function MyStack() {
+  const {userInfo} = useContext(AuthContext);
   return (
-    <AuthProvider>
-      <Stack.Navigator>
+    <Stack.Navigator>
+      {userInfo.access_token? (
+
+      <Stack.Screen
+        name="DrawerNavigation"
+        component={DrawerNavigation}
+        options={{
+          headerShown: false, //oculta la barra de arriba
+          title: "Información",
+          headerStyle: { backgroundColor: "#222f3e" },
+          headerTitleStyle: { color: "#fff" },
+          // headerBackVisible: {headerLeft: 'false'}
+          headerMode: "screen",
+        }}
+      />
+       ):( 
+
+      <>
         {/* <Stack.Screen
         name="fecha"
         component={FechaPrueba}
@@ -52,11 +70,7 @@ function MyStack() {
             headerMode: "screen",
           }}
         />
-        <Stack.Screen
-          name="UserDetailScreen"
-          component={EditarChofer}
-          options={{ title: "Editar chofer" }}
-        />
+
         <Stack.Screen
           name="RegistroMicro"
           component={RegistroMicro}
@@ -66,18 +80,7 @@ function MyStack() {
             headerTitleStyle: { color: "#fff" }, //color de la letra
           }}
         />
-        <Stack.Screen
-          name="DrawerNavigation"
-          component={DrawerNavigation}
-          options={{
-            headerShown: false, //oculta la barra de arriba
-            title: "Información",
-            headerStyle: { backgroundColor: "#222f3e" },
-            headerTitleStyle: { color: "#fff" },
-            // headerBackVisible: {headerLeft: 'false'}
-            headerMode: "screen",
-          }}
-        />
+
         <Stack.Screen
           name="CrearUsuario"
           component={CrearUsuario}
@@ -88,16 +91,19 @@ function MyStack() {
             headerTintColor: "#fff",
           }}
         />
-      </Stack.Navigator>
-    </AuthProvider>
+      </>
+       )} 
+    </Stack.Navigator>
   );
 }
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <MyStack />
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
 

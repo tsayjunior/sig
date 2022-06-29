@@ -8,6 +8,8 @@ import EditarChofer from "../Chofer/EditarChofer";
 import ChoferLista from "../Chofer/ChoferLista";
 import MicroLista from "../Micro/MicroLista";
 import RegistroChofer from "../Chofer/RegistroChofer";
+// import { AuthProvider } from "../context/AuthContext";
+import Logout from "../Login/Logout";
 
 const Drawer = createDrawerNavigator();
 
@@ -84,6 +86,10 @@ const DrawerNavigation = () => {
           ),
         })}
       />
+      <Drawer.Screen
+        name="logout"
+        component={Logout}
+        />
     </Drawer.Navigator>
   );
 };

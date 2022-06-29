@@ -1,0 +1,1 @@
+export const BASE_URL = 'http://ec2-15-228-12-142.sa-east-1.compute.amazonaws.com/api';
