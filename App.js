@@ -21,6 +21,20 @@ function MyStack() {
   const {userInfo} = useContext(AuthContext);
   return (
     <Stack.Navigator>
+
+     {/*  <Stack.Screen
+        name="DrawerNavigation"
+        component={DrawerNavigation}
+        options={{
+          headerShown: false, //oculta la barra de arriba
+          title: "Información",
+          headerStyle: { backgroundColor: "#222f3e" },
+          headerTitleStyle: { color: "#fff" },
+          // headerBackVisible: {headerLeft: 'false'}
+          headerMode: "screen",
+        }}
+      /> */}
+
       {userInfo.access_token? (
         <>
       <Stack.Screen

@@ -21,10 +21,12 @@ export default function NewLogin({ navigation }) {
   const [password, setPassword] = useState(""); */
 
   const [ci, setCi] = useState();
+
   const [password, setPassword] = useState();
   const { isLoading, login } = useContext(AuthContext);
 
   return (
+  
     <View style={StyleSheet.absoluteFill}>
       <Image source={backImage} style={styles.backImage} />
       <View style={styles.whiteSheet} />
@@ -39,6 +41,7 @@ export default function NewLogin({ navigation }) {
           keyboardType="numeric"
           textContentType="none"
           autoFocus={true}
+      
           value={ci}
           onChangeText={(value) => setCi(value)}
         />
@@ -89,6 +92,7 @@ export default function NewLogin({ navigation }) {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
  /*  container: {
     flex: 1,

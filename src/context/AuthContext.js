@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import React, { createContext, useState } from "react";
 import { BASE_URL } from "../Config";
-
+import { isEmpty } from "lodash";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -39,6 +39,7 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         let userInfo = res.data;
+        alert(res);
         setUserInfo(userInfo);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
@@ -59,16 +60,21 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         let userInfo = res.data;
-        console.log(userInfo);
-        setUserInfo(userInfo);
-        AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
-        setIsLoading(false);
+       
+          setUserInfo(userInfo);
+          AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
+          setIsLoading(false);
+        
       })
       .catch((e) => {
         console.log(`login error ${e}`);
-        alert("datos invalidos");
+      /*  if (isEmpty(e)) {
+        alert("todos los campos son requeridos");
+      } else {
+        alert(`login error ${e}`);
         setIsLoading(false);
-      });
+      }*/
+      }); 
   };
 
   const logout = () => {
@@ -134,7 +140,7 @@ export const AuthProvider = ({ children }) => {
 
     axios
       .post(
-        `${BASE_URL}/transporte`,       
+        `${BASE_URL}/transporte`,
         {
           placa,
           modelo,
@@ -143,9 +149,10 @@ export const AuthProvider = ({ children }) => {
           numero_interno,
           fecha_asignacion,
           fecha_baja,
-        },{
-          headers: { Authorization: `Bearer ${userInfo.access_token}` },
         },
+        {
+          headers: { Authorization: `Bearer ${userInfo.access_token}` },
+        }
       )
       .then((res) => {
         console.log("-*-*-*-**-*-*");
