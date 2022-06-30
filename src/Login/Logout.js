@@ -12,7 +12,7 @@ const Logout = () => {
     <Layout>
         <Spinner visible={isLoading} />
         <View style={styles.container}>
-      <Text style={styles.welcome}>desea cerrar sesion {userInfo.data.name}</Text>
+      <Text style={styles.welcome}>Presione si desea cerrar sesion {userInfo.data.name}</Text>
       <Button title="cerrar sesion" color="red" onPress={logout}/>
       </View>
     </Layout>

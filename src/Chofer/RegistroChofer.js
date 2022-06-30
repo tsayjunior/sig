@@ -29,7 +29,7 @@ const RegistroChofer = ({ navigation, route }) => {
 
   const [editing, setEditing] = useState(false); //creo este estado, para que en caso tenga que editar, se cambie a true, editing
 
-  const {isLoading, register} = useContext(AuthContext);
+  const {isLoading, register, userInfo} = useContext(AuthContext);
 
   const handleChangeText = (name, value) => {
     setState({ ...state, [name]: value });
@@ -81,6 +81,14 @@ const RegistroChofer = ({ navigation, route }) => {
   };
 
   useEffect(() => {
+    
+    console.log("***************************")
+    if(userInfo){
+      console.log("no nulo")
+    }else{
+      
+      console.log("no nulo")
+    }
     if (route.params && route.params.id) {
       //si le mando un id, es por que quiero editar, y no crear
       navigation.setOptions({ headerTitle: "Actualizar Chofer" }); //le cambia el nombre a la barra de arriba de navegacion
