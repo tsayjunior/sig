@@ -7,9 +7,9 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/logoChofer.png",
+      "image": "./assets/splash2.png",
       "resizeMode": "contain",
-      "backgroundColor": "#222f3e"
+      "backgroundColor": "#33d9b2"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

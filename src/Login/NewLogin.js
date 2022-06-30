@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,19 +11,27 @@ import {
   StatusBar,
   Alert,
 } from "react-native";
-
+import Spinner from "react-native-loading-spinner-overlay/lib";
+import Layout from "../components/Layout";
+import { AuthContext } from "../context/AuthContext";
 const backImage = require("../Image/tucan1.png");
 
 export default function NewLogin({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  /*   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState(""); */
+
+  const [ci, setCi] = useState();
+  const [password, setPassword] = useState();
+  const { isLoading, login } = useContext(AuthContext);
 
   return (
-    <View style={styles.container}>
+    <View style={StyleSheet.absoluteFill}>
       <Image source={backImage} style={styles.backImage} />
       <View style={styles.whiteSheet} />
       <SafeAreaView style={styles.form}>
         <Text style={styles.title}>Log In</Text>
+        {/* <Layout> */}
+        <Spinner visible={isLoading} />
         <TextInput
           style={styles.input}
           placeholder="Carnet identidad"
@@ -31,8 +39,8 @@ export default function NewLogin({ navigation }) {
           keyboardType="numeric"
           textContentType="none"
           autoFocus={true}
-          value={email}
-          onChangeText={(text) => setEmail(text)}
+          value={ci}
+          onChangeText={(value) => setCi(value)}
         />
         <TextInput
           style={styles.input}
@@ -42,9 +50,15 @@ export default function NewLogin({ navigation }) {
           secureTextEntry={true}
           textContentType="password"
           value={password}
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={(value) => setPassword(value)}
         />
-        <TouchableOpacity style={styles.button}>
+        {/*   </Layout> */}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            login(ci, password);
+          }}
+        >
           <Text style={{ fontWeight: "bold", color: "#fff", fontSize: 18 }}>
             {" "}
             Iniciar
@@ -59,14 +73,14 @@ export default function NewLogin({ navigation }) {
           }}
         >
           <Text style={{ color: "gray", fontWeight: "600", fontSize: 14 }}>
-           Aun no tienes una cuenta?{" "}
+            Aun no tienes una cuenta?{" "}
           </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("RegistroChofer")}
           >
             <Text style={{ color: "#33d9b2", fontWeight: "600", fontSize: 14 }}>
               {" "}
-             Registrar
+              Registrar
             </Text>
           </TouchableOpacity>
         </View>
@@ -76,10 +90,10 @@ export default function NewLogin({ navigation }) {
   );
 }
 const styles = StyleSheet.create({
-  container: {
+ /*  container: {
     flex: 1,
     backgroundColor: "#fff",
-  },
+  }, */
   title: {
     fontSize: 36,
     fontWeight: "bold",
