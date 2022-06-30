@@ -29,7 +29,7 @@ const RegistroChofer = ({ navigation, route }) => {
 
   const [editing, setEditing] = useState(false); //creo este estado, para que en caso tenga que editar, se cambie a true, editing
 
-  const {isLoading, register} = useContext(AuthContext);
+  const {isLoading, register, userInfo} = useContext(AuthContext);
 
   const handleChangeText = (name, value) => {
     setState({ ...state, [name]: value });
@@ -40,8 +40,10 @@ const RegistroChofer = ({ navigation, route }) => {
     //segun se actualize o se cree, realiza una funcion
     try {
       if (!editing) {
-        await saveUsers(state);
+        // await saveUsers(state);
         // console.log(state)
+        register(state.ci, state.name, state.lastname, state.sex, state.fecha_nac, state.email, state.category_licencia_id, state.password, state.password_confirmation, state.phone)
+        
         navigation.navigate("RegistroMicro");
         alert(resData.msg);
       } else {
@@ -79,6 +81,14 @@ const RegistroChofer = ({ navigation, route }) => {
   };
 
   useEffect(() => {
+    
+    console.log("***************************")
+    if(userInfo){
+      console.log("no nulo")
+    }else{
+      
+      console.log("no nulo")
+    }
     if (route.params && route.params.id) {
       //si le mando un id, es por que quiero editar, y no crear
       navigation.setOptions({ headerTitle: "Actualizar Chofer" }); //le cambia el nombre a la barra de arriba de navegacion
@@ -232,8 +242,8 @@ const RegistroChofer = ({ navigation, route }) => {
       {!editing ? (
         <TouchableOpacity
           style={styles.buttonSave}
-          // onPress={handleSubmit}
-          onPress={()=>{register(state.ci, state.name, state.lastname, state.sex, state.fecha_nac, state.email, state.category_licencia_id, state.password, state.password_confirmation, state.phone)}}
+          onPress={handleSubmit}
+          // onPress={()=>{register(state.ci, state.name, state.lastname, state.sex, state.fecha_nac, state.email, state.category_licencia_id, state.password, state.password_confirmation, state.phone)}}
           // disabled
         >
           <Text style={styles.buttonText}>Registrar</Text>

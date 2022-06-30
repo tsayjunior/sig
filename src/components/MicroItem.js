@@ -9,7 +9,7 @@ const MicroItem = ({ user, handleDelete }) => {
   return (
     <View style={styles.itemContainer}>
       <TouchableOpacity
-      onPress={()=>navigation.navigate('RegistroMicro', {id:user.id})}//aparte de navegar a la otra pantalla, le paso un parametro, que es el id, para poder editar
+      // onPress={()=>navigation.navigate('RegistroMicro', {id:user.id})}//aparte de navegar a la otra pantalla, le paso un parametro, que es el id, para poder editar
       >
         <Text style={styles.itemTitle}>{user.placa}</Text>
         <Text style={styles.itemTitle}>{user.modelo}</Text>
@@ -18,14 +18,14 @@ const MicroItem = ({ user, handleDelete }) => {
         <Text style={styles.itemTitle}>{user.numero_interno}</Text>
         <Text style={styles.itemTitle}>{user.fecha_asignacion}</Text>
         <Text style={styles.itemTitle}>{user.fecha_baja}</Text>
-        <Text style={styles.itemTitle}>{user.conductor_id}</Text>
+        {/* <Text style={styles.itemTitle}>{user.conductor_id}</Text> */}
       </TouchableOpacity>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={{ backgroundColor: "#ee5253", padding: 7, borderRadius: 5 }}
         onPress={()=>handleDelete(user.id)}
       >
         <Text style={{ color: "#fff" }}>Eliminar</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };

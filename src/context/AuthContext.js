@@ -9,6 +9,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [Micros, setMicross] = useState({});
 
   const register = (
     ci,
@@ -48,7 +49,7 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(false);
       });
   };
-  
+
   const login = (ci, password) => {
     setIsLoading(true);
     axios
@@ -56,7 +57,7 @@ export const AuthProvider = ({ children }) => {
         ci,
         password,
       })
-      .then(res => {
+      .then((res) => {
         let userInfo = res.data;
         console.log(userInfo);
         setUserInfo(userInfo);
@@ -65,6 +66,7 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((e) => {
         console.log(`login error ${e}`);
+        alert("datos invalidos");
         setIsLoading(false);
       });
   };
@@ -77,33 +79,97 @@ export const AuthProvider = ({ children }) => {
         `${BASE_URL}/logout`,
         // {},
         {
-          headers: {Authorization: `Bearer ${userInfo.access_token}`},
-        },
+          headers: { Authorization: `Bearer ${userInfo.access_token}` },
+        }
       )
-      .then(res => {
+      .then((res) => {
         console.log("-*-*-*-**-*-*");
 
         console.log(res.data);
-        AsyncStorage.removeItem('userInfo');
+        AsyncStorage.removeItem("userInfo");
         setUserInfo({});
         setIsLoading(false);
       })
-      .catch(e => {
-        
+      .catch((e) => {
         // console.log("-*-*-*-**-*-*");
         // console.log(`logout error ${e}`);
         setIsLoading(false);
       });
   };
 
+  const setMicros = () => {
+    //muestra todos los micros registrados de un chofer (usuario)
+    setIsLoading(true);
+
+    axios
+      .get(
+        `${BASE_URL}/transporte`,
+        // {},
+        {
+          headers: { Authorization: `Bearer ${userInfo.access_token}` },
+        }
+      )
+      .then((res) => {
+        // console.log("-*-*-*-**-*-*");
+        setIsLoading(false);
+        setMicross(res.data);
+      })
+      .catch((e) => {
+        // console.log("-*-*-*-**-*-*");
+        console.log(`logout error ${e}`);
+        setIsLoading(false);
+      });
+  };
+
+  const saveMicro = (
+    placa,
+    modelo,
+    linea,
+    cantidad_asiento,
+    numero_interno,
+    fecha_asignacion,
+    fecha_baja
+  ) => {
+    setIsLoading(true);
+
+    axios
+      .post(
+        `${BASE_URL}/transporte`,       
+        {
+          placa,
+          modelo,
+          linea,
+          cantidad_asiento,
+          numero_interno,
+          fecha_asignacion,
+          fecha_baja,
+        },{
+          headers: { Authorization: `Bearer ${userInfo.access_token}` },
+        },
+      )
+      .then((res) => {
+        console.log("-*-*-*-**-*-*");
+        console.log(res);
+        setIsLoading(false);
+        // setMicross(res.data);
+      })
+      .catch((e) => {
+        // console.log("-*-*-*-**-*-*");
+        console.log(`logout error ${e}`);
+        setIsLoading(false);
+      });
+  };
   return (
     <AuthContext.Provider
       value={{
         isLoading,
         userInfo,
+        Micros,
         register,
         login,
-        logout
+        logout,
+        setMicros,
+        saveMicro,
       }}
     >
       {children}

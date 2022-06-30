@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   StyleSheet,
@@ -8,6 +8,9 @@ import {
 } from "react-native";
 import Layout from "../components/Layout";
 import { saveUsers, getUser, updateUser } from "../Api/ApiMicro";
+import { AuthContext } from "../context/AuthContext";
+import { FontAwesome } from "@expo/vector-icons";
+import DateTimePicker from "@react-native-community/datetimepicker"; //fecha
 
 const RegistroMicro = ({ navigation, route }) => {
   const [state, setState] = useState({
@@ -18,7 +21,8 @@ const RegistroMicro = ({ navigation, route }) => {
     numero_interno: "",
     fecha_asignacion: "",
     fecha_baja: "",
-    conductor_id: "",
+    
+    // conductor_id: "",
   });
   const [editing, setEditing] = useState(false); //creo este estado, para que en caso tenga que editar, se cambie a true, editing
 
@@ -40,11 +44,13 @@ const RegistroMicro = ({ navigation, route }) => {
   //     }
   //   }
   // };
+  const {userInfo, isLoading, setMicros, Micros, saveMicro} = useContext(AuthContext)
   const handleSubmit = async () => {
     //segun se actualize o se cree, realiza una funcion
     try {
       if (!editing) {
-        await saveUsers(state);
+
+        saveMicro(state.placa, state.modelo, state.linea, state.cantidad_asiento, state.numero_interno, state.fecha_asignacion, state.fecha_baja)
         // console.log(state)
         navigation.navigate("DrawerNavigation");
         // props.navigation.navigate("DrawerNavigation", {
@@ -78,11 +84,35 @@ const RegistroMicro = ({ navigation, route }) => {
           numero_interno: state.numero_interno,
           fecha_asignacion: state.fecha_asignacion,
           fecha_baja: state.fecha_baja,
-          conductor_id: state.conductor_id
+          // conductor_id: state.conductor_id
         });
       })();
     }
   }, []);
+
+  // --**------------*-**para poner Fecha *-*-*-*-*-*-*-*-*-----------------------------
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+  const [text, setText] = useState("Fecha de asignacion");
+  const insertarFecha = (currentMode) => {
+    setShow(true);
+    // setMode(currentMode);
+  };
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === "ios");
+    setDate(currentDate);
+    let tempDate = new Date(currentDate);
+    let fDate =
+      tempDate.getFullYear() +
+      "-" +
+      (tempDate.getMonth() + 1) +
+      "-" +
+      tempDate.getDate();
+    setState({ ...state, ["fecha_asignacion"]: fDate });
+    setText(fDate);
+    console.log(state);
+  };
   return (
     <Layout>
       <TextInput
@@ -126,30 +156,50 @@ const RegistroMicro = ({ navigation, route }) => {
         onChangeText={(text) => handleChangeText("numero_interno", text)}
         // value={users.email} //pone en el input, lo que tenga el estado users
       />
-      <TextInput
+      <TouchableOpacity
         style={styles.input}
-        placeholder="Fecha de asignacion"
-        placeholderTextColor="#546474"
-        // onChangeText={text=>console.log(text)}
-        onChangeText={(text) => handleChangeText("fecha_asignacion", text)}
-        // value={users.email} //pone en el input, lo que tenga el estado users
-      />
-      <TextInput
+        // placeholder="Fecha de nacimiento"
+        onPress={insertarFecha}
+      >
+        {text === "Fecha de asignacion" ? (
+          <Text style={{ color: "#546474", textAlign: "center" }}>
+            {text}     <FontAwesome name="calendar" size={24} color="#fff" marginBottom="auto" />
+          </Text>
+        ) : (
+          <Text style={{ color: "#fff", textAlign: "center" }}>
+            {text}     <FontAwesome name="calendar" size={24} color="#fff"
+            // style={{margin:0, padding:0}} 
+            />
+          </Text>
+        )}
+      </TouchableOpacity>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode="date"
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+      )}
+
+      {/* <TextInput
         style={styles.input}
         placeholder="Fecha de baja"
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("fecha_baja", text)}
         // value={users.email} //pone en el input, lo que tenga el estado users
-      />
-      <TextInput
+      /> */}
+      {/* <TextInput
         style={styles.input}
         placeholder="Conductor id"
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("conductor_id", text)}
         // value={users.email} //pone en el input, lo que tenga el estado users
-      />
+      /> */}
       
       {!editing ? (
         <TouchableOpacity

@@ -41,8 +41,8 @@ const DrawerNavigation = () => {
           ),
         })}
       /> */}
-      <Drawer.Screen
-        name="Choferes"
+      {/* <Drawer.Screen
+        name="chofer"
         component={ChoferLista}
         options={({navigation})=>({
           // title: "Información",
@@ -55,9 +55,9 @@ const DrawerNavigation = () => {
             </TouchableOpacity>
           ),
         })}
-      />
-      <Drawer.Screen
-        name="Editar Chofer"
+      /> */}
+      {/* <Drawer.Screen
+        name="perfil"
         component={RegistroChofer}
         options={({navigation})=>({
           // title: "Información",
@@ -70,7 +70,7 @@ const DrawerNavigation = () => {
           //   </TouchableOpacity>
           // ),
         })}
-      />
+      /> */}
       <Drawer.Screen
         name="Micros"
         component={MicroLista}
@@ -87,8 +87,19 @@ const DrawerNavigation = () => {
         })}
       />
       <Drawer.Screen
-        name="logout"
+        name="Cerrar sesion"
         component={Logout}
+        options={({navigation})=>({
+          // title: "Información",
+          headerStyle: { backgroundColor: "#222f3e" },
+          headerTitleStyle: { color: "#fff" },
+          // headerBackVisible: {headerLeft: 'false'}
+          // headerRight: () => (
+          //   <TouchableOpacity onPress={()=>navigation.navigate('RegistroChofer')}>
+          //     <Text style={{color: '#fff', marginRight: 20, fontSize: 15}}>Nuevo</Text>
+          //   </TouchableOpacity>
+          // ),
+        })}
         />
     </Drawer.Navigator>
   );
