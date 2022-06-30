@@ -13,6 +13,8 @@ import EditarChofer from "./src/Chofer/EditarChofer";
 import CrearUsuario from "./src/User/CrearUsuario";
 import { AuthContext, AuthProvider } from "./src/context/AuthContext";
 import { useContext } from "react";
+/* PRueba del nuevo login */
+import NewLogin from "./src/Login/NewLogin";
 // import FechaPrueba from "./src/pruebas/FechaPrueba"; //prueba
 
 function MyStack() {
@@ -47,6 +49,18 @@ function MyStack() {
           headerMode: "screen",
         }}
       /> */}
+      {/* prueba del nuevo login */}
+       <Stack.Screen
+          name="NewLogin"
+          component={NewLogin}
+          options={{
+            title: "Login",
+            headerStyle:false,
+            headerShown: false,
+           
+          }}
+        />
+        {/* fin */}
 
         <Stack.Screen
           name="Login"
