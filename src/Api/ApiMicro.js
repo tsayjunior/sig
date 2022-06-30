@@ -20,7 +20,7 @@ export const saveUsers = async (newUser) => { //guarda un usuario
 };
 
 export const deleteUser = async (id) => { //borra un usuario segun el id dado
-  // console.log(id)
+  // console.log(`${API}/${id}`)
   await fetch(`${API}/${id}`, { // a la ruta api, se le concatena / + el id
     method: "DELETE",
 

@@ -20,12 +20,12 @@ const MicroItem = ({ user, handleDelete }) => {
         <Text style={styles.itemTitle}>{user.fecha_baja}</Text>
         {/* <Text style={styles.itemTitle}>{user.conductor_id}</Text> */}
       </TouchableOpacity>
-      {/* <TouchableOpacity
+      <TouchableOpacity
         style={{ backgroundColor: "#ee5253", padding: 7, borderRadius: 5 }}
         onPress={()=>handleDelete(user.id)}
       >
         <Text style={{ color: "#fff" }}>Eliminar</Text>
-      </TouchableOpacity> */}
+      </TouchableOpacity>
     </View>
   );
 };

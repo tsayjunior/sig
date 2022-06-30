@@ -56,7 +56,7 @@ const DrawerNavigation = () => {
           ),
         })}
       /> */}
-      {/* <Drawer.Screen
+      <Drawer.Screen
         name="perfil"
         component={RegistroChofer}
         options={({navigation})=>({
@@ -70,7 +70,7 @@ const DrawerNavigation = () => {
           //   </TouchableOpacity>
           // ),
         })}
-      /> */}
+      />
       <Drawer.Screen
         name="Micros"
         component={MicroLista}
