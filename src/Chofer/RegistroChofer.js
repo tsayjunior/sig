@@ -82,32 +82,29 @@ const RegistroChofer = ({ navigation, route }) => {
 
   useEffect(() => {
     
-    console.log("***************************")
-    if(userInfo){
-      console.log("no nulo")
-    }else{
-      
-      console.log("no nulo")
-    }
-    if (route.params && route.params.id) {
-      //si le mando un id, es por que quiero editar, y no crear
+    if (userInfo.access_token) {
+      // console.log(userInfo)
+      //si tiene token es que quiero editarlo
       navigation.setOptions({ headerTitle: "Actualizar Chofer" }); //le cambia el nombre a la barra de arriba de navegacion
       setEditing(true);
+      
       (async () => {
         //recibe el objeto del usuario, sacandolo de la api
-        const state = await getUser(route.params.id);
-        console.log(state);
+        // const state = await getUser(route.params.id);
+        
+        console.log("++++++++++++++++++++++++++")
+        console.log(userInfo.data.email);
         setState({
-          ci: state.data.ci,
-          name: state.data.name,
-          lastname: state.data.lastname,
-          fecha_nac: state.data.fecha_nac,
-          sex: state.data.sex,
-          phone: state.data.phone,
-          email: state.data.email,
-          password: state.data.password,
-          password_confirmation: state.data.password_confirmation,
-          category_licencia_id: state.data.category_licencia_id + "",
+          category_licencia_id: userInfo.data.category_licencia_id + "",
+          ci: userInfo.data.ci,
+          name: userInfo.data.name,
+          lastname: userInfo.data.lastname,
+          fecha_nac: userInfo.data.fecha_nac,
+          sex: userInfo.data.sex,
+          phone: userInfo.data.phone,
+          email: userInfo.data.email,
+          password: userInfo.data.password,
+          password_confirmation: userInfo.data.password_confirmation,
         });
       })();
     }
@@ -152,8 +149,9 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("name", text)}
-        value={state.names} //pone en el input, lo que tenga el estado users
+        value={state.name} //pone en el input, lo que tenga el estado users
       />
+      {console.log(state)}
       <TextInput
         style={styles.input}
         placeholder="Apellido"
@@ -174,7 +172,7 @@ const RegistroChofer = ({ navigation, route }) => {
           </Text>
         ) : (
           <Text style={{ color: "#fff", textAlign: "center" }}>
-            {text}     <FontAwesome name="calendar" size={24} color="#fff"
+            {state.fecha_nac}     <FontAwesome name="calendar" size={24} color="#fff"
             // style={{margin:0, padding:0}} 
             />
           </Text>
@@ -213,7 +211,7 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("email", text)}
-        value={state.mail} //pone en el input, lo que tenga el estado users
+        value={state.email} //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
@@ -221,7 +219,7 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("password", text)}
-        value={state.mail} //pone en el input, lo que tenga el estado users
+        value="*************" //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
@@ -229,7 +227,7 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("password_confirmation", text)}
-        value={state.mail} //pone en el input, lo que tenga el estado users
+        value="*************" //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
@@ -237,7 +235,7 @@ const RegistroChofer = ({ navigation, route }) => {
         placeholderTextColor="#546474"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("category_licencia_id", text)}
-        value={state.category_id} //pone en el input, lo que tenga el estado users
+        value={state.category_licencia_id} //pone en el input, lo que tenga el estado users
       />
       {!editing ? (
         <TouchableOpacity

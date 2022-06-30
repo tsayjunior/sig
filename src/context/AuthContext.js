@@ -127,6 +127,8 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+ 
+
   const saveMicro = (
     placa,
     modelo,
@@ -166,6 +168,31 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(false);
       });
   };
+
+  const eliminarMicro = (id) => {
+    //muestra todos los micros registrados de un chofer (usuario)
+    setIsLoading(true);
+
+    axios
+      .delete(
+        `${BASE_URL}/transporte/${id}`,
+        // {},
+        {
+          headers: { Authorization: `Bearer ${userInfo.access_token}` },
+        }
+      )
+      .then((res) => {
+        // console.log("-*-*-*-**-*-*");
+        setIsLoading(false);
+        // setMicross(res.data);
+      })
+      .catch((e) => {
+        // console.log("-*-*-*-**-*-*");
+        console.log(`logout error ${e}`);
+        setIsLoading(false);
+      });
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -177,6 +204,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         setMicros,
         saveMicro,
+        eliminarMicro
       }}
     >
       {children}

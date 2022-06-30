@@ -14,11 +14,11 @@ import { AuthContext } from '../context/AuthContext';
 
   const isFocused = useIsFocused() //useIsFocused es una funcion, que devuelve true si vuelvo a la pantalla anterior, y false si no
 
-  const {userInfo, isLoading, setMicros, Micros} = useContext(AuthContext)
+  const {userInfo, isLoading, setMicros, Micros, eliminarMicro} = useContext(AuthContext)
   const loadTasks = async () => {
     const data = setMicros();
-    console.log("*-*-*-*-**-*--*-*-")
-    console.log(Micros.data)
+    // console.log("*-*-*-*-**-*--*-*-")
+    // console.log(Micros.data)
     setUsers(Micros.data);
 
   };
@@ -32,8 +32,10 @@ import { AuthContext } from '../context/AuthContext';
 
   const handleDelete=async(id)=>{
     // console.log(id)
-    await deleteUser(id)
+    // await deleteUser(id)
+    eliminarMicro(id)
     await loadTasks()
+    // console.log(userInfo)
   }
   
   const renderItem = ({item}) =>{//que sera la funcion que se ejecutara por cada usuario, y por cada item que recorra, devolverá el texto que se le indica
@@ -50,6 +52,7 @@ import { AuthContext } from '../context/AuthContext';
 
    return (
     //  {/* flatlist recorrera todo el estado */}
+
      <FlatList style={{width:'100%' }} 
      data={users} //que sera el arreglo de usuarios, data recibe el arreglo de tareas
      keyExtractor={(item) => item.id + ''} //que sera el id de cada usuario, extrae el id, lo convierte en string
