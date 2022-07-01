@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     welcome:{
         fontSize: 18,
         marginBottom: 8,
-        color: "white"
+        color: "black"
     }
 }); 
 

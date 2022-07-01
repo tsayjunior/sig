@@ -51,7 +51,7 @@ const RegistroMicro = ({ navigation, route }) => {
       if (!editing) {
 
         saveMicro(state.placa, state.modelo, state.linea, state.cantidad_asiento, state.numero_interno, state.fecha_asignacion, state.fecha_baja)
-        // console.log(state)
+        console.log(state)
         navigation.navigate("DrawerNavigation");
         // props.navigation.navigate("DrawerNavigation", {
         //   user: "1",
@@ -117,16 +117,18 @@ const RegistroMicro = ({ navigation, route }) => {
     <Layout>
       <TextInput
         style={styles.input}
-        placeholder="placa"
+        placeholder="Placa"
         placeholderTextColor="#546474"
+        keyboardType="name-phone-pad"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("placa", text)}
         // value={users.email} //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
-        placeholder="modelo"
+        placeholder="Modelo"
         placeholderTextColor="#546474"
+        keyboardType="name-phone-pad"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("modelo", text)}
         // value={users.email} //pone en el input, lo que tenga el estado users
@@ -135,14 +137,18 @@ const RegistroMicro = ({ navigation, route }) => {
         style={styles.input}
         placeholder="Linea"
         placeholderTextColor="#546474"
+        keyboardType="numeric"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("linea", text)}
         // value={users.email} //pone en el input, lo que tenga el estado users
       />
+     
       <TextInput
+     
         style={styles.input}
         placeholder="Cantidad de asientos"
         placeholderTextColor="#546474"
+        keyboardType="numeric"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("cantidad_asiento", text)}
         // value={users.email} //pone en el input, lo que tenga el estado users
@@ -152,6 +158,7 @@ const RegistroMicro = ({ navigation, route }) => {
         style={styles.input}
         placeholder="Numero Interno"
         placeholderTextColor="#546474"
+        keyboardType="numeric"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("numero_interno", text)}
         // value={users.email} //pone en el input, lo que tenga el estado users
@@ -163,11 +170,11 @@ const RegistroMicro = ({ navigation, route }) => {
       >
         {text === "Fecha de asignacion" ? (
           <Text style={{ color: "#546474", textAlign: "center" }}>
-            {text}     <FontAwesome name="calendar" size={24} color="#fff" marginBottom="auto" />
+            {text}     <FontAwesome name="calendar" size={24} color="#33d9b2" marginBottom="auto" />
           </Text>
         ) : (
           <Text style={{ color: "#fff", textAlign: "center" }}>
-            {text}     <FontAwesome name="calendar" size={24} color="#fff"
+            {text}     <FontAwesome name="calendar" size={24} color="#33d9b2"
             // style={{margin:0, padding:0}} 
             />
           </Text>
@@ -227,12 +234,12 @@ const styles = StyleSheet.create({
     width: "90%",
     marginBottom: 15,
     // borderColor: '#10ac84',
-    borderColor: "#cccccc",
+    borderColor: "#33d9b2",
     fontSize: 14,
     borderBottomWidth: 1,
     //  borderWidth: 1,
     height: 35,
-    color: "#fff",
+    color: "#33d9b2",
     padding: 4,
     textAlign: "center",
   },

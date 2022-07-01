@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   Text,
+  SafeAreaView
 } from "react-native";
 import Layout from "../components/Layout";
 import { saveUsers, getUser, updateUser } from "../Api/ApiChofer";
@@ -12,6 +13,7 @@ import DateTimePicker from "@react-native-community/datetimepicker"; //fecha
 import { FontAwesome } from "@expo/vector-icons";
 import { AuthContext } from "../context/AuthContext";
 import Spinner from "react-native-loading-spinner-overlay/lib";
+
 
 const RegistroChofer = ({ navigation, route }) => {
   const [state, setState] = useState({
@@ -85,7 +87,7 @@ const RegistroChofer = ({ navigation, route }) => {
     if (userInfo.access_token) {
       // console.log(userInfo)
       //si tiene token es que quiero editarlo
-      navigation.setOptions({ headerTitle: "Actualizar Chofer" }); //le cambia el nombre a la barra de arriba de navegacion
+      navigation.setOptions({ headerTitle: "PERFL" }); //le cambia el nombre a la barra de arriba de navegacion
       setEditing(true);
       
       (async () => {
@@ -94,6 +96,7 @@ const RegistroChofer = ({ navigation, route }) => {
         
         console.log("++++++++++++++++++++++++++")
         console.log(userInfo.data.email);
+        setText(userInfo.data.fecha_nac);
         setState({
           category_licencia_id: userInfo.data.category_licencia_id + "",
           ci: userInfo.data.ci,
@@ -103,8 +106,8 @@ const RegistroChofer = ({ navigation, route }) => {
           sex: userInfo.data.sex,
           phone: userInfo.data.phone,
           email: userInfo.data.email,
-          password: userInfo.data.password,
-          password_confirmation: userInfo.data.password_confirmation,
+        /*   password: userInfo.data.password,
+          password_confirmation: userInfo.data.password_confirmation, */
         });
       })();
     }
@@ -132,13 +135,15 @@ const RegistroChofer = ({ navigation, route }) => {
   };
   // const val = useContext(AuthContext);
   return (
-    <Layout>
+    <Layout >
  {/* <Text>{val}</Text> */}
-    <Spinner visible={isLoading} />
+   {/*  <Spinner visible={isLoading} /> */}
+   
       <TextInput
         style={styles.input}
         placeholder="Documento de identidad"
         placeholderTextColor="#546474"
+        keyboardType="numeric"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("ci", text)}
         value={state.ci} //pone en el input, lo que tenga el estado users
@@ -147,6 +152,7 @@ const RegistroChofer = ({ navigation, route }) => {
         style={styles.input}
         placeholder="Nombre"
         placeholderTextColor="#546474"
+        keyboardType="name-phone-pad"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("name", text)}
         value={state.name} //pone en el input, lo que tenga el estado users
@@ -156,6 +162,7 @@ const RegistroChofer = ({ navigation, route }) => {
         style={styles.input}
         placeholder="Apellido"
         placeholderTextColor="#546474"
+        // keyboardType="name"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("lastname", text)}
         value={state.lastname} //pone en el input, lo que tenga el estado users
@@ -168,11 +175,11 @@ const RegistroChofer = ({ navigation, route }) => {
       >
         {text === "Fecha de nacimiento" ? (
           <Text style={{ color: "#546474", textAlign: "center" }}>
-            {text}     <FontAwesome name="calendar" size={24} color="#fff" marginBottom="auto" />
+            {text}     <FontAwesome name="calendar" size={24} color="#33d9b2" marginBottom="auto" />
           </Text>
         ) : (
-          <Text style={{ color: "#fff", textAlign: "center" }}>
-            {state.fecha_nac}     <FontAwesome name="calendar" size={24} color="#fff"
+          <Text style={{ color: "#33d9b2", textAlign: "center" }}>
+            {text}     <FontAwesome name="calendar" size={24} color="#33d9b2"
             // style={{margin:0, padding:0}} 
             />
           </Text>
@@ -191,16 +198,26 @@ const RegistroChofer = ({ navigation, route }) => {
 
       <TextInput
         style={styles.input}
-        placeholder="Sexo"
+        placeholder="Sexo -> M o F"
         placeholderTextColor="#546474"
+        keyboardType="name-phone-pad"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("sex", text)}
         value={state.sex} //pone en el input, lo que tenga el estado users
       />
+     {/*   <RNPickerSelect
+            onValueChange={(value) => console.log(value)}
+            items={[
+                { label: 'Football', value: 'football' },
+                { label: 'Baseball', value: 'baseball' },
+                { label: 'Hockey', value: 'hockey' },
+            ]}
+        /> */}
       <TextInput
         style={styles.input}
         placeholder="Telefono"
         placeholderTextColor="#546474"
+        keyboardType="numeric"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("phone", text)}
         value={state.phone} //pone en el input, lo que tenga el estado users
@@ -209,6 +226,7 @@ const RegistroChofer = ({ navigation, route }) => {
         style={styles.input}
         placeholder="Email"
         placeholderTextColor="#546474"
+        keyboardType="email-address"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("email", text)}
         value={state.email} //pone en el input, lo que tenga el estado users
@@ -217,26 +235,34 @@ const RegistroChofer = ({ navigation, route }) => {
         style={styles.input}
         placeholder="Contraseña"
         placeholderTextColor="#546474"
+        keyboardType="visible-password"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("password", text)}
-        value="*************" //pone en el input, lo que tenga el estado users
+        value={state.password}//pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
         placeholder="Confirmar contraseña"
         placeholderTextColor="#546474"
+        autoCapitalize="none"
+        autoCorrect={false}
+        secureTextEntry={true}
+        keyboardType="visible-password"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("password_confirmation", text)}
-        value="*************" //pone en el input, lo que tenga el estado users
+        value={state.password_confirmation} //pone en el input, lo que tenga el estado users
       />
       <TextInput
         style={styles.input}
-        placeholder="Categoria licencia"
+        placeholder="Categoria licencia (1-3)"
         placeholderTextColor="#546474"
+        keyboardType="numeric"
         // onChangeText={text=>console.log(text)}
         onChangeText={(text) => handleChangeText("category_licencia_id", text)}
         value={state.category_licencia_id} //pone en el input, lo que tenga el estado users
       />
+     
+      
       {!editing ? (
         <TouchableOpacity
           style={styles.buttonSave}
@@ -247,13 +273,15 @@ const RegistroChofer = ({ navigation, route }) => {
           <Text style={styles.buttonText}>Registrar</Text>
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity
+        
+       /*  <TouchableOpacity
           style={styles.buttonUpdate}
           onPress={handleSubmit}
           // disabled
         >
           <Text style={styles.buttonText}>Actualizar</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */
+        <></>
       )}
       {/* <View>
         <Button title="Registar chofer" onPress={() => saveNewUSer()} />
@@ -261,6 +289,7 @@ const RegistroChofer = ({ navigation, route }) => {
       {/* <View>
                 <Button title="lista de usuario" onPress={props.navigation.navigate('userList')}/>
             </View> */}
+            
     </Layout>
   );
 };
@@ -270,14 +299,16 @@ const styles = StyleSheet.create({
     width: "90%",
     marginBottom: 15,
     // borderColor: '#10ac84',
-    borderColor: "#cccccc",
+    borderColor: "#33d9b2",
     fontSize: 14,
     borderBottomWidth: 1,
     //  borderWidth: 1,
     height: 35,
-    color: "#fff",
+    color: "#33d9b2",
     padding: 4,
     textAlign: "center",
+    justifyContent: "center",
+  
   },
   buttonSave: {
     // flex: 0.3,
@@ -299,6 +330,14 @@ const styles = StyleSheet.create({
     marginBottom: 3,
     backgroundColor: "#e58e26",
     width: "90%",
+  },
+  /* safeArea */
+  form: {
+    flex: 1,
+    justifyContent: "center",
+   
+    // marginHorizontal: 10,
+   
   },
 });
 

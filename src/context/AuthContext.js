@@ -6,7 +6,7 @@ import { BASE_URL } from "../Config";
 import { isEmpty } from "lodash";
 export const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children,navigation }) => {
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [Micros, setMicross] = useState({});
@@ -95,6 +95,7 @@ export const AuthProvider = ({ children }) => {
         AsyncStorage.removeItem("userInfo");
         setUserInfo({});
         setIsLoading(false);
+        navigation.navigate("NewLogin");
       })
       .catch((e) => {
         // console.log("-*-*-*-**-*-*");

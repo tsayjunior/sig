@@ -13,7 +13,7 @@ const Layout = ({children}) => {
 
 const styles= StyleSheet.create({
     container: {
-        backgroundColor: '#222f3e',
+        backgroundColor: '#ecf0f1',
         padding:20,
         flex: 1,
         alignItems: 'center',

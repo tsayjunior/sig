@@ -61,7 +61,7 @@ const DrawerNavigation = () => {
         component={RegistroChofer}
         options={({navigation})=>({
           // title: "Información",
-          headerStyle: { backgroundColor: "#222f3e" },
+          headerStyle: { backgroundColor: "#33d9b2" },
           headerTitleStyle: { color: "#fff" },
           // headerBackVisible: {headerLeft: 'false'}
           // headerRight: () => (
@@ -71,7 +71,7 @@ const DrawerNavigation = () => {
           // ),
         })}
       />
-      <Drawer.Screen
+     {/*  <Drawer.Screen
         name="Micros"
         component={MicroLista}
         options={({navigation})=>({
@@ -85,7 +85,7 @@ const DrawerNavigation = () => {
             </TouchableOpacity>
           ),
         })}
-      />
+      /> */}
       <Drawer.Screen
         name="Cerrar sesion"
         component={Logout}

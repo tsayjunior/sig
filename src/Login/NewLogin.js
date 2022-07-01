@@ -33,7 +33,7 @@ export default function NewLogin({ navigation }) {
       <SafeAreaView style={styles.form}>
         <Text style={styles.title}>Log In</Text>
         {/* <Layout> */}
-        <Spinner visible={isLoading} />
+       {/*  <Spinner visible={isLoading} /> */}
         <TextInput
           style={styles.input}
           placeholder="Carnet identidad"
