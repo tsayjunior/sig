@@ -71,7 +71,7 @@ const DrawerNavigation = () => {
           // ),
         })}
       />
-     {/*  <Drawer.Screen
+      <Drawer.Screen
         name="Micros"
         component={MicroLista}
         options={({navigation})=>({
@@ -85,7 +85,7 @@ const DrawerNavigation = () => {
             </TouchableOpacity>
           ),
         })}
-      /> */}
+      />
       <Drawer.Screen
         name="Cerrar sesion"
         component={Logout}

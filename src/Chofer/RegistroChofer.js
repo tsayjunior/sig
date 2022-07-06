@@ -44,8 +44,23 @@ const RegistroChofer = ({ navigation, route }) => {
       if (!editing) {
         // await saveUsers(state);
         // console.log(state)
-        register(state.ci, state.name, state.lastname, state.sex, state.fecha_nac, state.email, state.category_licencia_id, state.password, state.password_confirmation, state.phone)
         
+        register(state.ci, state.name, state.lastname, state.sex, state.fecha_nac, state.email, state.category_licencia_id, state.password, state.password_confirmation, state.phone)
+        /* pone el estado vacio cuando cierra session */
+        setText("Fecha de nacimiento");
+        setState({
+          category_licencia_id:"",
+          ci:"",
+          name:"",
+          lastname:"",
+          fecha_nac:"",
+          sex:"",
+          phone:"", 
+          email:"", 
+        /*   password: userInfo.data.password,
+          password_confirmation: userInfo.data.password_confirmation, */
+        });
+        /* fin */
         navigation.navigate("RegistroMicro");
         alert(resData.msg);
       } else {

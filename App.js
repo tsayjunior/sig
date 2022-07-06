@@ -86,7 +86,7 @@ function MyStack() {
       /> */}
       {/* prueba del nuevo login */}
        <Stack.Screen
-          name="NewLogin"
+          name="Login"
           component={NewLogin}
           options={{
             title: "Login",
@@ -97,17 +97,7 @@ function MyStack() {
         />
         {/* fin */}
 
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{
-            title: "Inicio de sesion",
-            headerStyle: { backgroundColor: "#222f3e" },
-            headerTitleStyle: { color: "#fff" },
-            // headerBackVisible: {headerLeft: 'false'}
-            headerMode: "screen",
-          }}
-        />
+      
         <Stack.Screen
           name="RegistroChofer"
           component={RegistroChofer}

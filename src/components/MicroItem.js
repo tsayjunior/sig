@@ -11,12 +11,12 @@ const MicroItem = ({ user, handleDelete }) => {
       <TouchableOpacity
       // onPress={()=>navigation.navigate('RegistroMicro', {id:user.id})}//aparte de navegar a la otra pantalla, le paso un parametro, que es el id, para poder editar
       >
-        <Text style={styles.itemTitle}>{user.placa}</Text>
-        <Text style={styles.itemTitle}>{user.modelo}</Text>
-        <Text style={styles.itemTitle}>{user.linea}</Text>
-        <Text style={styles.itemTitle}>{user.cantidad_asiento}</Text>
-        <Text style={styles.itemTitle}>{user.numero_interno}</Text>
-        <Text style={styles.itemTitle}>{user.fecha_asignacion}</Text>
+        <Text style={styles.itemTitle}>Placa: {user.placa}</Text>
+        <Text style={styles.itemTitle}>Modelo: {user.modelo}</Text>
+        <Text style={styles.itemTitle}>Linea: {user.linea}</Text>
+        <Text style={styles.itemTitle}>Asientos: {user.cantidad_asiento}</Text>
+        <Text style={styles.itemTitle}>Nº Interno: {user.numero_interno}</Text>
+        <Text style={styles.itemTitle}>Asignación: {user.fecha_asignacion}</Text>
         <Text style={styles.itemTitle}>{user.fecha_baja}</Text>
         {/* <Text style={styles.itemTitle}>{user.conductor_id}</Text> */}
       </TouchableOpacity>

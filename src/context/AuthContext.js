@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { createContext, useState } from "react";
 import { BASE_URL } from "../Config";
 import { isEmpty } from "lodash";
+import { Alert } from "react-native";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children,navigation }) => {
@@ -39,7 +40,7 @@ export const AuthProvider = ({ children,navigation }) => {
       })
       .then((res) => {
         let userInfo = res.data;
-        alert(res);
+      
         setUserInfo(userInfo);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
@@ -94,8 +95,9 @@ export const AuthProvider = ({ children,navigation }) => {
         console.log(res.data);
         AsyncStorage.removeItem("userInfo");
         setUserInfo({});
+        Alert(()=>{"Volver A LOGIN"+ navigation.navigate("Login");})
         setIsLoading(false);
-        navigation.navigate("NewLogin");
+       
       })
       .catch((e) => {
         // console.log("-*-*-*-**-*-*");
@@ -165,7 +167,7 @@ export const AuthProvider = ({ children,navigation }) => {
       })
       .catch((e) => {
         // console.log("-*-*-*-**-*-*");
-        console.log(`logout error ${e}`);
+        console.log(`No se guardo micro error ${e}`);
         setIsLoading(false);
       });
   };

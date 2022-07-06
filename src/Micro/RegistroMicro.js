@@ -68,6 +68,7 @@ const RegistroMicro = ({ navigation, route }) => {
   };
 
   useEffect(() => {
+    
     if (route.params && route.params.id) {
       //si le mando un id, es por que quiero editar, y no crear
       navigation.setOptions({ headerTitle: "Actualizar Chofer" }); //le cambia el nombre a la barra de arriba de navegacion
@@ -114,7 +115,10 @@ const RegistroMicro = ({ navigation, route }) => {
     console.log(state);
   };
   return (
+    
     <Layout>
+      {userInfo.access_token?(
+        <>
       <TextInput
         style={styles.input}
         placeholder="Placa"
@@ -224,6 +228,17 @@ const RegistroMicro = ({ navigation, route }) => {
         >
           <Text style={styles.buttonText}>Actualizar</Text>
         </TouchableOpacity>
+      )}
+      </>):(
+        <>
+        <TouchableOpacity
+          style={styles.buttonSave}
+          onPress={()=>{navigation.navigate('Login')}}
+          // disabled
+        >
+          <Text style={styles.buttonText}>Ir a login</Text>
+        </TouchableOpacity>
+        </>
       )}
      </Layout>
   );

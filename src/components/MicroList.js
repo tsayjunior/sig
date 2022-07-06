@@ -53,7 +53,7 @@ import { AuthContext } from '../context/AuthContext';
    return (
     //  {/* flatlist recorrera todo el estado */}
 
-     <FlatList style={{width:'100%' }} 
+     <FlatList style={{width:'100%'}} 
      data={users} //que sera el arreglo de usuarios, data recibe el arreglo de tareas
      keyExtractor={(item) => item.id + ''} //que sera el id de cada usuario, extrae el id, lo convierte en string
      renderItem={renderItem}//renderisa el text
