@@ -66,6 +66,7 @@ export const AuthProvider = ({ children,navigation }) => {
           AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
           setIsLoading(false);
         
+        
       })
       .catch((e) => {
         console.log(`login error ${e}`);
