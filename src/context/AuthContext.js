@@ -61,7 +61,9 @@ export const AuthProvider = ({ children,navigation }) => {
       })
       .then((res) => {
         let userInfo = res.data;
-       
+      //  console.log("---------------------------------")
+      //   console.log(userInfo.access_token)
+      //   console.log(userInfo)
           setUserInfo(userInfo);
           AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
           setIsLoading(false);
@@ -112,16 +114,17 @@ export const AuthProvider = ({ children,navigation }) => {
 
     axios
       .get(
-        `${BASE_URL}/transporte`,
+        `${BASE_URL}/chofer-micros`,
         // {},
         {
           headers: { Authorization: `Bearer ${userInfo.access_token}` },
         }
       )
       .then((res) => {
-        // console.log("-*-*-*-**-*-*");
+        // console.log("-*-*-*micros-**-*-*");
         setIsLoading(false);
         setMicross(res.data);
+        // console.log(Micros)
       })
       .catch((e) => {
         // console.log("-*-*-*-**-*-*");

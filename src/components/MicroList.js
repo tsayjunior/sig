@@ -18,8 +18,8 @@ import { AuthContext } from '../context/AuthContext';
   const loadTasks = async () => {
     const data = setMicros();
     // console.log("*-*-*-*-**-*--*-*-")
-    // console.log(Micros.data)
-    setUsers(Micros.data);
+    console.log(Micros)
+    setUsers(Micros);
 
   };
 

@@ -9,7 +9,7 @@ import Login from "./src/Login/Login";
 import DrawerNavigation from "./src/Navigation/DrawerNavigation";
 import RegistroMicro from "./src/Micro/RegistroMicro";
 import RegistroChofer from "./src/Chofer/RegistroChofer";
-import EditarChofer from "./src/Chofer/EditarChofer";
+import PerfilChofer from "./src/Chofer/PerfilChofer";
 import CrearUsuario from "./src/User/CrearUsuario";
 import { AuthContext, AuthProvider } from "./src/context/AuthContext";
 import { useContext } from "react";
@@ -73,6 +73,7 @@ function MyStack() {
        ):( 
 
       <>
+      
         {/* <Stack.Screen
         name="fecha"
         component={FechaPrueba}
@@ -96,7 +97,7 @@ function MyStack() {
           }}
         />
         {/* fin */}
-
+{/* 
       
         <Stack.Screen
           name="RegistroChofer"
@@ -129,7 +130,7 @@ function MyStack() {
             headerTitleStyle: { color: "#fff" },
             headerTintColor: "#fff",
           }}
-        />
+        /> */}
       </>
        )} 
     </Stack.Navigator>

@@ -14,6 +14,7 @@ import {
 import Spinner from "react-native-loading-spinner-overlay/lib";
 import Layout from "../components/Layout";
 import { AuthContext } from "../context/AuthContext";
+import DrawerNavigation from "../Navigation/DrawerNavigation";
 const backImage = require("../Image/tucan1.png");
 
 export default function NewLogin({ navigation }) {
@@ -59,7 +60,7 @@ export default function NewLogin({ navigation }) {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            login(ci, password);
+            login(ci, password)
           }}
         >
           <Text style={{ fontWeight: "bold", color: "#fff", fontSize: 18 }}>
@@ -67,7 +68,7 @@ export default function NewLogin({ navigation }) {
             Iniciar
           </Text>
         </TouchableOpacity>
-        <View
+        {/* <View
           style={{
             marginTop: 20,
             flexDirection: "row",
@@ -86,7 +87,7 @@ export default function NewLogin({ navigation }) {
               Registrar
             </Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </SafeAreaView>
       <StatusBar barStyle="light-content" />
     </View>
