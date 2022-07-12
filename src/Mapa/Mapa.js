@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { Text, View, StyleSheet, TouchableOpacity,Alert } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import Layout from "../components/Layout";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import Toast from "react-native-easy-toast";
@@ -8,8 +8,12 @@ import * as Location from "expo-location";
 import Poli_1 from "../components/Poligonos/Poli_1";
 import Poli_1v from "../components/Poligonos/Poli_1v";
 
-
+/* sockets */
+import io from "socket.io-client";
 const Mapa = () => {
+  /* conexion con el servidor */
+  const socket = io ('https://websockets.procesojudicial.sbs/');
+  
   /* Ubicacion del usuario  */
   const [location, setlocation] = useState(null);
   const toastRef = useRef();
@@ -33,6 +37,12 @@ const Mapa = () => {
           latitudeDelta: 0.001,
           longitudeDelta: 0.001,
         });
+        /* envia al servidor las coordenadas */
+        socket.emit("linea1", {
+          coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
+          
+        });
+        
       }
     })();
   }, []);
@@ -47,12 +57,10 @@ const Mapa = () => {
   const mapRef = useRef();
   const { origen } = estado;
   return (
-    
     <View style={{ flex: 1 }}>
-     
       <MapView
         ref={mapRef}
-     /*    provider={PROVIDER_GOOGLE} */
+           provider={PROVIDER_GOOGLE}
         userLocationPriority="high"
         /* zoomEnabled={true} */
         /* zoomTapEnabled={true}
@@ -78,9 +86,8 @@ const Mapa = () => {
         toolbarEnabled={true}
         /*  scrollEnabled={false} */
         scrollDuringRotateOrZoomEnabled={false}
-        compassOffset={{x:50, y: 20}}
-        MapTypes={'satellite'}
-        
+        compassOffset={{ x: 50, y: 20 }}
+        MapTypes={"satellite"}
       >
         {/* poligono */}
         {/* {? (
@@ -88,14 +95,14 @@ const Mapa = () => {
         </>):(
 
         )} */}
-        
+
         <Poli_1></Poli_1>
         <Poli_1v></Poli_1v>
 
         <Marker
           title="Inicio"
           coordinate={{ latitude: -17.78634, longitude: -63.1082 }}
-          image={require('../Image/you3X.png')}
+          image={require("../Image/you3X.png")}
         />
       </MapView>
       <Toast
@@ -104,10 +111,8 @@ const Mapa = () => {
         opacity={0.8}
         fadeOutDuration={1000}
       />
-    
     </View>
   );
 };
-
 
 export default Mapa;
