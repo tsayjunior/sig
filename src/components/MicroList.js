@@ -20,8 +20,8 @@ import { AuthContext } from '../context/AuthContext';
     const data = setMicros();
     
     setUsers(Micros.data);
-       console.log("******------------------******")
-       console.log(users)
+      //  console.log("******------------------******")
+      //  console.log(users)
   };
 
   useEffect(() => {
