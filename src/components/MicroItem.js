@@ -10,11 +10,11 @@ const MicroItem = ({ user, handleDelete }) => {
       <View>
         <Image
           style={{ height: 200, width: "100%" }}
-          // source={{
-          //   uri: "https://reactnative.dev/img/tiny_logo.png",
-          //   // uri: user.foto,
-          // }}
-          source={require("../../assets/micro.jpg")}
+          source={{
+            // uri: "https://reactnative.dev/img/tiny_logo.png",
+            uri: 'http://ec2-18-228-190-183.sa-east-1.compute.amazonaws.com/' +user.micro.permiso_linea.linea.foto,
+          }}
+          // source={require("../../assets/micro.jpg")}
         />
       </View>
       <View style={styles.itemContainer}>
@@ -22,19 +22,20 @@ const MicroItem = ({ user, handleDelete }) => {
         <TouchableOpacity
         // onPress={()=>navigation.navigate('RegistroMicro', {id:user.id})}//aparte de navegar a la otra pantalla, le paso un parametro, que es el id, para poder editar
         >
-          <Text style={styles.itemTitle}>Placa: {user.placa}</Text>
-          <Text style={styles.itemTitle}>Modelo: {user.modelo}</Text>
-          <Text style={styles.itemTitle}>Linea: {user.linea}</Text>
+          <Text style={styles.itemTitle}>Placa: {user.micro.placa}</Text>
+          <Text style={styles.itemTitle}>Modelo: {user.micro.modelo}</Text>
+          <Text style={styles.itemTitle}>Linea: {user.micro.permiso_linea.linea.nrolinea}</Text>
           <Text style={styles.itemTitle}>
-            Asientos: {user.cant_asiento}
+            Asientos: {user.micro.cant_asiento}
           </Text>
           <Text style={styles.itemTitle}>
-            Nº Interno: {user.nro_interno}
+            Nº Interno: {user.micro.nro_interno}
           </Text>
           <Text style={styles.itemTitle}>
-            Asignación: {user.fecha_asignacion}
+            Asignación: {user.fecha_asig}
           </Text>
           <Text style={styles.itemTitle}>{user.fecha_baja}</Text>
+
           {/* <Text style={styles.itemTitle}>{user.conductor_id}</Text> */}
         </TouchableOpacity>
         {/* <TouchableOpacity

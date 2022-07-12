@@ -7,6 +7,8 @@ import * as Location from "expo-location";
 /* poligonos  */
 import Poli_1 from "../components/Poligonos/Poli_1";
 import Poli_1v from "../components/Poligonos/Poli_1v";
+
+
 const Mapa = () => {
   /* Ubicacion del usuario  */
   const [location, setlocation] = useState(null);
@@ -81,6 +83,11 @@ const Mapa = () => {
         
       >
         {/* poligono */}
+        {/* {? (
+        <>
+        </>):(
+
+        )} */}
         
         <Poli_1></Poli_1>
         <Poli_1v></Poli_1v>

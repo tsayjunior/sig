@@ -11,6 +11,7 @@ export const AuthProvider = ({ children,navigation }) => {
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [Micros, setMicross] = useState({});
+  const [MicroLinea, setMicroLinea] = useState({});
 
   const register = (
     ci,
@@ -200,6 +201,30 @@ export const AuthProvider = ({ children,navigation }) => {
       });
   };
 
+  const microLinea = (id) => {
+    //muestra todos los micros registrados de un chofer (usuario)
+    setIsLoading(true);
+
+    axios
+      .get(
+        `${BASE_URL}/micro/${id}`,
+        // {},
+        {
+          headers: { Authorization: `Bearer ${userInfo.access_token}` },
+        }
+      )
+      .then((res) => {
+        // console.log("-*-*-*micros-**-*-*");
+        setIsLoading(false);
+        setMicroLinea(res.data);
+        // console.log(Micros)
+      })
+      .catch((e) => {
+        // console.log("-*-*-*-**-*-*");
+        console.log(`logout error ${e}`);
+        setIsLoading(false);
+      });
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -211,7 +236,8 @@ export const AuthProvider = ({ children,navigation }) => {
         logout,
         setMicros,
         saveMicro,
-        eliminarMicro
+        eliminarMicro,
+        microLinea
       }}
     >
       {children}
