@@ -18,6 +18,7 @@ const MicroItem = ({ user, handleDelete }) => {
         />
       </View>
       <View style={styles.itemContainer}>
+        
         <TouchableOpacity
         // onPress={()=>navigation.navigate('RegistroMicro', {id:user.id})}//aparte de navegar a la otra pantalla, le paso un parametro, que es el id, para poder editar
         >
