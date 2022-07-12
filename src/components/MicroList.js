@@ -15,12 +15,12 @@ import { AuthContext } from '../context/AuthContext';
   const isFocused = useIsFocused() //useIsFocused es una funcion, que devuelve true si vuelvo a la pantalla anterior, y false si no
 
   const {userInfo, isLoading, setMicros, Micros, eliminarMicro} = useContext(AuthContext)
+  
   const loadTasks = async () => {
     const data = setMicros();
-    // console.log("*-*-*-*-**-*--*-*-")
-    // console.log(Micros.data)
-    setUsers(Micros.data);
-
+    
+    setUsers(Micros);
+    
   };
 
   useEffect(() => {
@@ -28,6 +28,8 @@ import { AuthContext } from '../context/AuthContext';
     // console.log(isFocused);
     
     loadTasks();
+    console.log("******------------------******")
+    console.log(users)
   }, [isFocused]);//se pone aca, para que cada que vuelva a la pantalla, me muestre eso
 
   const handleDelete=async(id)=>{
@@ -35,11 +37,13 @@ import { AuthContext } from '../context/AuthContext';
     // await deleteUser(id)
     eliminarMicro(id)
     await loadTasks()
+
     // console.log(userInfo)
   }
   
   const renderItem = ({item}) =>{//que sera la funcion que se ejecutara por cada usuario, y por cada item que recorra, devolverá el texto que se le indica
-      //  console.log(item);
+       console.log(item);
+       
       //  return <Text>{item.name}</Text>//indica que se le devuelva el texto name del item 
         return <MicroItem user={item} handleDelete={handleDelete}/>
   }

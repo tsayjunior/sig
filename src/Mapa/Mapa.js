@@ -6,6 +6,7 @@ import Toast from "react-native-easy-toast";
 import * as Location from "expo-location";
 /* poligonos  */
 import Poli_1 from "../components/Poligonos/Poli_1";
+import Poli_1v from "../components/Poligonos/Poli_1v";
 const Mapa = () => {
   /* Ubicacion del usuario  */
   const [location, setlocation] = useState(null);
@@ -79,7 +80,11 @@ const Mapa = () => {
         MapTypes={'satellite'}
         
       >
+        {/* poligono */}
+        
         <Poli_1></Poli_1>
+        <Poli_1v></Poli_1v>
+
         <Marker
           title="Inicio"
           coordinate={{ latitude: -17.78634, longitude: -63.1082 }}

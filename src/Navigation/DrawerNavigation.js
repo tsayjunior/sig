@@ -4,7 +4,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import Mapa from "../Mapa/Mapa";
 import EditarMicro from "../Micro/EditarMicro";
 import UserLista from "../User/UserLista";
-import EditarChofer from "../Chofer/EditarChofer";
+import PerfilChofer from "../Chofer/PerfilChofer";
 import ChoferLista from "../Chofer/ChoferLista";
 import MicroLista from "../Micro/MicroLista";
 import RegistroChofer from "../Chofer/RegistroChofer";
@@ -24,8 +24,14 @@ const DrawerNavigation = () => {
         // headerBackVisible: {headerLeft: 'false'}
       })}
       />
-      {/* <Drawer.Screen name="Editar chofer" component={EditarChofer} />
-      <Drawer.Screen name="Editar Micro" component={EditarMicro} /> */}
+      <Drawer.Screen name="perfil chofer" component={PerfilChofer} 
+      options={({navigation})=>({
+        // title: "Información",
+        headerStyle: { backgroundColor: "#222f3e" },
+        headerTitleStyle: { color: "#fff" },
+        // headerBackVisible: {headerLeft: 'false'}
+      })}/>
+      {/* <Drawer.Screen name="Editar Micro" component={EditarMicro} /> */}
       {/* <Drawer.Screen
         name="Usuarios"
         component={UserLista}
@@ -56,21 +62,7 @@ const DrawerNavigation = () => {
           ),
         })}
       /> */}
-      <Drawer.Screen
-        name="perfil"
-        component={RegistroChofer}
-        options={({navigation})=>({
-          // title: "Información",
-          headerStyle: { backgroundColor: "#33d9b2" },
-          headerTitleStyle: { color: "#fff" },
-          // headerBackVisible: {headerLeft: 'false'}
-          // headerRight: () => (
-          //   <TouchableOpacity onPress={()=>navigation.navigate('RegistroChofer')}>
-          //     <Text style={{color: '#fff', marginRight: 20, fontSize: 15}}>Nuevo</Text>
-          //   </TouchableOpacity>
-          // ),
-        })}
-      />
+
       <Drawer.Screen
         name="Micros"
         component={MicroLista}
