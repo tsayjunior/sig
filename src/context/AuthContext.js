@@ -12,6 +12,7 @@ export const AuthProvider = ({ children,navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [Micros, setMicross] = useState({});
   const [MicroLinea, setMicroLinea] = useState({});
+  const [LineaUser, setLineaUser] = useState({});
 
   const register = (
     ci,
@@ -225,19 +226,45 @@ export const AuthProvider = ({ children,navigation }) => {
         setIsLoading(false);
       });
   };
+
+  const lineaUser = () =>{
+    setIsLoading(true);
+
+    axios
+      .get(
+        `${BASE_URL}/chofer-micros`,
+        // {},
+        {
+          headers: { Authorization: `Bearer ${userInfo.access_token}` },
+        }
+      )
+      .then((res) => {
+        // console.log("-*-*-*micros-**-*-*");
+        setIsLoading(false);
+        setLineaUser(res.data);
+        // console.log(Micros)
+      })
+      .catch((e) => {
+        // console.log("-*-*-*-**-*-*");
+        console.log(`logout error ${e}`);
+        setIsLoading(false);
+      });
+  }
   return (
     <AuthContext.Provider
       value={{
         isLoading,
         userInfo,
         Micros,
+        LineaUser,
         register,
         login,
         logout,
         setMicros,
         saveMicro,
         eliminarMicro,
-        microLinea
+        microLinea,
+        lineaUser
       }}
     >
       {children}
