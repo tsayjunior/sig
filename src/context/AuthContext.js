@@ -232,7 +232,7 @@ export const AuthProvider = ({ children,navigation }) => {
 
     axios
       .get(
-        `${BASE_URL}/chofer-micros`,
+        `${BASE_URL}/linea-activa`,
         // {},
         {
           headers: { Authorization: `Bearer ${userInfo.access_token}` },
@@ -242,7 +242,7 @@ export const AuthProvider = ({ children,navigation }) => {
         // console.log("-*-*-*micros-**-*-*");
         setIsLoading(false);
         setLineaUser(res.data);
-        // console.log(Micros)
+         console.log(res.data[0]+ " desde auth")
       })
       .catch((e) => {
         // console.log("-*-*-*-**-*-*");

@@ -53,14 +53,17 @@ const Mapa = () => {
     longitude: 0,
   });
   const toastRef = useRef();
-
+ /* estado del numero de linea */
+ const [NroLinea, setNroLinea] = useState()
   const loadTasks = async () => {
     const data = lineaUser();
+     setNroLinea(LineaUser.data.nrolinea);
 
     console.log("aqui empieza");
-    console.log(LineaUser);
+    console.log(LineaUser.data.nrolinea+" ->Nrolinea");
     console.log("aqui acaba");
   };
+ 
   useEffect(() => {
     (async () => {
       const resultPermiso = await Location.requestForegroundPermissionsAsync();
@@ -86,61 +89,61 @@ const Mapa = () => {
           latitudeDelta: 0.001,
           longitudeDelta: 0.001,
         });
-         /* envia al servidor las coordenadas Linea 1 */
+        
+         
+        if (NroLinea==1) {
+           /* envia al servidor las coordenadas Linea 1 */
          socket.emit("linea1", {
           coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
         });
-         /* envia al servidor las coordenadas Linea 2 */
-         socket.emit("linea2", {
-          coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
-        });
-        if (LineaUser==1) {
-          
-        }else if (LineaUser==2){
+        }else if (NroLinea==2){
+       /* envia al servidor las coordenadas Linea 2 */
+       socket.emit("linea2", {
+        coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
+      });
        
-       
-      }else if (LineaUser==5){
+      }else if (NroLinea==5){
         /* envia al servidor las coordenadas Linea 5 */
         socket.emit("linea5", {
           coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
         });
-      }else if (LineaUser==5){
+      }else if (NroLinea==8){
         /* envia al servidor las coordenadas Linea 8 */
         socket.emit("linea8", {
           coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
         });
       }
-        else if (LineaUser==5){
+        else if (NroLinea==9){
         /* envia al servidor las coordenadas Linea 9 */
         socket.emit("linea9", {
           coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
         });
       }
-        else if (LineaUser==5){
+        else if (NroLinea==10){
         /* envia al servidor las coordenadas Linea 10 */
         socket.emit("linea10", {
           coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
         });
       }
-        else if (LineaUser==5){
+        else if (NroLinea==11){
         /* envia al servidor las coordenadas Linea 11 */
         socket.emit("linea11", {
           coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
         });
       }
-        else if (LineaUser==5){
+        else if (NroLinea==16){
         /* envia al servidor las coordenadas Linea 16 */
         socket.emit("linea16", {
           coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
         });
       }
-        else if (LineaUser==5){
+        else if (NroLinea==17){
         /* envia al servidor las coordenadas Linea 17 */
         socket.emit("linea17", {
           coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
         });
       }
-        else if (LineaUser==5){
+        else if (NroLinea==18){
         /* envia al servidor las coordenadas Linea 18 */
         socket.emit("linea18", {
           coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
@@ -191,8 +194,8 @@ const Mapa = () => {
         compassOffset={{ x: 50, y: 20 }}
        
       >
-        {renderizadoMapaIda(lineaUser)}
-        {renderizadoMapaVuelta(lineaUser)}
+        {renderizadoMapaIda(NroLinea)}
+        {renderizadoMapaVuelta(NroLinea)}
 
         <Marker
           title="YO"
@@ -210,7 +213,8 @@ const Mapa = () => {
   );
 };
 const renderizadoMapaIda = (linea) => {
-  if (true) {
+  console.log(linea+ " desde funcion nro de linea");
+  if (linea==1) {
     return <Poli_1></Poli_1>;
   } else if (linea == 2) {
     return <Poli_2i></Poli_2i>;
@@ -237,7 +241,7 @@ const renderizadoMapaVuelta = (linea) => {
     return <Poli_1v></Poli_1v>;
   } else if (linea == 2) {
     return <Poli_2v></Poli_2v>;
-  } else if (linea == 5) {
+  } else if (linea === 5) {
     return <Poli_5v></Poli_5v>;
   } else if (linea == 8) {
     return <Poli_8v></Poli_8v>;
