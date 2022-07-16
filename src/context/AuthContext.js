@@ -5,9 +5,11 @@ import React, { createContext, useState } from "react";
 import { BASE_URL } from "../Config";
 import { isEmpty } from "lodash";
 import { Alert } from "react-native";
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children,navigation }) => {
+  
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [Micros, setMicross] = useState({});
@@ -227,7 +229,7 @@ export const AuthProvider = ({ children,navigation }) => {
       });
   };
 
-  const lineaUser = () =>{
+  const lineaUser = async() =>{
     setIsLoading(true);
 
     axios
@@ -240,9 +242,10 @@ export const AuthProvider = ({ children,navigation }) => {
       )
       .then((res) => {
         // console.log("-*-*-*micros-**-*-*");
-        setIsLoading(false);
+       
         setLineaUser(res.data);
-         console.log(res.data[0]+ " desde auth")
+         console.log(res.data+ "*/*/*/ desde auth");
+         setIsLoading(false);
       })
       .catch((e) => {
         // console.log("-*-*-*-**-*-*");

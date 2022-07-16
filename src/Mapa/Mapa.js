@@ -56,13 +56,24 @@ const Mapa = () => {
   /* estado del numero de linea */
   const [NroLinea, setNroLinea] = useState();
   const loadTasks = async () => {
-    const data = lineaUser();
-    setNroLinea(LineaUser.data.nrolinea);
+    setNroLinea(JSON.stringify(LineaUser.data.nrolinea,null,4));
 
-    console.log("aqui empieza");
-    console.log(LineaUser.data.nrolinea + " ->Nrolinea");
-    console.log("aqui acaba");
+      console.log("aqui empieza");
+      console.log(JSON.stringify(LineaUser.data.nrolinea,null,4) + " ->Nrolinea");
+      console.log("aqui acaba");
+   
+    
   };
+  /* cambio de datos */
+  useEffect(() => {
+    if (LineaUser) {
+      loadTasks();
+      console.log('desde useffect');  
+    }
+ 
+  }, [LineaUser])
+  
+  /* fin */
 
   useEffect(() => {
     (async () => {
@@ -145,7 +156,8 @@ const Mapa = () => {
           });
         }
       }
-      loadTasks();
+      lineaUser();
+     /*  loadTasks(); */
     })();
   }, []);
   const [estado] = useState({
@@ -187,8 +199,9 @@ const Mapa = () => {
         scrollDuringRotateOrZoomEnabled={false}
         compassOffset={{ x: 50, y: 20 }}
       >
-        {renderizadoMapaIda(NroLinea)}
-        {renderizadoMapaVuelta(NroLinea)}
+        
+        {!NroLinea? renderizadoMapaIda(NroLinea):null}
+        {!NroLinea? renderizadoMapaVuelta(NroLinea):null}
 
         <Marker
           title="YO"
@@ -230,7 +243,7 @@ const renderizadoMapaIda = (linea) => {
   }
 };
 const renderizadoMapaVuelta = (linea) => {
-  if (linea == 1) {
+  if (linea == 1) { 
     return <Poli_1v></Poli_1v>;
   } else if (linea == 2) {
     return <Poli_2v></Poli_2v>;
