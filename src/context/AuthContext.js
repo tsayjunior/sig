@@ -244,7 +244,7 @@ export const AuthProvider = ({ children,navigation }) => {
         // console.log("-*-*-*micros-**-*-*");
        
         setLineaUser(res.data);
-         console.log(JSON.stringify(res.data,null,4)+ "*/*/*/ desde auth");
+        //  console.log(JSON.stringify(res.data,null,4)+ "*/*/*/ desde auth");
          setIsLoading(false);
       })
       .catch((e) => {

@@ -10,6 +10,8 @@ import Layout from "../components/Layout";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import Toast from "react-native-easy-toast";
 import * as Location from "expo-location";
+
+import * as TaskManager from "expo-task-manager";
 /* poligonos  */
 /* IDA */
 import Poli_1 from "../components/Poligonos/Poli_1";
@@ -39,129 +41,164 @@ import io from "socket.io-client";
 
 // linea del chofer
 import { AuthContext } from "../context/AuthContext";
+const LOCATION_TASK_NAME = "background-location-task";
 
 const Mapa = () => {
+  const foregroundSubscription = null;
   /* conexion con el servidor */
   const socket = io("https://websockets.procesojudicial.sbs/");
 
   const { LineaUser, lineaUser } = useContext(AuthContext);
 
   /* Ubicacion del usuario  */
-  const [location, setlocation] = useState(null);
+  const [location1, setlocation] = useState({ latitude: 0, longitude: 0 });
   const [Micro, setMicro] = useState({
     latitude: 0,
     longitude: 0,
   });
   const toastRef = useRef();
 
-   /* cambio de datos */
-   useEffect(() => {
+  /* cambio de datos */
+  useEffect(() => {
     if (LineaUser) {
       loadTasks();
-      console.log('desde useffect');  
+      console.log("desde useffect");
     }
- 
-  }, [LineaUser])
-  
+  }, [LineaUser]);
+
   /* fin */
   /* estado del numero de linea */
-  const [NroLinea, setNroLinea] = useState();
+  const [NroLinea, setNroLinea] = useState(null);
   const loadTasks = async () => {
-    setNroLinea(JSON.stringify(LineaUser.data.nrolinea,null,4));
+    setNroLinea(JSON.stringify(LineaUser.data.nrolinea, null, 4));
 
-      console.log("aqui empieza");
-      console.log(JSON.stringify(LineaUser.data.nrolinea,null,4) + " ->Nrolinea");
-      console.log("aqui acaba");
-   
-    
+    console.log("aqui empieza");
+    console.log(
+      JSON.stringify(LineaUser.data.nrolinea, null, 4) + " ->Nrolinea"
+    );
+    console.log("aqui acaba");
   };
- 
-
+  // Solicitar permisos justo después de iniciar la aplicación
   useEffect(() => {
-    (async () => {
-      const resultPermiso = await Location.requestForegroundPermissionsAsync();
-
-      const EstadoPermiso = resultPermiso.status;
-
-      if (EstadoPermiso !== "granted") {
+    const requestPermissions = async () => {
+      const foreground = await Location.requestForegroundPermissionsAsync();
+      if (foreground.granted){
+        await Location.requestBackgroundPermissionsAsync();
+      }else{
         toastRef.current.show(
           "Debes aceptar los permisos de localización",
           3000
         );
-      } else {
-       
-        const Userlocal = await Location.getCurrentPositionAsync({});
-        /* locacion del micro para el marcador */
-        setMicro({
-          latitude: Userlocal.coords.latitude,
-          longitude: Userlocal.coords.longitude,
-        });
-        /* localizacion para sockets */
-        setlocation({
-          latitude: Userlocal.coords.latitude,
-          longitude: Userlocal.coords.longitude,
-          latitudeDelta: 0.001,
-          longitudeDelta: 0.001,
-        });
-        
-        if (NroLinea==1) {
-           /* envia al servidor las coordenadas Linea 1 */
-           socket.emit("linea1", {
-            coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
-          });
-          console.log("-----------***********-------------------")
-         
-        } else if (NroLinea == 2) {
-          /* envia al servidor las coordenadas Linea 2 */
-          socket.emit("linea2", {
-            coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
-          });
-        } else if (NroLinea == 5) {
-          /* envia al servidor las coordenadas Linea 5 */
-          socket.emit("linea5", {
-            coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
-          });
-        } else if (NroLinea == 8) {
-          /* envia al servidor las coordenadas Linea 8 */
-          socket.emit("linea8", {
-            coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
-          });
-        } else if (NroLinea == 9) {
-          /* envia al servidor las coordenadas Linea 9 */
-          socket.emit("linea9", {
-            coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
-          });
-        } else if (NroLinea == 10) {
-          /* envia al servidor las coordenadas Linea 10 */
-          socket.emit("linea10", {
-            coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
-          });
-        } else if (NroLinea == 11) {
-          /* envia al servidor las coordenadas Linea 11 */
-          socket.emit("linea11", {
-            coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
-          });
-        } else if (NroLinea == 16) {
-          /* envia al servidor las coordenadas Linea 16 */
-          socket.emit("linea16", {
-            coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
-          });
-        } else if (NroLinea == 17) {
-          /* envia al servidor las coordenadas Linea 17 */
-          socket.emit("linea17", {
-            coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
-          });
-        } else if (NroLinea == 18) {
-          /* envia al servidor las coordenadas Linea 18 */
-          socket.emit("linea18", {
-            coord: [Userlocal.coords.latitude, Userlocal.coords.longitude],
-          });
-        }
       }
-      lineaUser();
-    
-    })();
+    };
+   /*  InicioSeguimiento(); */  /* inicia la ruta en primer plano */
+    requestPermissions();
+    lineaUser();
   }, []);
+/* mandar la ubicacion respecto al micro */
+useEffect(() => {
+ if (NroLinea!==null) {
+  InicioSeguimiento();
+  console.log("desde la ubicacion de micro");
+ }
+}, [NroLinea])
+
+
+
+  // Iniciar el seguimiento de la ubicación en primer plano
+  const InicioSeguimiento = async () => {
+    // Comprobar si se concede el permiso de primer plano
+    const { granted } = await Location.getForegroundPermissionsAsync();
+    if (!granted) {
+      console.log("location tracking denied");
+      return;
+    }
+    // Asegúrese de que el seguimiento de la ubicación en primer plano no se esté ejecutando
+    foregroundSubscription?.remove();
+
+    // Empezar a ver la posición en tiempo real
+    foregroundSubscription = await Location.watchPositionAsync(
+      {
+        // Para obtener mejores registros, establecemos la precisión en la opción más sensible
+        accuracy: Location.Accuracy.BestForNavigation,
+        distanceInterval: 1,
+        timeInterval: 5000,
+      },
+      (location) => {
+        setlocation({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        });
+        setMicro({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        });
+      
+        
+       /*  socket.emit("linea1", {
+          coord: [location.coords.latitude, location.coords.longitude],
+        }); */
+        if (NroLinea==1) {
+          /* envia al servidor las coordenadas Linea 1 */
+          socket.emit("linea1", {
+          coord: [location.coords.latitude, location.coords.longitude],
+         });
+         console.log(location.coords.latitude, location.coords.longitude + "LOcaliacion")
+        
+       } else if (NroLinea == 2) {
+         /* envia al servidor las coordenadas Linea 2 */
+         socket.emit("linea2", {
+          coord: [location.coords.latitude, location.coords.longitude],
+         });
+       } else if (NroLinea == 5) {
+         /* envia al servidor las coordenadas Linea 5 */
+         socket.emit("linea5", {
+          coord: [location.coords.latitude, location.coords.longitude],
+         });
+       } else if (NroLinea == 8) {
+         /* envia al servidor las coordenadas Linea 8 */
+         socket.emit("linea8", {
+          coord: [location.coords.latitude, location.coords.longitude],
+         });
+       } else if (NroLinea == 9) {
+         /* envia al servidor las coordenadas Linea 9 */
+         socket.emit("linea9", {
+          coord: [location.coords.latitude, location.coords.longitude],
+         });
+       } else if (NroLinea == 10) {
+         /* envia al servidor las coordenadas Linea 10 */
+         socket.emit("linea10", {
+          coord: [location.coords.latitude, location.coords.longitude],
+         });
+       } else if (NroLinea == 11) {
+         /* envia al servidor las coordenadas Linea 11 */
+         socket.emit("linea11", {
+          coord: [location.coords.latitude, location.coords.longitude],
+         });
+       } else if (NroLinea == 16) {
+         /* envia al servidor las coordenadas Linea 16 */
+         socket.emit("linea16", {
+          coord: [location.coords.latitude, location.coords.longitude],
+         });
+       } else if (NroLinea == 17) {
+         /* envia al servidor las coordenadas Linea 17 */
+         socket.emit("linea17", {
+          coord: [location.coords.latitude, location.coords.longitude],
+         });
+         console.log("desde la linea 17");
+       }else if (location!==null && NroLinea == 18) {
+         /* envia al servidor las coordenadas Linea 18 */
+         socket.emit("linea18", {
+          coord: [location.coords.latitude, location.coords.longitude],
+         });
+       console.log("location 18 " + JSON.stringify(location));
+
+       }
+      
+      }
+    );
+  };
+
   const [estado] = useState({
     origen: {
       latitude: -17.78634,
@@ -201,7 +238,6 @@ const Mapa = () => {
         scrollDuringRotateOrZoomEnabled={false}
         compassOffset={{ x: 50, y: 20 }}
       >
-        
         {renderizadoMapaIda(NroLinea)}
         {renderizadoMapaVuelta(NroLinea)}
 
@@ -245,7 +281,7 @@ const renderizadoMapaIda = (linea) => {
   }
 };
 const renderizadoMapaVuelta = (linea) => {
-  if (linea == 1) { 
+  if (linea == 1) {
     return <Poli_1v></Poli_1v>;
   } else if (linea == 2) {
     return <Poli_2v></Poli_2v>;
