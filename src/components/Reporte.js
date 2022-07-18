@@ -7,7 +7,7 @@ export default Reporte = () => {
     <View style={{ justifyContent: "center", alignItems: "center" }}>
       <View style={{ justifyContent: "center", alignItems: "center",marginTop: 15}}>
         <Text style={{ fontWeight: "bold" }}>
-          Este reporte se enviara al administrador de su linea
+          Este reporte se enviará al administrador de su linea
         </Text>
 
         <TextInput

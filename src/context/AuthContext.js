@@ -229,7 +229,7 @@ export const AuthProvider = ({ children,navigation }) => {
       });
   };
 
-  const lineaUser = async() =>{
+  const lineaUser =() =>{
     setIsLoading(true);
 
     axios
@@ -244,7 +244,7 @@ export const AuthProvider = ({ children,navigation }) => {
         // console.log("-*-*-*micros-**-*-*");
        
         setLineaUser(res.data);
-         console.log(res.data+ "*/*/*/ desde auth");
+         console.log(JSON.stringify(res.data,null,4)+ "*/*/*/ desde auth");
          setIsLoading(false);
       })
       .catch((e) => {

@@ -53,6 +53,17 @@ const Mapa = () => {
     longitude: 0,
   });
   const toastRef = useRef();
+
+   /* cambio de datos */
+   useEffect(() => {
+    if (LineaUser) {
+      loadTasks();
+      console.log('desde useffect');  
+    }
+ 
+  }, [LineaUser])
+  
+  /* fin */
   /* estado del numero de linea */
   const [NroLinea, setNroLinea] = useState();
   const loadTasks = async () => {
@@ -64,16 +75,7 @@ const Mapa = () => {
    
     
   };
-  /* cambio de datos */
-  useEffect(() => {
-    if (LineaUser) {
-      loadTasks();
-      console.log('desde useffect');  
-    }
  
-  }, [LineaUser])
-  
-  /* fin */
 
   useEffect(() => {
     (async () => {
@@ -157,7 +159,7 @@ const Mapa = () => {
         }
       }
       lineaUser();
-     /*  loadTasks(); */
+    
     })();
   }, []);
   const [estado] = useState({
@@ -200,8 +202,8 @@ const Mapa = () => {
         compassOffset={{ x: 50, y: 20 }}
       >
         
-        {!NroLinea? renderizadoMapaIda(NroLinea):null}
-        {!NroLinea? renderizadoMapaVuelta(NroLinea):null}
+        {renderizadoMapaIda(NroLinea)}
+        {renderizadoMapaVuelta(NroLinea)}
 
         <Marker
           title="YO"
