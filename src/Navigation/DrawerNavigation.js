@@ -10,7 +10,7 @@ import MicroLista from "../Micro/MicroLista";
 import RegistroChofer from "../Chofer/RegistroChofer";
 // import { AuthProvider } from "../context/AuthContext";
 import Logout from "../Login/Logout";
-
+import Reporte from "../components/Reporte";
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
@@ -93,6 +93,22 @@ const DrawerNavigation = () => {
           // ),
         })}
         />
+         <Drawer.Screen
+        name="Reporte"
+        component={Reporte}
+        options={({navigation})=>({
+          // title: "Información",
+          headerStyle: { backgroundColor: "#222f3e" },
+          headerTitleStyle: { color: "#fff" },
+          // headerBackVisible: {headerLeft: 'false'}
+          // headerRight: () => (
+          //   <TouchableOpacity onPress={()=>navigation.navigate('RegistroChofer')}>
+          //     <Text style={{color: '#fff', marginRight: 20, fontSize: 15}}>Nuevo</Text>
+          //   </TouchableOpacity>
+          // ),
+        })}
+        />
+
     </Drawer.Navigator>
   );
 };
