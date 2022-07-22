@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View,ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -12,13 +12,17 @@ import RegistroChofer from "./src/Chofer/RegistroChofer";
 import PerfilChofer from "./src/Chofer/PerfilChofer";
 import CrearUsuario from "./src/User/CrearUsuario";
 import { AuthContext, AuthProvider } from "./src/context/AuthContext";
-import { useContext } from "react";
+import { useContext,useState,useEffect } from "react";
 /* PRueba del nuevo login */
 import NewLogin from "./src/Login/NewLogin";
 // import FechaPrueba from "./src/pruebas/FechaPrueba"; //prueba
+import Inicio from "./src/components/Inicio";
 
 function MyStack() {
   const {userInfo} = useContext(AuthContext);
+
+
+
   return (
     <Stack.Navigator>
 
@@ -86,6 +90,16 @@ function MyStack() {
         }}
       /> */}
       {/* prueba del nuevo login */}
+      <Stack.Screen
+          name="Inicio"
+          component={Inicio}
+          options={{
+            title: "Inicio",
+            headerStyle:false,
+            headerShown: false,
+           
+          }}
+        />
        <Stack.Screen
           name="Login"
           component={NewLogin}
