@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     },
     image: {
        flex: 0.7,
-       justifyContent: 'center', 
+       justifyContent: 'center',
+      
     },
     titulo: {
         fontWeight: '800',
@@ -39,6 +40,6 @@ const styles = StyleSheet.create({
         fontWeight: '300',
         color:'#62656b',
         textAlign: 'center',
-        paddingHorizontal:64,
+        paddingHorizontal:14,
     }
 })

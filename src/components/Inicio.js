@@ -5,6 +5,7 @@ import {
   View,
   useWindowDimensions,
   Animated,
+  StatusBar,
 } from "react-native";
 import React, { useRef, useState } from "react";
 import InicioItems from "./InicioItems";
@@ -27,31 +28,28 @@ export default Inicio = ({ navigation }) => {
   const DATA = [
     {
       id: "1",
-      titulo: "Afiliación",
-      descripcion:
-        "xdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxd",
-      image: require("../Image/you3X.png"),
+      titulo: "Afíliate",
+      descripcion:"Entrega los requisitos al area de administración de tu linea,para poder iniciar sesión",
+      image: require("../Image/admin.png"),
     },
     {
       id: "2",
-      titulo: "Afiliación",
-      descripcion:
-        "xdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxd",
-      image: require("../Image/you3X.png"),
+      titulo: "Permiso de Transporte",
+      descripcion:"Asegúrate de tener un permiso para pertenecer a una linea de microbus",
+      image: require("../Image/permiso.png"),
     },
     {
       id: "3",
-      titulo: "Afiliación",
+      titulo: "Navegación",
       descripcion:
-        "xdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxd",
-      image: require("../Image/you3X.png"),
+        "Obtén tus ruta de ida y vuelta desde la aplicación al iniciar sesión",
+      image: require("../Image/rutas.png"),
     },
     {
       id: "4",
-      titulo: "Afiliación",
-      descripcion:
-        "xdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxdxd",
-      image: require("../Image/you3X.png"),
+      titulo: "Reporte",
+      descripcion:"Si tienes algún inconveniente a medio camino, reporta a la central del problema, en la sección reporte ",
+      image: require("../Image/reporte.png"),
     },
   ];
 
@@ -64,8 +62,11 @@ export default Inicio = ({ navigation }) => {
     }
   };
   return (
+    
     <View style={styles.container}>
+     
       <View style={{ flex: 3 }}>
+      <StatusBar hidden />
         <FlatList
           data={DATA}
           renderItem={({ item }) => <InicioItems item={item} />}
