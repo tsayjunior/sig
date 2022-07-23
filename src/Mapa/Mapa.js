@@ -133,6 +133,14 @@ useEffect(() => {
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
         });
+        setOrigen({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0922,
+      
+        
+        })
       
         
        /*  socket.emit("linea1", {
@@ -199,16 +207,25 @@ useEffect(() => {
     );
   };
 
-  const [estado] = useState({
+/*   const [estado] = useState({
     origen: {
       latitude: -17.78634,
       longitude: -63.1082,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0922,
     },
+  }); */
+  const [Origen,setOrigen] = useState({
+    
+      latitude:0,
+      longitude:0,
+      latitudeDelta: 0,
+      longitudeDelta: 0,
+  
   });
+
+ /*  const { origen } = estado; */
   const mapRef = useRef();
-  const { origen } = estado;
   return (
     <View style={{ flex: 1 }}>
       <MapView
@@ -216,13 +233,13 @@ useEffect(() => {
         provider={PROVIDER_GOOGLE}
         userLocationPriority="high"
         style={StyleSheet.absoluteFill}
-        initialRegion={origen}
+        initialRegion={Origen}
         showsUserLocation={true}
         /*  toolbarEnabled={false} */
         showsMyLocationButton={true}
         userLocationFastestInterval={5000}
-        maxZoomLevel={25}
-        minZoomLevel={25}
+        maxZoomLevel={22}
+        minZoomLevel={22}
         userLocationCalloutEnabled={true}
         // mapPadding={{ top: 395 }}
         userLocationAnnotationTitle="YOU"
@@ -256,16 +273,21 @@ useEffect(() => {
     </View>
   );
 };
+
+//linea 8
+const Linea8i = () => {
+  toastRef.current.show("Linea 8: Ruta de partida");
+};
 const renderizadoMapaIda = (linea) => {
   console.log(linea + " desde funcion nro de linea");
   if (linea == 1) {
-    return <Poli_1></Poli_1>;
+    return <Poli_1 onPress={alertaIda}/>
   } else if (linea == 2) {
     return <Poli_2i></Poli_2i>;
   } else if (linea == 5) {
     return <Poli_5i></Poli_5i>;
   } else if (linea == 8) {
-    return <Poli_8i></Poli_8i>;
+    return <Poli_8i onPress={Linea8i}/>
   } else if (linea == 9) {
     return <Poli_9i></Poli_9i>;
   } else if (linea == 10) {
@@ -302,5 +324,80 @@ const renderizadoMapaVuelta = (linea) => {
   } else if (linea == 18) {
     return <Poli_18v></Poli_18v>;
   }
+};
+//linea 1
+const alertaIda = () => {
+  toastRef.current.show("Linea 1: Ruta de partida");
+};
+const alertaVuelta = () => {
+  toastRef.current.show("Linea 1: Ruta de vuelta");
+};
+
+//linea 2
+const Linea2i = () => {
+  toastRef.current.show("Linea 2: Ruta de partida");
+};
+const Linea2v = () => {
+  toastRef.current.show("Linea 2: Ruta de vuelta");
+};
+
+//linea 5
+const Linea5i = () => {
+  toastRef.current.show("Linea 5: Ruta de partida");
+};
+const Linea5v = () => {
+  toastRef.current.show("Linea 5: Ruta de vuelta");
+};
+
+const Linea8v = () => {
+  toastRef.current.show("Linea 8: Ruta de vuelta");
+};
+
+//linea 9
+const Linea9i = () => {
+  toastRef.current.show("Linea 9: Ruta de partida");
+};
+const Linea9v = () => {
+  toastRef.current.show("Linea 9: Ruta de vuelta");
+};
+
+//linea 10
+const Linea10i = () => {
+  toastRef.current.show("Linea 10: Ruta de partida");
+};
+const Linea10v = () => {
+  toastRef.current.show("Linea 10: Ruta de vuelta");
+};
+
+//linea 11
+const Linea11i = () => {
+  toastRef.current.show("Linea 11: Ruta de partida");
+};
+const Linea11v = () => {
+  toastRef.current.show("Linea 11: Ruta de vuelta");
+};
+
+//linea 16
+const Linea16i = () => {
+  toastRef.current.show("Linea 16: Ruta de partida");
+};
+const Linea16v = () => {
+  toastRef.current.show("Linea 16: Ruta de vuelta");
+};
+
+//linea 17
+const Linea17i = () => {
+  toastRef.current.show("Linea 17: Ruta de partida");
+};
+const Linea17v = () => {
+  toastRef.current.show("Linea 17: Ruta de vuelta");
+};
+
+//linea 18
+const Linea18i = () => {
+  toastRef.current.show("Linea 18: Ruta de partida");
+};
+const Linea18v = () => {
+  toastRef.current.show("Linea 18: Ruta de vuelta");
 };
 export default Mapa;

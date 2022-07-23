@@ -65,7 +65,7 @@ export default NextButton = ({ percentage,scrollTo }) => {
 
           <Circle
             ref={progressRef}
-            stroke="#F4338F" /* color de la circunferencia del centro */
+            stroke="#33d9b2" /* color de la circunferencia del centro */
             cx={center}
             cy={center}
             r={radius}
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   button: {
     position: "absolute",
-    backgroundColor: "#f4338f" /* btn de flecha */,
+    backgroundColor: "#33d9b2" /* btn de flecha */,
     borderRadius: 100,
     padding: 20,
   },
