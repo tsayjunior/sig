@@ -253,6 +253,35 @@ export const AuthProvider = ({ children,navigation }) => {
         setIsLoading(false);
       });
   }
+
+  const guardarProblema = (
+    descripcion,
+  ) => {
+    setIsLoading(true);
+
+    axios
+      .post(
+        `${BASE_URL}/problema`,
+        {
+          descripcion
+        },
+        {
+          headers: { Authorization: `Bearer ${userInfo.access_token}` },
+        }
+      )
+      .then((res) => {
+        console.log("-*-*-*-**-*-*");
+        console.log(res);
+        setIsLoading(false);
+        console.log('guardado');
+        // setMicross(res.data);
+      })
+      .catch((e) => {
+        // console.log("-*-*-*-**-*-*");
+        console.log(`No se guardo problema error ${e}`);
+        setIsLoading(false);
+      });
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -267,7 +296,8 @@ export const AuthProvider = ({ children,navigation }) => {
         saveMicro,
         eliminarMicro,
         microLinea,
-        lineaUser
+        lineaUser,
+        guardarProblema
       }}
     >
       {children}

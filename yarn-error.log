@@ -3,6 +3,10 @@ Arguments:
 
 PATH: 
   C:\Python310\Scripts\;C:\Python310\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\Users\Junior Javier\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\Junior Javier\AppData\Local\Microsoft\WindowsApps;C:\Users\Junior Javier\AppData\Roaming\Composer\vendor\bin;C:\Users\Junior Javier\AppData\Local\Programs\Microsoft VS Code\bin;C:\src\flutter\bin;C:\Users\Junior Javier\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\Junior Javier\AppData\Local\Yarn\bin;
+  C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\yarn\bin\yarn.js install
+
+PATH: 
+  C:\Users\Junior Javier\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Junior Javier\bin;C:\Python310\Scripts;C:\Python310;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\Users\Junior Javier\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\Junior Javier\AppData\Local\Microsoft\WindowsApps;C:\Users\Junior Javier\AppData\Roaming\Composer\vendor\bin;C:\Users\Junior Javier\AppData\Local\Programs\Microsoft VS Code\bin;C:\src\flutter\bin;C:\Users\Junior Javier\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\Junior Javier\AppData\Local\Yarn\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
 
 Yarn version: 
   1.22.19
@@ -15,6 +19,7 @@ Platform:
 
 Trace: 
   Error: 124:error:1408F119:SSL routines:ssl3_get_record:decryption failed or bad record mac:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:677:
+  Error: 10892:error:1408F119:SSL routines:ssl3_get_record:decryption failed or bad record mac:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:677:
 
 npm manifest: 
   {

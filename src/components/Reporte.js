@@ -1,8 +1,10 @@
 import { StyleSheet, Text, View, TextInput,TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 /* 11343562 */
 export default Reporte = () => {
   const [Reporte, setReporte] = useState("");
+  const {guardarProblema} = useContext(AuthContext)
   return (
     <View style={{ justifyContent: "center", alignItems: "center" }}>
       <View style={{ justifyContent: "center", alignItems: "center",marginTop: 15}}>
@@ -24,9 +26,10 @@ export default Reporte = () => {
         />
          <TouchableOpacity
           style={styles.button}
-          /* onPress={() => {
-            login(ci, password)
-          }} */
+          onPress={() => {
+            guardarProblema(Reporte),
+            setReporte("")
+          }}
         >
           <Text style={{ fontWeight: "bold", color: "#fff", fontSize: 18 }}>
           Enviar reporte
