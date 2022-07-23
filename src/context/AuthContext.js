@@ -261,7 +261,7 @@ export const AuthProvider = ({ children,navigation }) => {
 
     axios
       .post(
-        `${BASE_URL}/transporte`,
+        `${BASE_URL}/problema`,
         {
           descripcion
         },

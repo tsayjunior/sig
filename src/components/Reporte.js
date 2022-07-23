@@ -27,7 +27,8 @@ export default Reporte = () => {
          <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            guardarProblema(Reporte)
+            guardarProblema(Reporte),
+            setReporte("")
           }}
         >
           <Text style={{ fontWeight: "bold", color: "#fff", fontSize: 18 }}>
