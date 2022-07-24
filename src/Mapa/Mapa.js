@@ -48,7 +48,7 @@ const Mapa = () => {
   /* conexion con el servidor */
   const socket = io("https://websockets.procesojudicial.sbs/");
 
-  const { LineaUser, lineaUser } = useContext(AuthContext);
+  const { LineaUser, lineaUser, ida } = useContext(AuthContext);
 
   /* Ubicacion del usuario  */
   const [location1, setlocation] = useState({ latitude: 0, longitude: 0 });
@@ -82,28 +82,26 @@ const Mapa = () => {
   useEffect(() => {
     const requestPermissions = async () => {
       const foreground = await Location.requestForegroundPermissionsAsync();
-      if (foreground.granted){
+      if (foreground.granted) {
         await Location.requestBackgroundPermissionsAsync();
-      }else{
+      } else {
         toastRef.current.show(
           "Debes aceptar los permisos de localización",
           3000
         );
       }
     };
-   /*  InicioSeguimiento(); */  /* inicia la ruta en primer plano */
+    /*  InicioSeguimiento(); */ /* inicia la ruta en primer plano */
     requestPermissions();
     lineaUser();
   }, []);
-/* mandar la ubicacion respecto al micro */
-useEffect(() => {
- if (NroLinea!==null) {
-  InicioSeguimiento();
-  console.log("desde la ubicacion de micro");
- }
-}, [NroLinea])
-
-
+  /* mandar la ubicacion respecto al micro */
+  useEffect(() => {
+    if (NroLinea !== null) {
+      InicioSeguimiento();
+      console.log("desde la ubicacion de micro");
+    }
+  }, [NroLinea]);
 
   // Iniciar el seguimiento de la ubicación en primer plano
   const InicioSeguimiento = async () => {
@@ -138,76 +136,73 @@ useEffect(() => {
           longitude: location.coords.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0922,
-      
-        
-        })
-      
-        
-       /*  socket.emit("linea1", {
+        });
+
+        /*  socket.emit("linea1", {
           coord: [location.coords.latitude, location.coords.longitude],
         }); */
-        if (NroLinea==1) {
+        if (NroLinea == 1) {
           /* envia al servidor las coordenadas Linea 1 */
           socket.emit("linea1", {
-          coord: [location.coords.latitude, location.coords.longitude],
-         });
-         console.log(location.coords.latitude, location.coords.longitude + "LOcaliacion")
-        
-       } else if (NroLinea == 2) {
-         /* envia al servidor las coordenadas Linea 2 */
-         socket.emit("linea2", {
-          coord: [location.coords.latitude, location.coords.longitude],
-         });
-       } else if (NroLinea == 5) {
-         /* envia al servidor las coordenadas Linea 5 */
-         socket.emit("linea5", {
-          coord: [location.coords.latitude, location.coords.longitude],
-         });
-       } else if (NroLinea == 8) {
-         /* envia al servidor las coordenadas Linea 8 */
-         socket.emit("linea8", {
-          coord: [location.coords.latitude, location.coords.longitude],
-         });
-       } else if (NroLinea == 9) {
-         /* envia al servidor las coordenadas Linea 9 */
-         socket.emit("linea9", {
-          coord: [location.coords.latitude, location.coords.longitude],
-         });
-       } else if (NroLinea == 10) {
-         /* envia al servidor las coordenadas Linea 10 */
-         socket.emit("linea10", {
-          coord: [location.coords.latitude, location.coords.longitude],
-         });
-       } else if (NroLinea == 11) {
-         /* envia al servidor las coordenadas Linea 11 */
-         socket.emit("linea11", {
-          coord: [location.coords.latitude, location.coords.longitude],
-         });
-       } else if (NroLinea == 16) {
-         /* envia al servidor las coordenadas Linea 16 */
-         socket.emit("linea16", {
-          coord: [location.coords.latitude, location.coords.longitude],
-         });
-       } else if (NroLinea == 17) {
-         /* envia al servidor las coordenadas Linea 17 */
-         socket.emit("linea17", {
-          coord: [location.coords.latitude, location.coords.longitude],
-         });
-         console.log("desde la linea 17");
-       }else if (location!==null && NroLinea == 18) {
-         /* envia al servidor las coordenadas Linea 18 */
-         socket.emit("linea18", {
-          coord: [location.coords.latitude, location.coords.longitude],
-         });
-       console.log("location 18 " + JSON.stringify(location));
-
-       }
-      
+            coord: [location.coords.latitude, location.coords.longitude],
+          });
+          console.log(
+            location.coords.latitude,
+            location.coords.longitude + "LOcaliacion"
+          );
+        } else if (NroLinea == 2) {
+          /* envia al servidor las coordenadas Linea 2 */
+          socket.emit("linea2", {
+            coord: [location.coords.latitude, location.coords.longitude],
+          });
+        } else if (NroLinea == 5) {
+          /* envia al servidor las coordenadas Linea 5 */
+          socket.emit("linea5", {
+            coord: [location.coords.latitude, location.coords.longitude],
+          });
+        } else if (NroLinea == 8) {
+          /* envia al servidor las coordenadas Linea 8 */
+          socket.emit("linea8", {
+            coord: [location.coords.latitude, location.coords.longitude],
+          });
+        } else if (NroLinea == 9) {
+          /* envia al servidor las coordenadas Linea 9 */
+          socket.emit("linea9", {
+            coord: [location.coords.latitude, location.coords.longitude],
+          });
+        } else if (NroLinea == 10) {
+          /* envia al servidor las coordenadas Linea 10 */
+          socket.emit("linea10", {
+            coord: [location.coords.latitude, location.coords.longitude],
+          });
+        } else if (NroLinea == 11) {
+          /* envia al servidor las coordenadas Linea 11 */
+          socket.emit("linea11", {
+            coord: [location.coords.latitude, location.coords.longitude],
+          });
+        } else if (NroLinea == 16) {
+          /* envia al servidor las coordenadas Linea 16 */
+          socket.emit("linea16", {
+            coord: [location.coords.latitude, location.coords.longitude],
+          });
+        } else if (NroLinea == 17) {
+          /* envia al servidor las coordenadas Linea 17 */
+          socket.emit("linea17", {
+            coord: [location.coords.latitude, location.coords.longitude],
+          });
+          console.log("desde la linea 17");
+        } else if (location !== null && NroLinea == 18) {
+          /* envia al servidor las coordenadas Linea 18 */
+          socket.emit("linea18", {
+            coord: [location.coords.latitude, location.coords.longitude],
+          });
+          console.log("location 18 " + JSON.stringify(location));
+        }
       }
     );
   };
 
-/*   const [estado] = useState({
+  /*   const [estado] = useState({
     origen: {
       latitude: -17.78634,
       longitude: -63.1082,
@@ -215,16 +210,14 @@ useEffect(() => {
       longitudeDelta: 0.0922,
     },
   }); */
-  const [Origen,setOrigen] = useState({
-    
-      latitude:0,
-      longitude:0,
-      latitudeDelta: 0,
-      longitudeDelta: 0,
-  
+  const [Origen, setOrigen] = useState({
+    latitude: 0,
+    longitude: 0,
+    latitudeDelta: 0,
+    longitudeDelta: 0,
   });
 
- /*  const { origen } = estado; */
+  /*  const { origen } = estado; */
   const mapRef = useRef();
   return (
     <View style={{ flex: 1 }}>
@@ -255,8 +248,11 @@ useEffect(() => {
         scrollDuringRotateOrZoomEnabled={false}
         compassOffset={{ x: 50, y: 20 }}
       >
-        {renderizadoMapaIda(NroLinea)}
-        {renderizadoMapaVuelta(NroLinea)}
+        {ida == true ? (
+          <>{renderizadoMapaIda(NroLinea)}</>
+        ) : (
+          <>{renderizadoMapaVuelta(NroLinea)}</>
+        )}
 
         <Marker
           title="YO"
@@ -281,13 +277,13 @@ const Linea8i = () => {
 const renderizadoMapaIda = (linea) => {
   console.log(linea + " desde funcion nro de linea");
   if (linea == 1) {
-    return <Poli_1 onPress={alertaIda}/>
+    return <Poli_1 onPress={alertaIda} />;
   } else if (linea == 2) {
     return <Poli_2i></Poli_2i>;
   } else if (linea == 5) {
     return <Poli_5i></Poli_5i>;
   } else if (linea == 8) {
-    return <Poli_8i onPress={Linea8i}/>
+    return <Poli_8i onPress={Linea8i} />;
   } else if (linea == 9) {
     return <Poli_9i></Poli_9i>;
   } else if (linea == 10) {

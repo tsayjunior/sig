@@ -15,7 +15,7 @@ export const AuthProvider = ({ children,navigation }) => {
   const [Micros, setMicross] = useState({});
   const [MicroLinea, setMicroLinea] = useState({});
   const [LineaUser, setLineaUser] = useState({});
-
+  const [ida, setGIda] = useState(true);
   const register = (
     ci,
     name,
@@ -289,6 +289,7 @@ export const AuthProvider = ({ children,navigation }) => {
         userInfo,
         Micros,
         LineaUser,
+        ida,
         register,
         login,
         logout,
@@ -297,7 +298,8 @@ export const AuthProvider = ({ children,navigation }) => {
         eliminarMicro,
         microLinea,
         lineaUser,
-        guardarProblema
+        guardarProblema,
+        setGIda
       }}
     >
       {children}
