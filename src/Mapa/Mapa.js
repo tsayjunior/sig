@@ -119,8 +119,9 @@ const Mapa = () => {
       {
         // Para obtener mejores registros, establecemos la precisión en la opción más sensible
         accuracy: Location.Accuracy.BestForNavigation,
-        distanceInterval: 1,
-        timeInterval: 5000,
+        distanceInterval: 5,/* actualización de coordenadas cada 5 metros */
+        timeInterval: 30000,/* intervalo de tiempo de espera en cada actualización */
+        mayShowUserSettingsDialog:true,
       },
       (location) => {
         setlocation({
@@ -253,7 +254,6 @@ const Mapa = () => {
         ) : (
           <>{renderizadoMapaVuelta(NroLinea)}</>
         )}
-
         <Marker
           title="YO"
           coordinate={Micro}
