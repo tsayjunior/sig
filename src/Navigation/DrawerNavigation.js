@@ -11,7 +11,7 @@ import RegistroChofer from "../Chofer/RegistroChofer";
 // import { AuthProvider } from "../context/AuthContext";
 import Logout from "../Login/Logout";
 import Reporte from "../components/Reporte";
-import iniciar from "../Recorrido/iniciar";
+import Iniciar from "../Recorrido/Iniciar";
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
@@ -27,7 +27,7 @@ const DrawerNavigation = () => {
         // headerBackVisible: {headerLeft: 'false'}
       })}
       />
-      <Drawer.Screen name="Recorrido" component={iniciar} 
+      <Drawer.Screen name="Recorrido" component={Iniciar} 
       options={({navigation})=>({
         // title: "Información",
         headerStyle: { backgroundColor: "#222f3e" },

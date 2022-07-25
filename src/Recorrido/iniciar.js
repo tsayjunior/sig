@@ -9,7 +9,7 @@ import {
 import Checkbox from "expo-checkbox";
 import { AuthContext } from "../context/AuthContext";
 
-const iniciar = ({ navigation }) => {
+const Iniciar = ({ navigation }) => {
   const { ida, setGIda } = useContext(AuthContext);
   const [isIda, setIda] = useState(false);
   const [isvuelta, setVuelta] = useState(false);
@@ -126,4 +126,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default iniciar;
+export default Iniciar;

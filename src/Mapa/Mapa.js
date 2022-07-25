@@ -121,7 +121,7 @@ const Mapa = () => {
         accuracy: Location.Accuracy.BestForNavigation,
         distanceInterval: 5,/* actualización de coordenadas cada 5 metros */
         timeInterval: 30000,/* intervalo de tiempo de espera en cada actualización */
-        mayShowUserSettingsDialog:true,
+        /* mayShowUserSettingsDialog:true, */
       },
       (location) => {
         setlocation({
