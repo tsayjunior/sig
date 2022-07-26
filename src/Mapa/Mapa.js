@@ -120,7 +120,7 @@ const Mapa = () => {
         // Para obtener mejores registros, establecemos la precisión en la opción más sensible
         accuracy: Location.Accuracy.BestForNavigation,
         distanceInterval: 5,/* actualización de coordenadas cada 5 metros */
-        timeInterval: 30000,/* intervalo de tiempo de espera en cada actualización */
+        timeInterval: 20000,/* intervalo de tiempo de espera en cada actualización */
         /* mayShowUserSettingsDialog:true, */
       },
       (location) => {
@@ -192,7 +192,7 @@ const Mapa = () => {
             coord: [location.coords.latitude, location.coords.longitude],
           });
           console.log("desde la linea 17");
-        } else if (location !== null && NroLinea == 18) {
+        } else if (NroLinea == 18) {
           /* envia al servidor las coordenadas Linea 18 */
           socket.emit("linea18", {
             coord: [location.coords.latitude, location.coords.longitude],
