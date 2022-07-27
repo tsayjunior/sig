@@ -48,7 +48,7 @@ const Mapa = () => {
   /* conexion con el servidor */
   const socket = io("https://websockets.procesojudicial.sbs/");
 
-  const { LineaUser, lineaUser, ida } = useContext(AuthContext);
+  const { LineaUser, lineaUser, ida, HoraLlegada} = useContext(AuthContext);
 
   /* Ubicacion del usuario  */
   const [location1, setlocation] = useState({ latitude: 0, longitude: 0 });
@@ -256,6 +256,8 @@ const Mapa = () => {
         opacity={0.8}
         fadeOutDuration={1000}
       />
+      
+      <Text style={styles.titulo}>Tiempo estimado de llegada: {HoraLlegada} </Text>
     </View>
   );
 };

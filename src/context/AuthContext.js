@@ -16,6 +16,12 @@ export const AuthProvider = ({ children,navigation }) => {
   const [MicroLinea, setMicroLinea] = useState({});
   const [LineaUser, setLineaUser] = useState({});
   const [ida, setGIda] = useState(true);
+  const [HoraLlegada, setHoraLlegada] = useState("");
+  const [TarjetaRecorrido, setTarjetaRecorrido] = useState(true);
+  const [ErrorReporte, setErrorReporte] = useState(false);
+  
+  
+  
   const register = (
     ci,
     name,
@@ -274,11 +280,38 @@ export const AuthProvider = ({ children,navigation }) => {
         console.log(res);
         setIsLoading(false);
         console.log('guardado');
+        setErrorReporte(false)
         // setMicross(res.data);
       })
       .catch((e) => {
         // console.log("-*-*-*-**-*-*");
         console.log(`No se guardo problema error ${e}`);
+        setErrorReporte(true)
+        setIsLoading(false);
+      });
+  };
+  const setTarjetaRec = () => {
+    //muestra todos los micros registrados de un chofer (usuario)
+    setIsLoading(true);
+
+    axios
+      .get(
+        `${BASE_URL}/recorridos-chofer-tarjeta-activo`,
+        // {},
+        {
+          headers: { Authorization: `Bearer ${userInfo.access_token}` },
+        }
+      )
+      .then((res) => {
+        // console.log("-*-*-*micros-**-*-*");
+        setIsLoading(false);
+        setTarjetaRecorrido(res.data);
+        // console.log("-*-*-*tarjeta recorrdio-**-*-*");
+        // console.log(res.data)
+      })
+      .catch((e) => {
+        // console.log("-*-*-*-**-*-*");
+        console.log(`logout error ${e}`);
         setIsLoading(false);
       });
   };
@@ -290,6 +323,9 @@ export const AuthProvider = ({ children,navigation }) => {
         Micros,
         LineaUser,
         ida,
+        TarjetaRecorrido,
+        HoraLlegada,
+        ErrorReporte,
         register,
         login,
         logout,
@@ -299,7 +335,9 @@ export const AuthProvider = ({ children,navigation }) => {
         microLinea,
         lineaUser,
         guardarProblema,
-        setGIda
+        setGIda,
+        setTarjetaRec,
+        setHoraLlegada
       }}
     >
       {children}
