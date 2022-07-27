@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     margin: 10,
     alignItems: "center",
+    alignSelf:"center"
     // justifyContent: "center",
   },
   warning_modal: {
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#ff0",
+    backgroundColor: "#33d9b2",
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
   },
@@ -149,8 +150,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   warning_button: {
-    backgroundColor: "red",
+    backgroundColor: "#33d9b2",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+   
   },
 });

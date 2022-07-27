@@ -11,7 +11,7 @@ import RegistroChofer from "../Chofer/RegistroChofer";
 // import { AuthProvider } from "../context/AuthContext";
 import Logout from "../Login/Logout";
 import Reporte from "../components/Reporte";
-import iniciar from "../Recorrido/iniciar";
+
 import Tarjeta from "../Tarjetas/Tarjeta";
 const Drawer = createDrawerNavigator();
 

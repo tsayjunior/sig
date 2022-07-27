@@ -52,15 +52,15 @@ const Logout = ({ navigation }) => {
       </Modal>
       <Spinner visible={isLoading} />
       <View style={styles.container}>
-        <Text style={styles.welcome}>
+       {/*  <Text style={styles.welcome}>
           Presione si desea cerrar sesion {userInfo.data.name}
-        </Text>
+        </Text> */}
         {/* <Button title="cerrar sesion" color="red" onPress={logout} /> */}
-        <Button
+       {/*  <Button
           title="cerrar sesion"
           color="red"
           onPress={() => setModal(true)}
-        />
+        /> */}
       </View>
     </Layout>
   );
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#ff0",
+    backgroundColor: "#33d9b2",
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
   },
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   warning_button: {
-    backgroundColor: "red",
+    backgroundColor: "#33d9b2",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },

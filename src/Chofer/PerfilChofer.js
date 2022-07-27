@@ -75,7 +75,7 @@ const PerfilChofer = ({ navigation }) => {
             uri: 'http://ec2-18-228-190-183.sa-east-1.compute.amazonaws.com/' + state.foto,
           }}
         />
-      ) : (
+      ) : ( 
         <Image
           style={{ width: "100%", height: 250 }}
           source={require("../../assets/usuario.png")}

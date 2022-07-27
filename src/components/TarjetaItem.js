@@ -16,6 +16,7 @@ const TarjetaItem = ({user, handleDelete }) => {
     setHoraLlegada(user.hora_llegada)
     navigation.navigate("Mapa");
   };
+  console.log("Desde el recorrido-> " + user.tipo_recorrido);
   return (
     <View style={styles.itemContainer}>
       <View style={styles.aux1}>
@@ -31,14 +32,17 @@ const TarjetaItem = ({user, handleDelete }) => {
           <Text style={styles.titulo}>Llegada: </Text>
           <Text style={styles.itemTitle}>{user.hora_llegada}</Text>
           <Text style={styles.titulo}>Trayectoria: </Text>
-          {user.tipo_recorrido == null ? (
+          {user.tipo_recorrido === null ? (
             <>
-              <Text style={styles.itemTitle}>No definida</Text>
+              <Text style={styles.itemTitle}>Ruta de Partida</Text>
             </>
-          ) : (
+          ) : ( user.tipo_recorrido==false ? (
             <>
-              <Text style={styles.itemTitle}>{user.tipo_recorrido}</Text>
+              <Text style={styles.itemTitle}>Ruta de Partida</Text>
             </>
+            ):(
+              <Text style={styles.itemTitle}>Ruta de Vuelta</Text>
+            )
           )}
         </TouchableOpacity>
       </View>

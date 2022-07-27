@@ -43,7 +43,7 @@ import io from "socket.io-client";
 import { AuthContext } from "../context/AuthContext";
 const LOCATION_TASK_NAME = "background-location-task";
 
-const Mapa = () => {
+export default Mapa = () => {
   const foregroundSubscription = null;
   /* conexion con el servidor */
   const socket = io("https://websockets.procesojudicial.sbs/");
@@ -220,6 +220,7 @@ const Mapa = () => {
 
   /*  const { origen } = estado; */
   const mapRef = useRef();
+  console.log("desde la ida",ida);
   return (
     <View style={{ flex: 1 }}>
       <MapView
@@ -240,13 +241,14 @@ const Mapa = () => {
       >
         {ida == true ? (
           <>{renderizadoMapaIda(NroLinea)}</>
+         
         ) : (
           <>{renderizadoMapaVuelta(NroLinea)}</>
         )}
         <Marker
           title="YO"
           coordinate={Micro}
-          description={ida==true?"Ruta de Partida":"Ruta de Vuelta"}
+          description={ida==false?"Ruta de Partida":"Ruta de Vuelta"}
           image={require("../Image/you3X.png")}
         />
       </MapView>
@@ -308,4 +310,12 @@ const renderizadoMapaVuelta = (linea) => {
     return <Poli_18v></Poli_18v>;
   }
 };
-export default Mapa;
+
+
+const styles= StyleSheet.create({
+  titulo:{
+    fontSize:20,
+    fontWeight: "bold",
+    color:"#10ac84",
+  }
+})
