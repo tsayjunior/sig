@@ -16,6 +16,11 @@ export const AuthProvider = ({ children,navigation }) => {
   const [MicroLinea, setMicroLinea] = useState({});
   const [LineaUser, setLineaUser] = useState({});
   const [ida, setGIda] = useState(true);
+  const [HoraLlegada, setHoraLlegada] = useState("");
+  const [TarjetaRecorrido, setTarjetaRecorrido] = useState(true);
+  
+  
+  
   const register = (
     ci,
     name,
@@ -282,6 +287,31 @@ export const AuthProvider = ({ children,navigation }) => {
         setIsLoading(false);
       });
   };
+  const setTarjetaRec = () => {
+    //muestra todos los micros registrados de un chofer (usuario)
+    setIsLoading(true);
+
+    axios
+      .get(
+        `${BASE_URL}/recorridos-chofer-tarjeta-activo`,
+        // {},
+        {
+          headers: { Authorization: `Bearer ${userInfo.access_token}` },
+        }
+      )
+      .then((res) => {
+        // console.log("-*-*-*micros-**-*-*");
+        setIsLoading(false);
+        setTarjetaRecorrido(res.data);
+        // console.log("-*-*-*tarjeta recorrdio-**-*-*");
+        // console.log(res.data)
+      })
+      .catch((e) => {
+        // console.log("-*-*-*-**-*-*");
+        console.log(`logout error ${e}`);
+        setIsLoading(false);
+      });
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -290,6 +320,8 @@ export const AuthProvider = ({ children,navigation }) => {
         Micros,
         LineaUser,
         ida,
+        TarjetaRecorrido,
+        HoraLlegada,
         register,
         login,
         logout,
@@ -299,7 +331,9 @@ export const AuthProvider = ({ children,navigation }) => {
         microLinea,
         lineaUser,
         guardarProblema,
-        setGIda
+        setGIda,
+        setTarjetaRec,
+        setHoraLlegada
       }}
     >
       {children}

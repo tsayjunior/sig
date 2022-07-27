@@ -34,7 +34,11 @@ const MicroItem = ({ user, handleDelete }) => {
           <Text style={styles.itemTitle}>
             Asignación: {user.fecha_asig}
           </Text>
+          {user.fecha_baja==null? (<>
+            <Text style={styles.itemTitle}>Micro en uso</Text>
+          </>):(<>
           <Text style={styles.itemTitle}>Baja: {user.fecha_baja}</Text>
+          </>)}
 
           {/* <Text style={styles.itemTitle}>{user.conductor_id}</Text> */}
         </TouchableOpacity>
