@@ -119,8 +119,8 @@ const Mapa = () => {
       {
         // Para obtener mejores registros, establecemos la precisión en la opción más sensible
         accuracy: Location.Accuracy.BestForNavigation,
-        distanceInterval: 5,/* actualización de coordenadas cada 5 metros */
-        timeInterval: 20000,/* intervalo de tiempo de espera en cada actualización */
+        distanceInterval: 5 /* actualización de coordenadas cada 5 metros */,
+        timeInterval: 20000 /* intervalo de tiempo de espera en cada actualización */,
         /* mayShowUserSettingsDialog:true, */
       },
       (location) => {
@@ -212,10 +212,10 @@ const Mapa = () => {
     },
   }); */
   const [Origen, setOrigen] = useState({
-    latitude: 0,
-    longitude: 0,
-    latitudeDelta: 0,
-    longitudeDelta: 0,
+    latitude: -17.78634,
+    longitude: -63.1082,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0922,
   });
 
   /*  const { origen } = estado; */
@@ -229,25 +229,14 @@ const Mapa = () => {
         style={StyleSheet.absoluteFill}
         initialRegion={Origen}
         showsUserLocation={true}
-        /*  toolbarEnabled={false} */
         showsMyLocationButton={true}
-        userLocationFastestInterval={5000}
+        userLocationFastestInterval={2000}
         maxZoomLevel={22}
         minZoomLevel={22}
         userLocationCalloutEnabled={true}
-        // mapPadding={{ top: 395 }}
-        userLocationAnnotationTitle="YOU"
-        showsCompass={true}
-        showsBuildings={true}
-        /*   showsTraffic={true} */
-        /* showsIndoors={true} */
         showsIndoorLevelPicker={true}
         rotateEnabled={false}
-        pitchEnabled={false}
-        toolbarEnabled={true}
-        /*  scrollEnabled={false} */
-        scrollDuringRotateOrZoomEnabled={false}
-        compassOffset={{ x: 50, y: 20 }}
+        scrollDuringRotateOrZoomEnabled={true}
       >
         {ida == true ? (
           <>{renderizadoMapaIda(NroLinea)}</>
@@ -257,6 +246,7 @@ const Mapa = () => {
         <Marker
           title="YO"
           coordinate={Micro}
+          description={ida==true?"Ruta de Partida":"Ruta de Vuelta"}
           image={require("../Image/you3X.png")}
         />
       </MapView>
@@ -269,21 +259,16 @@ const Mapa = () => {
     </View>
   );
 };
-
-//linea 8
-const Linea8i = () => {
-  toastRef.current.show("Linea 8: Ruta de partida");
-};
 const renderizadoMapaIda = (linea) => {
   console.log(linea + " desde funcion nro de linea");
   if (linea == 1) {
-    return <Poli_1 onPress={alertaIda} />;
+    return <Poli_1 />;
   } else if (linea == 2) {
     return <Poli_2i></Poli_2i>;
   } else if (linea == 5) {
     return <Poli_5i></Poli_5i>;
   } else if (linea == 8) {
-    return <Poli_8i onPress={Linea8i} />;
+    return <Poli_8i />;
   } else if (linea == 9) {
     return <Poli_9i></Poli_9i>;
   } else if (linea == 10) {
@@ -320,80 +305,5 @@ const renderizadoMapaVuelta = (linea) => {
   } else if (linea == 18) {
     return <Poli_18v></Poli_18v>;
   }
-};
-//linea 1
-const alertaIda = () => {
-  toastRef.current.show("Linea 1: Ruta de partida");
-};
-const alertaVuelta = () => {
-  toastRef.current.show("Linea 1: Ruta de vuelta");
-};
-
-//linea 2
-const Linea2i = () => {
-  toastRef.current.show("Linea 2: Ruta de partida");
-};
-const Linea2v = () => {
-  toastRef.current.show("Linea 2: Ruta de vuelta");
-};
-
-//linea 5
-const Linea5i = () => {
-  toastRef.current.show("Linea 5: Ruta de partida");
-};
-const Linea5v = () => {
-  toastRef.current.show("Linea 5: Ruta de vuelta");
-};
-
-const Linea8v = () => {
-  toastRef.current.show("Linea 8: Ruta de vuelta");
-};
-
-//linea 9
-const Linea9i = () => {
-  toastRef.current.show("Linea 9: Ruta de partida");
-};
-const Linea9v = () => {
-  toastRef.current.show("Linea 9: Ruta de vuelta");
-};
-
-//linea 10
-const Linea10i = () => {
-  toastRef.current.show("Linea 10: Ruta de partida");
-};
-const Linea10v = () => {
-  toastRef.current.show("Linea 10: Ruta de vuelta");
-};
-
-//linea 11
-const Linea11i = () => {
-  toastRef.current.show("Linea 11: Ruta de partida");
-};
-const Linea11v = () => {
-  toastRef.current.show("Linea 11: Ruta de vuelta");
-};
-
-//linea 16
-const Linea16i = () => {
-  toastRef.current.show("Linea 16: Ruta de partida");
-};
-const Linea16v = () => {
-  toastRef.current.show("Linea 16: Ruta de vuelta");
-};
-
-//linea 17
-const Linea17i = () => {
-  toastRef.current.show("Linea 17: Ruta de partida");
-};
-const Linea17v = () => {
-  toastRef.current.show("Linea 17: Ruta de vuelta");
-};
-
-//linea 18
-const Linea18i = () => {
-  toastRef.current.show("Linea 18: Ruta de partida");
-};
-const Linea18v = () => {
-  toastRef.current.show("Linea 18: Ruta de vuelta");
 };
 export default Mapa;

@@ -53,6 +53,7 @@ function MyStack() {
           headerMode: "screen",
         }}
       />
+
        <Stack.Screen
           name="RegistroChofer"
           component={RegistroChofer}
@@ -91,6 +92,7 @@ function MyStack() {
       /> */}
       {/* prueba del nuevo login */}
       <Stack.Screen
+     
           name="Inicio"
           component={Inicio}
           options={{
