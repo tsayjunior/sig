@@ -12,33 +12,39 @@ const MicroItem = ({ user, handleDelete }) => {
           style={{ height: 200, width: "100%" }}
           source={{
             // uri: "https://reactnative.dev/img/tiny_logo.png",
-            uri: 'http://ec2-18-228-190-183.sa-east-1.compute.amazonaws.com/' +user.micro.permiso_linea.linea.foto,
+            uri:
+              "http://ec2-18-228-190-183.sa-east-1.compute.amazonaws.com/" +
+              user.micro.permiso_linea.linea.foto,
           }}
           // source={require("../../assets/micro.jpg")}
         />
       </View>
       <View style={styles.itemContainer}>
-        
         <TouchableOpacity
         // onPress={()=>navigation.navigate('RegistroMicro', {id:user.id})}//aparte de navegar a la otra pantalla, le paso un parametro, que es el id, para poder editar
         >
-          <Text style={styles.itemTitle}>Placa: {user.micro.placa}</Text>
-          <Text style={styles.itemTitle}>Modelo: {user.micro.modelo}</Text>
-          <Text style={styles.itemTitle}>Linea: {user.micro.permiso_linea.linea.nrolinea}</Text>
-          <Text style={styles.itemTitle}>
-            Asientos: {user.micro.cant_asiento}
-          </Text>
-          <Text style={styles.itemTitle}>
-            Nº Interno: {user.micro.nro_interno}
-          </Text>
-          <Text style={styles.itemTitle}>
-            Asignación: {user.fecha_asig}
-          </Text>
-          {user.fecha_baja==null? (<>
-            <Text style={styles.itemTitle}>Micro en uso</Text>
-          </>):(<>
-          <Text style={styles.itemTitle}>Baja: {user.fecha_baja}</Text>
-          </>)}
+          <Text style={styles.titulo}>Placa: </Text>
+          <Text style={styles.itemTitle}>     {user.micro.placa}</Text>
+          <Text style={styles.titulo}>Modelo: </Text>
+          <Text style={styles.itemTitle}>     {user.micro.modelo}</Text>
+          <Text style={styles.titulo}>Linea: </Text>
+          <Text style={styles.itemTitle}>     {user.micro.permiso_linea.linea.nrolinea}</Text>
+          <Text style={styles.titulo}>Asientos: </Text>
+          <Text style={styles.itemTitle}>     {user.micro.cant_asiento}</Text>
+          <Text style={styles.titulo}>Nº Interno: </Text>
+          <Text style={styles.itemTitle}>     {user.micro.nro_interno}</Text>
+          <Text style={styles.titulo}>Asignación: </Text>
+          <Text style={styles.itemTitle}>      {user.fecha_asig}</Text>
+          {user.fecha_baja == null ? (
+            <>
+              <Text style={styles.titulo}>Micro en uso</Text>
+            </>
+          ) : (
+            <>
+              <Text style={styles.titulo}>Baja: </Text>
+              <Text style={styles.itemTitle}>     {user.fecha_baja}</Text>
+            </>
+          )}
 
           {/* <Text style={styles.itemTitle}>{user.conductor_id}</Text> */}
         </TouchableOpacity>
@@ -69,7 +75,12 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: "#333333",
-    paddingBottom: 50
+    paddingBottom: 50,
+  },
+  titulo: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#bbb",
   },
 });
 
