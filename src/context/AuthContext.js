@@ -18,6 +18,7 @@ export const AuthProvider = ({ children,navigation }) => {
   const [ida, setGIda] = useState(true);
   const [HoraLlegada, setHoraLlegada] = useState("");
   const [TarjetaRecorrido, setTarjetaRecorrido] = useState(true);
+  const [ErrorReporte, setErrorReporte] = useState(false);
   
   
   
@@ -279,11 +280,13 @@ export const AuthProvider = ({ children,navigation }) => {
         console.log(res);
         setIsLoading(false);
         console.log('guardado');
+        setErrorReporte(false)
         // setMicross(res.data);
       })
       .catch((e) => {
         // console.log("-*-*-*-**-*-*");
         console.log(`No se guardo problema error ${e}`);
+        setErrorReporte(true)
         setIsLoading(false);
       });
   };
@@ -322,6 +325,7 @@ export const AuthProvider = ({ children,navigation }) => {
         ida,
         TarjetaRecorrido,
         HoraLlegada,
+        ErrorReporte,
         register,
         login,
         logout,

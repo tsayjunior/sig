@@ -13,6 +13,7 @@ import Logout from "../Login/Logout";
 import Reporte from "../components/Reporte";
 import iniciar from "../Recorrido/iniciar";
 import Tarjeta from "../Tarjetas/Tarjeta";
+import { Button } from "react-native-web";
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
