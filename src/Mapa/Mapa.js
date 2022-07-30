@@ -48,7 +48,7 @@ export default Mapa = () => {
   /* conexion con el servidor */
   const socket = io("https://websockets.procesojudicial.sbs/");
 
-  const { LineaUser, lineaUser, ida, HoraLlegada} = useContext(AuthContext);
+  const { LineaUser, lineaUser, ida, HoraLlegada } = useContext(AuthContext);
 
   /* Ubicacion del usuario  */
   const [location1, setlocation] = useState({ latitude: 0, longitude: 0 });
@@ -62,13 +62,24 @@ export default Mapa = () => {
   useEffect(() => {
     if (LineaUser) {
       loadTasks();
-      console.log("desde useffect");
+      console.log("desde loadTasks");
     }
   }, [LineaUser]);
+
+  /* funcion que envia las la linea logueada para la notificacion de Usuario Peaton */
+  function SendNotifications() {
+    if (NroLinea > 0) {
+      /* Envia la notificacion de la linea 1 */
+
+      socket.emit("notificaciones", { NroLinea });
+      console.log("Numero-----> " + NroLinea);
+    }
+  }
 
   /* fin */
   /* estado del numero de linea */
   const [NroLinea, setNroLinea] = useState(null);
+
   const loadTasks = async () => {
     setNroLinea(JSON.stringify(LineaUser.data.nrolinea, null, 4));
 
@@ -97,9 +108,12 @@ export default Mapa = () => {
   }, []);
   /* mandar la ubicacion respecto al micro */
   useEffect(() => {
-    if (NroLinea !== null) {
+    if (NroLinea > 0) {
       InicioSeguimiento();
       console.log("desde la ubicacion de micro");
+
+      SendNotifications();
+      console.log("Notificacion");
     }
   }, [NroLinea]);
 
@@ -118,9 +132,9 @@ export default Mapa = () => {
     foregroundSubscription = await Location.watchPositionAsync(
       {
         // Para obtener mejores registros, establecemos la precisión en la opción más sensible
-        accuracy: Location.Accuracy.BestForNavigation,
-        distanceInterval: 5 /* actualización de coordenadas cada 5 metros */,
-        timeInterval: 20000 /* intervalo de tiempo de espera en cada actualización */,
+        accuracy: Location.Accuracy.High,
+        /* distanceInterval: 5  /* actualización de coordenadas cada 5 metros */
+        timeInterval: 45000 /* intervalo de tiempo de espera en cada actualización */,
         /* mayShowUserSettingsDialog:true, */
       },
       (location) => {
@@ -149,7 +163,7 @@ export default Mapa = () => {
           });
           console.log(
             location.coords.latitude,
-            location.coords.longitude + "LOcaliacion"
+            location.coords.longitude + " LOcaliacion"
           );
         } else if (NroLinea == 2) {
           /* envia al servidor las coordenadas Linea 2 */
@@ -161,6 +175,10 @@ export default Mapa = () => {
           socket.emit("linea5", {
             coord: [location.coords.latitude, location.coords.longitude],
           });
+          console.log(
+            location.coords.latitude,
+            location.coords.longitude + " LOcaliacion"
+          );
         } else if (NroLinea == 8) {
           /* envia al servidor las coordenadas Linea 8 */
           socket.emit("linea8", {
@@ -197,7 +215,10 @@ export default Mapa = () => {
           socket.emit("linea18", {
             coord: [location.coords.latitude, location.coords.longitude],
           });
-          console.log("location 18 " + JSON.stringify(location));
+          console.log(
+            location.coords.latitude,
+            location.coords.longitude + " LOcaliacion"
+          );
         }
       }
     );
@@ -219,8 +240,8 @@ export default Mapa = () => {
   });
 
   /*  const { origen } = estado; */
-  const mapRef = useRef();
-  console.log("desde la ida",ida);
+  const mapRef = useRef(MapView);
+  console.log("desde la ida", ida);
   return (
     <View style={{ flex: 1 }}>
       <MapView
@@ -233,7 +254,7 @@ export default Mapa = () => {
         showsMyLocationButton={true}
         userLocationFastestInterval={2000}
         maxZoomLevel={22}
-        minZoomLevel={22}
+        minZoomLevel={20}
         userLocationCalloutEnabled={true}
         showsIndoorLevelPicker={true}
         rotateEnabled={false}
@@ -241,14 +262,13 @@ export default Mapa = () => {
       >
         {ida == true ? (
           <>{renderizadoMapaIda(NroLinea)}</>
-         
         ) : (
           <>{renderizadoMapaVuelta(NroLinea)}</>
         )}
         <Marker
           title="YO"
           coordinate={Micro}
-          description={ida==false?"Ruta de Partida":"Ruta de Vuelta"}
+          description={ida == false ? "Ruta de Partida" : "Ruta de Vuelta"}
           image={require("../Image/you3X.png")}
         />
       </MapView>
@@ -258,8 +278,10 @@ export default Mapa = () => {
         opacity={0.8}
         fadeOutDuration={1000}
       />
-      
-      <Text style={styles.titulo}>Tiempo estimado de llegada: {HoraLlegada} </Text>
+
+      <Text style={styles.titulo}>
+        Tiempo estimado de llegada: {HoraLlegada}{" "}
+      </Text>
     </View>
   );
 };
@@ -311,11 +333,10 @@ const renderizadoMapaVuelta = (linea) => {
   }
 };
 
-
-const styles= StyleSheet.create({
-  titulo:{
-    fontSize:20,
+const styles = StyleSheet.create({
+  titulo: {
+    fontSize: 20,
     fontWeight: "bold",
-    color:"#10ac84",
-  }
-})
+    color: "#10ac84",
+  },
+});
