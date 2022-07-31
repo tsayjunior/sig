@@ -41,6 +41,8 @@ import io from "socket.io-client";
 
 // linea del chofer
 import { AuthContext } from "../context/AuthContext";
+import { Button } from "react-native-web";
+import { useNavigation } from "@react-navigation/native";
 const LOCATION_TASK_NAME = "background-location-task";
 
 export default Mapa = () => {
@@ -48,7 +50,7 @@ export default Mapa = () => {
   /* conexion con el servidor */
   const socket = io("https://websockets.procesojudicial.sbs/");
 
-  const { LineaUser, lineaUser, ida, HoraLlegada} = useContext(AuthContext);
+  const { LineaUser, lineaUser, ida, HoraLlegada, HoraFinalizada, id, recorrido_tarjeta_id} = useContext(AuthContext);
 
   /* Ubicacion del usuario  */
   const [location1, setlocation] = useState({ latitude: 0, longitude: 0 });
@@ -65,6 +67,13 @@ export default Mapa = () => {
       console.log("desde useffect");
     }
   }, [LineaUser]);
+  
+  const navigation = useNavigation();
+  const actualizarHoraFinalizada = async () => {
+    var date1 = new Date().toLocaleTimeString(); //me dá la hora actual
+    HoraFinalizada(id, recorrido_tarjeta_id, date1)
+    navigation.navigate("DrawerNavigation");
+  };
 
   /* fin */
   /* estado del numero de linea */
@@ -223,6 +232,7 @@ export default Mapa = () => {
   console.log("desde la ida",ida);
   return (
     <View style={{ flex: 1 }}>
+      
       <MapView
         ref={mapRef}
         provider={PROVIDER_GOOGLE}
@@ -259,8 +269,29 @@ export default Mapa = () => {
         fadeOutDuration={1000}
       />
       
-      <Text style={styles.titulo}>Tiempo estimado de llegada: {HoraLlegada} </Text>
+      <Text style={styles.titulo}>Hora estimada de llegada: {HoraLlegada} </Text>
+      {/* <Button title="cerrar sesion" color="red"/> */}
+      <TouchableOpacity
+                  style={{
+                    backgroundColor: "#ee5253",
+                    padding: 10,
+                    margin: 10,
+                    borderRadius: 5,
+                    width: "50%"
+                  }}
+                  // onPress={() => navegarMapa()}
+                  onPress={() => {
+                    HoraFinalizada(id, new Date().toLocaleTimeString(), recorrido_tarjeta_id),
+                    navigation.navigate("DrawerNavigation")
+                    // actualizarHoraFinalizada()
+                  }}
+                >
+                  <Text style={{ color: "#fff", textAlign: "center" }}>
+                    Finalizar recorido
+                  </Text>
+                </TouchableOpacity>
     </View>
+    
   );
 };
 const renderizadoMapaIda = (linea) => {
@@ -309,6 +340,7 @@ const renderizadoMapaVuelta = (linea) => {
   } else if (linea == 18) {
     return <Poli_18v></Poli_18v>;
   }
+  
 };
 
 

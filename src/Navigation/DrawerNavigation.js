@@ -28,14 +28,14 @@ const DrawerNavigation = () => {
           // headerBackVisible: {headerLeft: 'false'}
         })}
       />
-      <Drawer.Screen name="Mapa" component={Mapa} 
+      {/* <Drawer.Screen name="Mapa" component={Mapa} 
       options={({navigation})=>({
         // title: "Información",
         headerStyle: { backgroundColor: "#222f3e" },
         headerTitleStyle: { color: "#fff" },
         // headerBackVisible: {headerLeft: 'false'}
       })}
-      />
+      /> */}
      
       <Drawer.Screen name="perfil chofer" component={PerfilChofer} 
       options={({navigation})=>({

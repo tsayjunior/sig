@@ -19,7 +19,8 @@ import TarjetaItem from './TarjetaItem';
   const loadTasks = async () => {
     const data = setTarjetaRec(); //cambiar  -*-*- actualizar -*-*-*-
 
-    setUsers(TarjetaRecorrido.data);
+    setUsers(TarjetaRecorrido);
+    // console.log(users)
   };
 
   useEffect(() => {
