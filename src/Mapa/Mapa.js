@@ -46,7 +46,8 @@ const LOCATION_TASK_NAME = "background-location-task";
 export default Mapa = () => {
   const foregroundSubscription = null;
   /* conexion con el servidor */
-  const socket = io("https://websockets.procesojudicial.sbs/");
+  const socket = io("http://192.168.100.184:3000");
+  // const socket = io("https://websockets.procesojudicial.sbs/");
 
   const { LineaUser, lineaUser, ida, HoraLlegada } = useContext(AuthContext);
 
@@ -71,7 +72,7 @@ export default Mapa = () => {
     if (NroLinea > 0) {
       /* Envia la notificacion de la linea 1 */
 
-      socket.emit("notificaciones", { NroLinea });
+      socket.emit("notificaciones",NroLinea);
       console.log("Numero-----> " + NroLinea);
     }
   }
