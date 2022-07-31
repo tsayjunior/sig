@@ -27,14 +27,13 @@ export default function NewLogin({ navigation }) {
   const { isLoading, login } = useContext(AuthContext);
 
   return (
-  
     <View style={StyleSheet.absoluteFill}>
       <Image source={backImage} style={styles.backImage} />
       <View style={styles.whiteSheet} />
       <SafeAreaView style={styles.form}>
         <Text style={styles.title}>Log In</Text>
         {/* <Layout> */}
-       {/*  <Spinner visible={isLoading} /> */}
+        {/*  <Spinner visible={isLoading} /> */}
         <TextInput
           style={styles.input}
           placeholder="Carnet identidad"
@@ -42,7 +41,6 @@ export default function NewLogin({ navigation }) {
           keyboardType="numeric"
           textContentType="none"
           autoFocus={true}
-      
           value={ci}
           onChangeText={(value) => setCi(value)}
         />
@@ -60,7 +58,7 @@ export default function NewLogin({ navigation }) {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            login(ci, password)
+            login(ci, password);
           }}
         >
           <Text style={{ fontWeight: "bold", color: "#fff", fontSize: 18 }}>
@@ -88,6 +86,23 @@ export default function NewLogin({ navigation }) {
             </Text>
           </TouchableOpacity>
         </View> */}
+        <TouchableOpacity
+          style={styles.Info}
+          onPress={() => navigation.navigate("Inicio")}
+        >
+          <Text
+            style={{
+              fontWeight: "bold",
+              color: "#33d9b2",
+              fontSize: 15,
+              width: "150%",
+              textAlign: "center",
+            
+            }}
+          >
+            {`¿Cómo Afiliarme?`}
+          </Text>
+        </TouchableOpacity>
       </SafeAreaView>
       <StatusBar barStyle="light-content" />
     </View>
@@ -95,7 +110,7 @@ export default function NewLogin({ navigation }) {
 }
 
 const styles = StyleSheet.create({
- /*  container: {
+  /*  container: {
     flex: 1,
     backgroundColor: "#fff",
   }, */
@@ -140,6 +155,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 40,
+    marginTop: 25,
+  },
+  Info: {
+    height: 48,
+    width: 98,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 7,
+    alignSelf: "center",
+    flexDirection: "row",
+
   },
 });

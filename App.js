@@ -91,17 +91,7 @@ function MyStack() {
         }}
       /> */}
       {/* prueba del nuevo login */}
-      <Stack.Screen
      
-          name="Inicio"
-          component={Inicio}
-          options={{
-            title: "Inicio",
-            headerStyle:false,
-            headerShown: false,
-           
-          }}
-        />
        <Stack.Screen
           name="Login"
           component={NewLogin}
@@ -112,6 +102,17 @@ function MyStack() {
            
           }}
         />
+         <Stack.Screen
+     
+     name="Inicio"
+     component={Inicio}
+     options={{
+       title: "Inicio",
+       headerStyle:false,
+       headerShown: false,
+      
+     }}
+   />
         {/* fin */}
 {/* 
       
