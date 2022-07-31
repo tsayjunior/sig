@@ -41,6 +41,8 @@ import io from "socket.io-client";
 
 // linea del chofer
 import { AuthContext } from "../context/AuthContext";
+import { Button } from "react-native-web";
+import { useNavigation } from "@react-navigation/native";
 const LOCATION_TASK_NAME = "background-location-task";
 
 export default Mapa = () => {
@@ -49,7 +51,15 @@ export default Mapa = () => {
   // const socket = io("http://192.168.100.184:3000");
   const socket = io("https://websockets.procesojudicial.sbs/");
 
-  const { LineaUser, lineaUser, ida, HoraLlegada } = useContext(AuthContext);
+  const {
+    LineaUser,
+    lineaUser,
+    ida,
+    HoraLlegada,
+    HoraFinalizada,
+    id,
+    recorrido_tarjeta_id,
+  } = useContext(AuthContext);
 
   /* Ubicacion del usuario  */
   const [location1, setlocation] = useState({ latitude: 0, longitude: 0 });
@@ -67,80 +77,85 @@ export default Mapa = () => {
     }
   }, [LineaUser]);
 
+  const navigation = useNavigation();
+  const actualizarHoraFinalizada = async () => {
+    var date1 = new Date().toLocaleTimeString(); //me dá la hora actual
+    HoraFinalizada(id, recorrido_tarjeta_id, date1);
+    navigation.navigate("DrawerNavigation");
+  };
+
   /* funcion que envia las la linea logueada para la notificacion de Usuario Peaton */
   function SendNotifications() {
     if (NroLinea > 0) {
       /* Envia la notificacion de la linea 1 */
 
-      socket.emit("notificaciones",NroLinea);
+      socket.emit("notificaciones", NroLinea);
       console.log("Numero-----> " + NroLinea);
     }
   }
 
   /* fin */
   function SenNroLinea1() {
-    if (NroLinea==1) {
-      socket.emit("isLinea1",NroLinea);
+    if (NroLinea == 1) {
+      socket.emit("isLinea1", NroLinea);
       console.log("Enviando-----> " + NroLinea);
     }
   }
   function SenNroLinea2() {
-    if (NroLinea==2) {
-      socket.emit("isLinea2",NroLinea);
+    if (NroLinea == 2) {
+      socket.emit("isLinea2", NroLinea);
       console.log("Enviando-----> " + NroLinea);
     }
   }
   function SenNroLinea5() {
-    if (NroLinea==5) {
-      socket.emit("isLinea5",NroLinea);
+    if (NroLinea == 5) {
+      socket.emit("isLinea5", NroLinea);
       console.log("Enviando-----> " + NroLinea);
     }
   }
   function SenNroLinea8() {
-    if (NroLinea==8) {
-      socket.emit("isLinea8",NroLinea);
+    if (NroLinea == 8) {
+      socket.emit("isLinea8", NroLinea);
       console.log("Enviando-----> " + NroLinea);
     }
   }
   function SenNroLinea9() {
-    if (NroLinea==9) {
-      socket.emit("isLinea9",NroLinea);
+    if (NroLinea == 9) {
+      socket.emit("isLinea9", NroLinea);
       console.log("Enviando-----> " + NroLinea);
     }
   }
   function SenNroLinea10() {
-    if (NroLinea==10) {
-      socket.emit("isLinea10",NroLinea);
+    if (NroLinea == 10) {
+      socket.emit("isLinea10", NroLinea);
       console.log("Enviando-----> " + NroLinea);
     }
   }
   function SenNroLinea11() {
-    if (NroLinea==11) {
-      socket.emit("isLinea11",NroLinea);
+    if (NroLinea == 11) {
+      socket.emit("isLinea11", NroLinea);
       console.log("Enviando-----> " + NroLinea);
     }
   }
   function SenNroLinea16() {
-    if (NroLinea==16) {
-      socket.emit("isLinea16",NroLinea);
+    if (NroLinea == 16) {
+      socket.emit("isLinea16", NroLinea);
       console.log("Enviando-----> " + NroLinea);
     }
   }
   function SenNroLinea17() {
-    if (NroLinea==17) {
-      socket.emit("isLinea17",NroLinea);
+    if (NroLinea == 17) {
+      socket.emit("isLinea17", NroLinea);
       console.log("Enviando-----> " + NroLinea);
     }
   }
 
   function SenNroLinea18() {
-    if (NroLinea==18) {
-      socket.emit("isLinea18",NroLinea);
+    if (NroLinea == 18) {
+      socket.emit("isLinea18", NroLinea);
       console.log("Enviando-----> " + NroLinea);
     }
   }
-
-
 
   /* estado del numero de linea */
   const [NroLinea, setNroLinea] = useState(null);
@@ -181,41 +196,37 @@ export default Mapa = () => {
       console.log("Notificacion");
 
       SenNroLinea1();
-      console.log("SenNroLinea1"+ NroLinea);
+      console.log("SenNroLinea1" + NroLinea);
 
       SenNroLinea2();
-      console.log("SenNroLinea2"+ NroLinea);
+      console.log("SenNroLinea2" + NroLinea);
 
       SenNroLinea5();
-      console.log("SenNroLinea5"+ NroLinea);
+      console.log("SenNroLinea5" + NroLinea);
 
       SenNroLinea8();
-      console.log("SenNroLinea8"+ NroLinea);
+      console.log("SenNroLinea8" + NroLinea);
 
       SenNroLinea9();
-      console.log("SenNroLinea9"+ NroLinea);
+      console.log("SenNroLinea9" + NroLinea);
 
       SenNroLinea10();
-      console.log("SenNroLinea10"+ NroLinea);
+      console.log("SenNroLinea10" + NroLinea);
 
       SenNroLinea11();
-      console.log("SenNroLinea11"+ NroLinea);
+      console.log("SenNroLinea11" + NroLinea);
 
       SenNroLinea16();
-      console.log("SenNroLinea16"+ NroLinea);
-      
+      console.log("SenNroLinea16" + NroLinea);
+
       SenNroLinea17();
-      console.log("SenNroLinea17"+ NroLinea);
+      console.log("SenNroLinea17" + NroLinea);
 
       SenNroLinea18();
-      console.log("SenNroLinea18"+ NroLinea);
-
-
+      console.log("SenNroLinea18" + NroLinea);
     }
   }, [NroLinea]);
 
-
-  
   // Iniciar el seguimiento de la ubicación en primer plano
   const InicioSeguimiento = async () => {
     // Comprobar si se concede el permiso de primer plano
@@ -259,12 +270,11 @@ export default Mapa = () => {
           /* envia al servidor las coordenadas Linea 1 */
           socket.emit("linea1", {
             coord: [location.coords.latitude, location.coords.longitude],
-           
           });
-        
+
           console.log(
             location.coords.latitude,
-            location.coords.longitude + " LOcaliacion" 
+            location.coords.longitude + " LOcaliacion"
           );
         } else if (NroLinea == 2) {
           /* envia al servidor las coordenadas Linea 2 */
@@ -287,7 +297,7 @@ export default Mapa = () => {
           });
           console.log(
             location.coords.latitude,
-            location.coords.longitude + " LOcaliacion"+ "desde la 8"
+            location.coords.longitude + " LOcaliacion" + "desde la 8"
           );
         } else if (NroLinea == 9) {
           /* envia al servidor las coordenadas Linea 9 */
@@ -391,8 +401,32 @@ export default Mapa = () => {
       />
 
       <Text style={styles.titulo}>
-        Tiempo estimado de llegada: {HoraLlegada}{" "}
+        Hora estimada de llegada: {HoraLlegada}{" "}
       </Text>
+      {/* <Button title="cerrar sesion" color="red"/> */}
+      <TouchableOpacity
+        style={{
+          backgroundColor: "#ee5253",
+          padding: 10,
+          margin: 10,
+          borderRadius: 5,
+          width: "50%",
+        }}
+        // onPress={() => navegarMapa()}
+        onPress={() => {
+          HoraFinalizada(
+            id,
+            new Date().toLocaleTimeString(),
+            recorrido_tarjeta_id
+          ),
+            navigation.navigate("DrawerNavigation");
+          // actualizarHoraFinalizada()
+        }}
+      >
+        <Text style={{ color: "#fff", textAlign: "center" }}>
+          Finalizar recorido
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

@@ -17,6 +17,7 @@ import { useContext,useState,useEffect } from "react";
 import NewLogin from "./src/Login/NewLogin";
 // import FechaPrueba from "./src/pruebas/FechaPrueba"; //prueba
 import Inicio from "./src/components/Inicio";
+import Mapa from "./src/Mapa/Mapa";
 
 function MyStack() {
   const {userInfo} = useContext(AuthContext);
@@ -53,7 +54,17 @@ function MyStack() {
           headerMode: "screen",
         }}
       />
-
+        <Stack.Screen
+          name="Mapa"
+          component={Mapa}
+          options={{
+            title: "Mapa",
+            headerStyle: { backgroundColor: "#222f3e" }, //color de la barra superior
+            headerTitleStyle: { color: "#fff" }, //color de la letra
+            
+          headerShown: false, //oculta la barra de arriba
+          }}
+        />
        <Stack.Screen
           name="RegistroChofer"
           component={RegistroChofer}
@@ -74,6 +85,7 @@ function MyStack() {
             headerTitleStyle: { color: "#fff" }, //color de la letra
           }}
         />
+        
       </>
        ):( 
 

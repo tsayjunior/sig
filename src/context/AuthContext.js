@@ -19,7 +19,12 @@ export const AuthProvider = ({ children,navigation }) => {
   const [HoraLlegada, setHoraLlegada] = useState("");
   const [TarjetaRecorrido, setTarjetaRecorrido] = useState(true);
   const [ErrorReporte, setErrorReporte] = useState(false);
+  const [horaFinalizada, setHoraFinalizada] = useState({});
   
+  
+  const [id, setId] = useState("");
+  const [hora_finalizado, setHora_Finalizado] = useState("");
+  const [recorrido_tarjeta_id, setRecorrido_tarjeta_id] = useState("");
   
   
   const register = (
@@ -61,7 +66,31 @@ export const AuthProvider = ({ children,navigation }) => {
         setIsLoading(false);
       });
   };
-
+  const HoraFinalizada = (id, hora_finalizado, recorrido_tarjeta_id) => {
+    //muestra todos los micros registrados de un chofer (usuario)
+    setIsLoading(true);
+    axios
+      .put(
+        `${BASE_URL}/chofer-tarjeta-recorrido/${id}`,
+        {
+          hora_finalizado,
+          recorrido_tarjeta_id
+        },
+        {
+          headers: { Authorization: `Bearer ${userInfo.access_token}` },
+        }
+      )
+      .then((res) => {
+        setIsLoading(false);
+        console.log("se actualiza")
+      })
+      .catch((e) => {
+        // console.log("-*-*-*-**-*-*");
+        console.log(`error ${e}`);
+        console.log("no se actualiza")
+        setIsLoading(false);
+      });
+  };
   const login = (ci, password) => {
     setIsLoading(true);
     axios
@@ -296,7 +325,9 @@ export const AuthProvider = ({ children,navigation }) => {
 
     axios
       .get(
-        `${BASE_URL}/recorridos-chofer-tarjeta-activo`,
+        // `${BASE_URL}/recorridos-chofer-tarjeta-activo`,
+        `${BASE_URL}/tiempo-recorridos-chofer-tarjeta-activo`,
+
         // {},
         {
           headers: { Authorization: `Bearer ${userInfo.access_token}` },
@@ -307,7 +338,7 @@ export const AuthProvider = ({ children,navigation }) => {
         setIsLoading(false);
         setTarjetaRecorrido(res.data);
         // console.log("-*-*-*tarjeta recorrdio-**-*-*");
-        // console.log(res.data)
+        // console.log(res)
       })
       .catch((e) => {
         // console.log("-*-*-*-**-*-*");
@@ -318,6 +349,9 @@ export const AuthProvider = ({ children,navigation }) => {
   return (
     <AuthContext.Provider
       value={{
+        id,
+        hora_finalizado,
+        recorrido_tarjeta_id,
         isLoading,
         userInfo,
         Micros,
@@ -326,6 +360,10 @@ export const AuthProvider = ({ children,navigation }) => {
         TarjetaRecorrido,
         HoraLlegada,
         ErrorReporte,
+        horaFinalizada,
+        setId,
+        setHora_Finalizado,
+        setRecorrido_tarjeta_id,
         register,
         login,
         logout,
@@ -337,7 +375,8 @@ export const AuthProvider = ({ children,navigation }) => {
         guardarProblema,
         setGIda,
         setTarjetaRec,
-        setHoraLlegada
+        setHoraLlegada,
+        HoraFinalizada
       }}
     >
       {children}
