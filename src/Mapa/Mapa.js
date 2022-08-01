@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useContext,
 } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, Alert,useWindowDimensions } from "react-native";
 import Layout from "../components/Layout";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import Toast from "react-native-easy-toast";
@@ -46,6 +46,7 @@ import { useNavigation } from "@react-navigation/native";
 const LOCATION_TASK_NAME = "background-location-task";
 
 export default Mapa = () => {
+  const { height } = useWindowDimensions();
   const foregroundSubscription = null;
   // /* conexion con el servidor */
   // const socket = io("http://192.168.100.184:3000");
@@ -259,8 +260,8 @@ export default Mapa = () => {
         setOrigen({
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0922,
+          latitudeDelta:0.0001,
+          longitudeDelta: 0.0007
         });
 
         /*  socket.emit("linea1", {
@@ -347,12 +348,7 @@ export default Mapa = () => {
       longitudeDelta: 0.0922,
     },
   }); */
-  const [Origen, setOrigen] = useState({
-    latitude: -17.78634,
-    longitude: -63.1082,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0922,
-  });
+  const [Origen, setOrigen] = useState(null);
 
   /*  const { origen } = estado; */
   const mapRef = useRef(MapView);
@@ -361,6 +357,7 @@ export default Mapa = () => {
     <View style={{ flex: 1 }}>
       <MapView
         ref={mapRef}
+        region={Origen}
         provider={PROVIDER_GOOGLE}
         userLocationPriority="high"
         style={StyleSheet.absoluteFill}
@@ -369,7 +366,7 @@ export default Mapa = () => {
         showsMyLocationButton={true}
         userLocationFastestInterval={2000}
         maxZoomLevel={22}
-        minZoomLevel={20}
+        minZoomLevel={22}
         userLocationCalloutEnabled={true}
         showsIndoorLevelPicker={true}
         rotateEnabled={false}
@@ -404,30 +401,37 @@ export default Mapa = () => {
         Hora estimada de llegada: {HoraLlegada}{" "}
       </Text>
       {/* <Button title="cerrar sesion" color="red"/> */}
-      <TouchableOpacity
+      <View
         style={{
-          backgroundColor: "#ee5253",
-          padding: 10,
-          margin: 10,
-          borderRadius: 5,
-          width: "50%",
-        }}
-        // onPress={() => navegarMapa()}
-        onPress={() => {
-          HoraFinalizada(
-            id,
-            new Date().toLocaleTimeString(),
-            recorrido_tarjeta_id
-          ),
-            navigation.navigate("DrawerNavigation");
-
-          // actualizarHoraFinalizada()
+          marginTop: height - 120,
+          justifyContent: "center",
+          alignSelf: "center",
         }}
       >
-        <Text style={{ color: "#fff", textAlign: "center" }}>
-          Finalizar recorrido
-        </Text>
-      </TouchableOpacity>
+        {console.log("alto xd " + (height - 100))}
+        <TouchableOpacity
+          style={{
+            backgroundColor: "#ee5253",
+            padding: 10,
+            margin: 10,
+            borderRadius: 5,
+            width: "50%",
+          }}
+          // onPress={() => navegarMapa()}
+          onPress={() => {
+            HoraFinalizada(
+              id,
+              new Date().toLocaleTimeString(),
+              recorrido_tarjeta_id
+            ),
+              navigation.navigate("DrawerNavigation");
+          }}
+        >
+          <Text style={{ color: "#fff", textAlign: "center" }}>
+            Finalizar recorrido
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
