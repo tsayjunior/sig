@@ -67,7 +67,7 @@ export const AuthProvider = ({ children,navigation }) => {
         setIsLoading(false);
       });
   };
-  const HoraFinalizada = (id, hora_finalizado, recorrido_tarjeta_id) => {
+  const HoraFinalizada = (id, hora_finalizado, recorrido_tarjeta_id, gps) => {
     //muestra todos los micros registrados de un chofer (usuario)
     setIsLoading(true);
     axios
@@ -75,7 +75,8 @@ export const AuthProvider = ({ children,navigation }) => {
         `${BASE_URL}/chofer-tarjeta-recorrido/${id}`,
         {
           hora_finalizado,
-          recorrido_tarjeta_id
+          recorrido_tarjeta_id,
+          gps
         },
         {
           headers: { Authorization: `Bearer ${userInfo.access_token}` },

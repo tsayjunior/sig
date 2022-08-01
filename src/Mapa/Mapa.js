@@ -422,7 +422,8 @@ export default Mapa = () => {
             HoraFinalizada(
               id,
               new Date().toLocaleTimeString(),
-              recorrido_tarjeta_id
+              recorrido_tarjeta_id,
+              gps
             ),
               navigation.navigate("DrawerNavigation");
           }}
