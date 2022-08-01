@@ -260,8 +260,8 @@ export default Mapa = () => {
         setOrigen({
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
-          latitudeDelta:0.0001,
-          longitudeDelta: 0.0007
+          latitudeDelta:0.00007,
+          longitudeDelta: 0.00007
         });
 
         /*  socket.emit("linea1", {
