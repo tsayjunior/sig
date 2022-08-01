@@ -208,7 +208,7 @@ const TarjetaItem = ({ user, handleDelete }) => {
                   onPress={() => setModal(true)}
                 >
                   <Text style={{ color: "#fff", textAlign: "center" }}>
-                    Iniciar recorido
+                    Iniciar recorrido
                   </Text>
                 </TouchableOpacity>
               </>
@@ -224,7 +224,7 @@ const TarjetaItem = ({ user, handleDelete }) => {
                   onPress={() => setModal(true)}
                 >
                   <Text style={{ color: "#fff", textAlign: "center" }}>
-                    Iniciar recorido
+                    Iniciar recorrido
                   </Text>
                 </TouchableOpacity>
               </>

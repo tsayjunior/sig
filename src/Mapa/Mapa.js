@@ -420,11 +420,12 @@ export default Mapa = () => {
             recorrido_tarjeta_id
           ),
             navigation.navigate("DrawerNavigation");
+
           // actualizarHoraFinalizada()
         }}
       >
         <Text style={{ color: "#fff", textAlign: "center" }}>
-          Finalizar recorido
+          Finalizar recorrido
         </Text>
       </TouchableOpacity>
     </View>
