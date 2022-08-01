@@ -25,6 +25,7 @@ export const AuthProvider = ({ children,navigation }) => {
   const [id, setId] = useState("");
   const [hora_finalizado, setHora_Finalizado] = useState("");
   const [recorrido_tarjeta_id, setRecorrido_tarjeta_id] = useState("");
+  const [modalLogin, setModalLogin] = useState(false);
   
   
   const register = (
@@ -111,6 +112,7 @@ export const AuthProvider = ({ children,navigation }) => {
       })
       .catch((e) => {
         console.log(`login error ${e}`);
+        setModalLogin(true)
       /*  if (isEmpty(e)) {
         alert("todos los campos son requeridos");
       } else {
@@ -361,6 +363,7 @@ export const AuthProvider = ({ children,navigation }) => {
         HoraLlegada,
         ErrorReporte,
         horaFinalizada,
+        modalLogin, 
         setId,
         setHora_Finalizado,
         setRecorrido_tarjeta_id,
@@ -376,7 +379,8 @@ export const AuthProvider = ({ children,navigation }) => {
         setGIda,
         setTarjetaRec,
         setHoraLlegada,
-        HoraFinalizada
+        HoraFinalizada,
+        setModalLogin
       }}
     >
       {children}
