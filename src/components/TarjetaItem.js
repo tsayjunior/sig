@@ -33,16 +33,16 @@ const TarjetaItem = ({ user, handleDelete }) => {
     // console.log(id)
     
     // console.log("---recorrido id tarjeta--------------")
-    // console.log(recorrido_tarjeta_id)
-    // console.log("----------------------------------")
-    if (user.tipo_recorrido == false) {
+    console.log("----------tipo de recorrido, de ida o vuelta---------------------")
+    console.log(user.recorrido_tarjeta.tipo_recorrido)
+    if (user.recorrido_tarjeta.tipo_recorrido == false) {
       setGIda(false);
     } else {
       setGIda(true);
     }
     setHoraLlegada(aux2);
-    console.log("hora estimada de llegada es: ---");
-    console.log(HoraLlegada);
+    // console.log("hora estimada de llegada es: ---");
+    // console.log(HoraLlegada);
     navigation.navigate("Mapa");
   };
 

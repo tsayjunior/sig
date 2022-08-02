@@ -424,6 +424,8 @@ export default Mapa = () => {
           left: 20,
         }}
       >
+      {console.log("avisará la idaa")}
+        {console.log(ida)}
         {ida == true ? (
           <>{renderizadoMapaIda(NroLinea)}</>
         ) : (
