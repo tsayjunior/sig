@@ -235,6 +235,8 @@ export default Mapa = () => {
       console.log("SenNroLinea18" + NroLinea);
     }
   }, [NroLinea]);
+ 
+  
 
   // Iniciar el seguimiento de la ubicación en primer plano
   const InicioSeguimiento = async () => {
@@ -445,7 +447,8 @@ export default Mapa = () => {
               id,
               new Date().toLocaleTimeString(),
               recorrido_tarjeta_id,
-              gps
+             ""+Micro.latitude +","+ Micro.longitude,
+            //  console.log("****** desde finalizar" +  Micro.latitude + Micro.longitude,)
             ),
               navigation.navigate("DrawerNavigation");
           }}
