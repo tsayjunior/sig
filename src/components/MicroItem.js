@@ -28,7 +28,11 @@ const MicroItem = ({ user, handleDelete }) => {
           <Text style={styles.titulo}>Modelo: </Text>
           <Text style={styles.itemTitle}>     {user.micro.modelo}</Text>
           <Text style={styles.titulo}>Linea: </Text>
+          {user.micro.permiso_linea.linea.nrolinea==91? (<>
+            <Text style={styles.itemTitle}>     09</Text>
+          </>):(<>
           <Text style={styles.itemTitle}>     {user.micro.permiso_linea.linea.nrolinea}</Text>
+          </>)}
           <Text style={styles.titulo}>Asientos: </Text>
           <Text style={styles.itemTitle}>     {user.micro.cant_asiento}</Text>
           <Text style={styles.titulo}>Nº Interno: </Text>
