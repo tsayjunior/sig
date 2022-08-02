@@ -164,6 +164,13 @@ export default Mapa = () => {
       socket.emit("isLinea18", NroLinea);
       console.log("Enviando-----> " + NroLinea);
     }
+    
+  }
+  function SenNroLinea91() {
+    if (NroLinea == 91) {
+      socket.emit("isLinea91", NroLinea);
+      console.log("Enviando-----> " + NroLinea);
+    }
   }
 
   /* estado del numero de linea */
@@ -233,7 +240,12 @@ export default Mapa = () => {
 
       SenNroLinea18();
       console.log("SenNroLinea18" + NroLinea);
+
+      SenNroLinea91();
+    console.log("SenNroLinea 91 " + NroLinea);
     }
+    
+
   }, [NroLinea]);
  
   
@@ -344,6 +356,16 @@ export default Mapa = () => {
           console.log(
             location.coords.latitude,
             location.coords.longitude + " LOcaliacion"
+          );
+        }
+        else if (NroLinea == 91) {
+          /* envia al servidor las coordenadas Linea 91 */
+          socket.emit("linea91", {
+            coord: [location.coords.latitude, location.coords.longitude],
+          });
+          console.log(
+            location.coords.latitude,
+            location.coords.longitude + " desde la linea 91"
           );
         }
       }
@@ -483,8 +505,10 @@ const renderizadoMapaIda = (linea) => {
     return <Poli_17></Poli_17>;
   } else if (linea == 18) {
     return <Poli_18></Poli_18>;
-  }
+  }else if (linea == 91) {
+    return <Poli_9i></Poli_9i>;
 };
+}
 const renderizadoMapaVuelta = (linea) => {
   if (linea == 1) {
     return <Poli_1v></Poli_1v>;
@@ -506,6 +530,9 @@ const renderizadoMapaVuelta = (linea) => {
     return <Poli_17v></Poli_17v>;
   } else if (linea == 18) {
     return <Poli_18v></Poli_18v>;
+  }
+  else if (linea == 91) {
+    return <Poli_9v></Poli_9v>;
   }
 };
 
