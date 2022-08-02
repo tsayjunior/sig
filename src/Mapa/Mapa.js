@@ -388,8 +388,11 @@ export default Mapa = () => {
         minZoomLevel={22}
         userLocationCalloutEnabled={true}
         showsIndoorLevelPicker={true}
-        rotateEnabled={false}
+        rotateEnabled={true}
         scrollDuringRotateOrZoomEnabled={true}
+       
+        pitchEnabled={true}
+        toolbarEnabled={false}
         mapPadding={{
           top: 40,
           right: 5,
