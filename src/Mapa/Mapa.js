@@ -5,7 +5,15 @@ import React, {
   useCallback,
   useContext,
 } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, Alert,useWindowDimensions } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  useWindowDimensions,
+  Image,
+} from "react-native";
 import Layout from "../components/Layout";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import Toast from "react-native-easy-toast";
@@ -245,7 +253,7 @@ export default Mapa = () => {
         // Para obtener mejores registros, establecemos la precisión en la opción más sensible
         accuracy: Location.Accuracy.High,
         /* distanceInterval: 5  /* actualización de coordenadas cada 5 metros */
-        timeInterval: 20000 /* intervalo de tiempo de espera en cada actualización */,
+        timeInterval: 18000 /* intervalo de tiempo de espera en cada actualización */,
         /* mayShowUserSettingsDialog:true, */
       },
       (location) => {
@@ -260,8 +268,8 @@ export default Mapa = () => {
         setOrigen({
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
-          latitudeDelta:0.00007,
-          longitudeDelta: 0.00007
+          latitudeDelta: 0.00007,
+          longitudeDelta: 0.00007,
         });
 
         /*  socket.emit("linea1", {
@@ -353,6 +361,17 @@ export default Mapa = () => {
   /*  const { origen } = estado; */
   const mapRef = useRef(MapView);
   console.log("desde la ida", ida);
+
+  useEffect(() => {
+    /* metodo de redireccionamiento */
+    const gotToMyLocation = () => {
+      Location.installWebGeolocationPolyfill();
+      navigator.geolocation.getCurrentPosition(location1);
+    };
+    gotToMyLocation();
+    console.log("------->gotToMyLocation " + JSON.stringify(location1));
+  }, [location1]);
+
   return (
     <View style={{ flex: 1 }}>
       <MapView
@@ -362,8 +381,8 @@ export default Mapa = () => {
         userLocationPriority="high"
         style={StyleSheet.absoluteFill}
         initialRegion={Origen}
-        showsUserLocation={true}
-        showsMyLocationButton={true}
+        /*   showsUserLocation={true}
+        showsMyLocationButton={true} */
         userLocationFastestInterval={2000}
         maxZoomLevel={22}
         minZoomLevel={22}
